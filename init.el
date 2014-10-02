@@ -84,6 +84,7 @@ Failed to load warns error message."
             ))
     (setq face-font-rescale-alist
           '(("^-apple-hiragino.*" . 1.2)))
+    (set-face-attribute 'default t :font fs-name)
     (push `(font . ,fs-name) default-frame-alist))
   )
  ;; Carbon
