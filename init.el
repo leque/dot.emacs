@@ -276,3 +276,8 @@ Failed to load warns error message."
   (require 'caml-font)
   (push (cons "\\.ml[ily]?\\'" 'caml-mode)
         auto-mode-alist))
+
+(when (require* 'sml-mode)
+  (setq sml-indent-level 2)
+  (push '("\\.\\(sml\\|smi\\|sig\\)\\'" . sml-mode)
+        auto-mode-alist))
