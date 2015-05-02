@@ -271,3 +271,8 @@ Failed to load warns error message."
                      (label . 2)
                      (statement-case-open . 4))))
      ))
+
+(when (require* 'caml)
+  (require 'caml-font)
+  (push (cons "\\.ml[ily]?\\'" 'caml-mode)
+        auto-mode-alist))
