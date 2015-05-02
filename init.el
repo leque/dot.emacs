@@ -45,9 +45,9 @@
   (byte-recompile-directory dir 0))
 
 (defun require* (feature &optional filename)
-  "loads feature like require, but never signals error.
-returns t if feature is loaded, otherwise nil.
-Failed to load warns error message."
+  "loads FEATURE from FILENAME like `require', but never signals error.
+returns t if the feature is loaded,
+otherwise displays a warnning message and returns nil."
   (let ((res (require feature filename t)))
     (unless res
       (warn "require*: %s is not loaded" (or filename feature)))
