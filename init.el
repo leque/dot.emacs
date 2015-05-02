@@ -77,7 +77,7 @@ otherwise displays a warnning message and returns nil."
   (setq ns-command-modifier 'meta)
   ;; super is used in ns-win.el
   (setq ns-option-modifier 'hyper)
-  (set-default-coding-systems 'utf-8)
+  (prefer-coding-system 'utf-8)
 
   (let* ((name "hiragino")
          (fs-name (format "fontset-%s" name))
