@@ -1,6 +1,6 @@
+;;; -*- coding: utf-8 -*-
+;;;
 ;;; skk-pskana.el --- Prefix Shift Kana Input Method for SKK
-;;
-;; -*- coding: euc-jp -*-
 ;;
 ;; Copyright (C) 2006-2013 OOHASHI, Daichi <leque@katch.ne.jp>
 ;; Copyright (C) 2000 Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
@@ -30,9 +30,9 @@
 ;;
 ;; This is an utility to input Japanese with prefix shift kana layout,
 ;; such as
-;; :²ÖÇÛÎó (Hana layout):
+;; :èŠ±é…åˆ— (Hana layout):
 ;;   http://homepage3.nifty.com/togasi/hana_no_kuni/
-;; :·îÇÛÎó 2-263 (Tsuki-2-263 layout):
+;; :æœˆé…åˆ— 2-263 (Tsuki-2-263 layout):
 ;;   http://jisx6004.client.jp/tsuki.html
 ;; :Some variants of Tsuki:
 ;;   http://yellow.ribbon.to/%7Eujiro/hairetu.htm
@@ -67,15 +67,15 @@
 ;; the layout, and are familiar to SKK), but there is a little bit
 ;; difference from normal SKK to input an okurigana with dakuten/handakuten.
 ;; 
-;; On normal SKK, for instance, to input `Í·¤Ö', you have simply to type
-;; `AsoBu'. But here, you have to type ¤¢¤½¤Õ<Shift>¡«: type a okurigana
+;; On normal SKK, for instance, to input `éŠã¶', you have simply to type
+;; `AsoBu'. But here, you have to type ã‚ããµ<Shift>ã‚›: type a okurigana
 ;; character without dakuten/handakuten, and hold down a Shift key and
 ;; type dakuten/handakuten.
 ;; 
-;; I.e., with tsuki-2-263, for `Í·¤Ö', you have to type `KfqkrL':
-;; `Kf' for `¤¢', `q' for `¤½', `kr' for `¤Õ', and `L' for dakuten.
-;; For `¿©¤Ù¤ë', type `GkxLm': `G' for `¤¿', `kx' for `¤Ø', `L' for dakuten,
-;; and `m' for `¤ë'.
+;; I.e., with tsuki-2-263, for `éŠã¶', you have to type `KfqkrL':
+;; `Kf' for `ã‚', `q' for `ã', `kr' for `ãµ', and `L' for dakuten.
+;; For `é£Ÿã¹ã‚‹', type `GkxLm': `G' for `ãŸ', `kx' for `ã¸', `L' for dakuten,
+;; and `m' for `ã‚‹'.
 ;;
 ;;
 ;; * Note
@@ -96,7 +96,7 @@
   :group 'skk-custom-by-filename)
 
 (defcustom skk-pskana-keyboard-type 'us
-  "*»ÈÍÑ¤¹¤ë¥­¡¼¥Ü¡¼¥É¤Î¼ïÊÌ"
+  "*ä½¿ç”¨ã™ã‚‹ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ç¨®åˆ¥"
   :type '(choice (const us)
 		 (const jis)
 		 (const dvorak)
@@ -104,7 +104,7 @@
   :group 'skk-pskana)
 
 (defcustom skk-pskana-keyboard-layout 'tsuki-2-263
-  "*»ÈÍÑ¤¹¤ë¤«¤ÊÇÛÎó¤Î¼ïÊÌ"
+  "*ä½¿ç”¨ã™ã‚‹ã‹ãªé…åˆ—ã®ç¨®åˆ¥"
   :type '(choice (const tsuki-2-263)
 		 (const hana)
 		 (symbol :tag "Another Keyboard Layout"))
@@ -200,181 +200,181 @@
 ;;; Layouts
 
 (defconst skk-pskana-rom-kana-rule-list-hana-us
-  '(("z" nil ("¥µ" . "¤µ"))  ("a" nil ("¥¹" . "¤¹"))  ("q" nil ("¥ç" . "¤ç"))
-    ("x" nil ("¥·" . "¤·"))  ("s" nil ("¥«" . "¤«"))  ("w" nil ("¥Æ" . "¤Æ"))
-    ("c" nil ("¥Ê" . "¤Ê"))                           ("e" nil ("¥È" . "¤È"))
-    ("v" nil ("¥Î" . "¤Î"))  ("f" nil ("¥­" . "¤­"))  ("r" nil ("¥³" . "¤³"))
-    ("b" nil ("¥Ë" . "¤Ë"))  ("g" nil ("¥¿" . "¤¿"))  ("t" nil ("¥Ï" . "¤Ï"))
-    ("n" nil ("¥¤" . "¤¤"))  ("h" nil ("¥ó" . "¤ó"))  ("y" nil ("¥Ã" . "¤Ã"))
-    ("m" nil ("¥Ä" . "¤Ä"))  ("j" nil ("¥ì" . "¤ì"))  ("u" nil ("¥¯" . "¤¯"))
-    ("," nil skk-current-kuten)                       ("i" nil ("¥¦" . "¤¦"))
-    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("¥ë" . "¤ë"))
-    ("/" nil ("¥á" . "¤á"))  (";" nil ("¥í" . "¤í"))  ("p" nil ("¥é" . "¤é"))
-                             ("'" nil ("¥ê" . "¤ê"))  ("[" nil "¡¼")
-                                                      ("]" nil ("¥¨" . "¤¨"))
+  '(("z" nil ("ã‚µ" . "ã•"))  ("a" nil ("ã‚¹" . "ã™"))  ("q" nil ("ãƒ§" . "ã‚‡"))
+    ("x" nil ("ã‚·" . "ã—"))  ("s" nil ("ã‚«" . "ã‹"))  ("w" nil ("ãƒ†" . "ã¦"))
+    ("c" nil ("ãƒŠ" . "ãª"))                           ("e" nil ("ãƒˆ" . "ã¨"))
+    ("v" nil ("ãƒ" . "ã®"))  ("f" nil ("ã‚­" . "ã"))  ("r" nil ("ã‚³" . "ã“"))
+    ("b" nil ("ãƒ‹" . "ã«"))  ("g" nil ("ã‚¿" . "ãŸ"))  ("t" nil ("ãƒ" . "ã¯"))
+    ("n" nil ("ã‚¤" . "ã„"))  ("h" nil ("ãƒ³" . "ã‚“"))  ("y" nil ("ãƒƒ" . "ã£"))
+    ("m" nil ("ãƒ„" . "ã¤"))  ("j" nil ("ãƒ¬" . "ã‚Œ"))  ("u" nil ("ã‚¯" . "ã"))
+    ("," nil skk-current-kuten)                       ("i" nil ("ã‚¦" . "ã†"))
+    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ãƒ«" . "ã‚‹"))
+    ("/" nil ("ãƒ¡" . "ã‚"))  (";" nil ("ãƒ­" . "ã‚"))  ("p" nil ("ãƒ©" . "ã‚‰"))
+                             ("'" nil ("ãƒª" . "ã‚Š"))  ("[" nil "ãƒ¼")
+                                                      ("]" nil ("ã‚¨" . "ãˆ"))
     ;; prefix-key: k
-    ("kz" nil ("¥¥" . "¤¥")) ("ka" nil ("¥¡" . "¤¡")) ("kq" nil ("¥Ò" . "¤Ò"))
-    ("kx" nil ("¥»" . "¤»")) ("ks" nil ("¥è" . "¤è")) ("kw" nil ("¥±" . "¤±"))
-    ("kc" nil ("¥¢" . "¤¢")) ("kd" nil ("¥å" . "¤å")) ("ke" nil ("¥§" . "¤§"))
-    ("kv" nil ("¥ï" . "¤ï")) ("kf" nil ("¥ä" . "¤ä")) ("kr" nil ("¥Û" . "¤Û"))
-    ("kb" nil ("¥æ" . "¤æ")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("¥Ø" . "¤Ø"))
+    ("kz" nil ("ã‚¥" . "ã…")) ("ka" nil ("ã‚¡" . "ã")) ("kq" nil ("ãƒ’" . "ã²"))
+    ("kx" nil ("ã‚»" . "ã›")) ("ks" nil ("ãƒ¨" . "ã‚ˆ")) ("kw" nil ("ã‚±" . "ã‘"))
+    ("kc" nil ("ã‚¢" . "ã‚")) ("kd" nil ("ãƒ¥" . "ã‚…")) ("ke" nil ("ã‚§" . "ã‡"))
+    ("kv" nil ("ãƒ¯" . "ã‚")) ("kf" nil ("ãƒ¤" . "ã‚„")) ("kr" nil ("ãƒ›" . "ã»"))
+    ("kb" nil ("ãƒ¦" . "ã‚†")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("ãƒ˜" . "ã¸"))
     ;; prefix-key: d
-    ("dn" nil ("¥Í" . "¤Í")) ("dh" nil "¡¦")          ("dy" nil ("¥ã" . "¤ã"))
-    ("dm" nil ("¥ß" . "¤ß")) ("dj" nil ("¥Õ" . "¤Õ")) ("du" nil ("¥Ş" . "¤Ş"))
-    ("d," nil ("¥ò" . "¤ò")) ("dk" nil ("¥Á" . "¤Á")) ("di" nil ("¥½" . "¤½"))
-    ("d." nil ("¥ª" . "¤ª")) ("dl" nil ("¥à" . "¤à")) ("do" nil ("¥â" . "¤â"))
-    ("d/" nil ("¥Ì" . "¤Ì")) ("d;" nil ("¥©" . "¤©")) ("dp" nil ("¥£" . "¤£"))
-                             ("d'" nil "¡×")          ("d[" nil "¡Ö")
+    ("dn" nil ("ãƒ" . "ã­")) ("dh" nil "ãƒ»")          ("dy" nil ("ãƒ£" . "ã‚ƒ"))
+    ("dm" nil ("ãƒŸ" . "ã¿")) ("dj" nil ("ãƒ•" . "ãµ")) ("du" nil ("ãƒ" . "ã¾"))
+    ("d," nil ("ãƒ²" . "ã‚’")) ("dk" nil ("ãƒ" . "ã¡")) ("di" nil ("ã‚½" . "ã"))
+    ("d." nil ("ã‚ª" . "ãŠ")) ("dl" nil ("ãƒ " . "ã‚€")) ("do" nil ("ãƒ¢" . "ã‚‚"))
+    ("d/" nil ("ãƒŒ" . "ã¬")) ("d;" nil ("ã‚©" . "ã‰")) ("dp" nil ("ã‚£" . "ãƒ"))
+                             ("d'" nil "ã€")          ("d[" nil "ã€Œ")
 
     )
-  "US 101/104 ¥­¡¼¥Ü¡¼¥É¤Ç²ÖÇÛÎó¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "US 101/104 ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§èŠ±é…åˆ—ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 (defconst skk-pskana-rom-kana-rule-list-hana-jis
-  '(("z" nil ("¥µ" . "¤µ"))  ("a" nil ("¥¹" . "¤¹"))  ("q" nil ("¥ç" . "¤ç"))
-    ("x" nil ("¥·" . "¤·"))  ("s" nil ("¥«" . "¤«"))  ("w" nil ("¥Æ" . "¤Æ"))
-    ("c" nil ("¥Ê" . "¤Ê"))                           ("e" nil ("¥È" . "¤È"))
-    ("v" nil ("¥Î" . "¤Î"))  ("f" nil ("¥­" . "¤­"))  ("r" nil ("¥³" . "¤³"))
-    ("b" nil ("¥Ë" . "¤Ë"))  ("g" nil ("¥¿" . "¤¿"))  ("t" nil ("¥Ï" . "¤Ï"))
-    ("n" nil ("¥¤" . "¤¤"))  ("h" nil ("¥ó" . "¤ó"))  ("y" nil ("¥Ã" . "¤Ã"))
-    ("m" nil ("¥Ä" . "¤Ä"))  ("j" nil ("¥ì" . "¤ì"))  ("u" nil ("¥¯" . "¤¯"))
-    ("," nil skk-current-kuten)                       ("i" nil ("¥¦" . "¤¦"))
-    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("¥ë" . "¤ë"))
-    ("/" nil ("¥á" . "¤á"))  (";" nil ("¥í" . "¤í"))  ("p" nil ("¥é" . "¤é"))
-    ("\\" nil ("¥¨" . "¤¨")) (":" nil ("¥ê" . "¤ê"))  ("@" nil "¡¼")
+  '(("z" nil ("ã‚µ" . "ã•"))  ("a" nil ("ã‚¹" . "ã™"))  ("q" nil ("ãƒ§" . "ã‚‡"))
+    ("x" nil ("ã‚·" . "ã—"))  ("s" nil ("ã‚«" . "ã‹"))  ("w" nil ("ãƒ†" . "ã¦"))
+    ("c" nil ("ãƒŠ" . "ãª"))                           ("e" nil ("ãƒˆ" . "ã¨"))
+    ("v" nil ("ãƒ" . "ã®"))  ("f" nil ("ã‚­" . "ã"))  ("r" nil ("ã‚³" . "ã“"))
+    ("b" nil ("ãƒ‹" . "ã«"))  ("g" nil ("ã‚¿" . "ãŸ"))  ("t" nil ("ãƒ" . "ã¯"))
+    ("n" nil ("ã‚¤" . "ã„"))  ("h" nil ("ãƒ³" . "ã‚“"))  ("y" nil ("ãƒƒ" . "ã£"))
+    ("m" nil ("ãƒ„" . "ã¤"))  ("j" nil ("ãƒ¬" . "ã‚Œ"))  ("u" nil ("ã‚¯" . "ã"))
+    ("," nil skk-current-kuten)                       ("i" nil ("ã‚¦" . "ã†"))
+    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ãƒ«" . "ã‚‹"))
+    ("/" nil ("ãƒ¡" . "ã‚"))  (";" nil ("ãƒ­" . "ã‚"))  ("p" nil ("ãƒ©" . "ã‚‰"))
+    ("\\" nil ("ã‚¨" . "ãˆ")) (":" nil ("ãƒª" . "ã‚Š"))  ("@" nil "ãƒ¼")
 
     ;; prefix-key: k
-    ("kz" nil ("¥¥" . "¤¥")) ("ka" nil ("¥¡" . "¤¡")) ("kq" nil ("¥Ò" . "¤Ò"))
-    ("kx" nil ("¥»" . "¤»")) ("ks" nil ("¥è" . "¤è")) ("kw" nil ("¥±" . "¤±"))
-    ("kc" nil ("¥¢" . "¤¢")) ("kd" nil ("¥å" . "¤å")) ("ke" nil ("¥§" . "¤§"))
-    ("kv" nil ("¥ï" . "¤ï")) ("kf" nil ("¥ä" . "¤ä")) ("kr" nil ("¥Û" . "¤Û"))
-    ("kb" nil ("¥æ" . "¤æ")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("¥Ø" . "¤Ø"))
+    ("kz" nil ("ã‚¥" . "ã…")) ("ka" nil ("ã‚¡" . "ã")) ("kq" nil ("ãƒ’" . "ã²"))
+    ("kx" nil ("ã‚»" . "ã›")) ("ks" nil ("ãƒ¨" . "ã‚ˆ")) ("kw" nil ("ã‚±" . "ã‘"))
+    ("kc" nil ("ã‚¢" . "ã‚")) ("kd" nil ("ãƒ¥" . "ã‚…")) ("ke" nil ("ã‚§" . "ã‡"))
+    ("kv" nil ("ãƒ¯" . "ã‚")) ("kf" nil ("ãƒ¤" . "ã‚„")) ("kr" nil ("ãƒ›" . "ã»"))
+    ("kb" nil ("ãƒ¦" . "ã‚†")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("ãƒ˜" . "ã¸"))
     ;; prefix-key: d
-    ("dn" nil ("¥Í" . "¤Í")) ("dh" nil "¡¦")          ("dy" nil ("¥ã" . "¤ã"))
-    ("dm" nil ("¥ß" . "¤ß")) ("dj" nil ("¥Õ" . "¤Õ")) ("du" nil ("¥Ş" . "¤Ş"))
-    ("d," nil ("¥ò" . "¤ò")) ("dk" nil ("¥Á" . "¤Á")) ("di" nil ("¥½" . "¤½"))
-    ("d." nil ("¥ª" . "¤ª")) ("dl" nil ("¥à" . "¤à")) ("do" nil ("¥â" . "¤â"))
-    ("d/" nil ("¥Ì" . "¤Ì")) ("d;" nil ("¥©" . "¤©")) ("dp" nil ("¥£" . "¤£"))
-                             ("d:" nil "¡×")          ("d@" nil "¡Ö")
+    ("dn" nil ("ãƒ" . "ã­")) ("dh" nil "ãƒ»")          ("dy" nil ("ãƒ£" . "ã‚ƒ"))
+    ("dm" nil ("ãƒŸ" . "ã¿")) ("dj" nil ("ãƒ•" . "ãµ")) ("du" nil ("ãƒ" . "ã¾"))
+    ("d," nil ("ãƒ²" . "ã‚’")) ("dk" nil ("ãƒ" . "ã¡")) ("di" nil ("ã‚½" . "ã"))
+    ("d." nil ("ã‚ª" . "ãŠ")) ("dl" nil ("ãƒ " . "ã‚€")) ("do" nil ("ãƒ¢" . "ã‚‚"))
+    ("d/" nil ("ãƒŒ" . "ã¬")) ("d;" nil ("ã‚©" . "ã‰")) ("dp" nil ("ã‚£" . "ãƒ"))
+                             ("d:" nil "ã€")          ("d@" nil "ã€Œ")
     )
-  "JIS X 6002-1980 ¥­¡¼¥Ü¡¼¥É¤Ç²ÖÇÛÎó¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "JIS X 6002-1980 ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§èŠ±é…åˆ—ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 (defconst skk-pskana-rom-kana-rule-list-hana-dvorak
-  '((";" nil ("¥µ" . "¤µ"))  ("a" nil ("¥¹" . "¤¹"))  ("'" nil ("¥ç" . "¤ç"))
-    ("q" nil ("¥·" . "¤·"))  ("o" nil ("¥«" . "¤«"))  ("," nil ("¥Æ" . "¤Æ"))
-    ("j" nil ("¥Ê" . "¤Ê"))                           ("." nil ("¥È" . "¤È"))
-    ("k" nil ("¥Î" . "¤Î"))  ("i" nil ("¥­" . "¤­"))  ("p" nil ("¥³" . "¤³"))
-    ("x" nil ("¥Ë" . "¤Ë"))  ("u" nil ("¥¿" . "¤¿"))  ("y" nil ("¥Ï" . "¤Ï"))
-    ("b" nil ("¥¤" . "¤¤"))  ("d" nil ("¥ó" . "¤ó"))  ("f" nil ("¥Ã" . "¤Ã"))
-    ("m" nil ("¥Ä" . "¤Ä"))  ("h" nil ("¥ì" . "¤ì"))  ("g" nil ("¥¯" . "¤¯"))
-    ("w" nil skk-current-kuten)                       ("c" nil ("¥¦" . "¤¦"))
-    ("v" nil skk-current-touten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("¥ë" . "¤ë"))
-    ("z" nil ("¥á" . "¤á"))  ("s" nil ("¥í" . "¤í"))  ("l" nil ("¥é" . "¤é"))
-                             ("-" nil ("¥ê" . "¤ê"))  ("/" nil "¡¼")
-                                                      ("=" nil ("¥¨" . "¤¨"))
+  '((";" nil ("ã‚µ" . "ã•"))  ("a" nil ("ã‚¹" . "ã™"))  ("'" nil ("ãƒ§" . "ã‚‡"))
+    ("q" nil ("ã‚·" . "ã—"))  ("o" nil ("ã‚«" . "ã‹"))  ("," nil ("ãƒ†" . "ã¦"))
+    ("j" nil ("ãƒŠ" . "ãª"))                           ("." nil ("ãƒˆ" . "ã¨"))
+    ("k" nil ("ãƒ" . "ã®"))  ("i" nil ("ã‚­" . "ã"))  ("p" nil ("ã‚³" . "ã“"))
+    ("x" nil ("ãƒ‹" . "ã«"))  ("u" nil ("ã‚¿" . "ãŸ"))  ("y" nil ("ãƒ" . "ã¯"))
+    ("b" nil ("ã‚¤" . "ã„"))  ("d" nil ("ãƒ³" . "ã‚“"))  ("f" nil ("ãƒƒ" . "ã£"))
+    ("m" nil ("ãƒ„" . "ã¤"))  ("h" nil ("ãƒ¬" . "ã‚Œ"))  ("g" nil ("ã‚¯" . "ã"))
+    ("w" nil skk-current-kuten)                       ("c" nil ("ã‚¦" . "ã†"))
+    ("v" nil skk-current-touten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("ãƒ«" . "ã‚‹"))
+    ("z" nil ("ãƒ¡" . "ã‚"))  ("s" nil ("ãƒ­" . "ã‚"))  ("l" nil ("ãƒ©" . "ã‚‰"))
+                             ("-" nil ("ãƒª" . "ã‚Š"))  ("/" nil "ãƒ¼")
+                                                      ("=" nil ("ã‚¨" . "ãˆ"))
     ;; prefix-key: k
-    ("t;" nil ("¥¥" . "¤¥")) ("ta" nil ("¥¡" . "¤¡")) ("t'" nil ("¥Ò" . "¤Ò"))
-    ("tq" nil ("¥»" . "¤»")) ("to" nil ("¥è" . "¤è")) ("t," nil ("¥±" . "¤±"))
-    ("tj" nil ("¥¢" . "¤¢")) ("te" nil ("¥å" . "¤å")) ("t." nil ("¥§" . "¤§"))
-    ("tk" nil ("¥ï" . "¤ï")) ("ti" nil ("¥ä" . "¤ä")) ("tp" nil ("¥Û" . "¤Û"))
-    ("tx" nil ("¥æ" . "¤æ")) ("tu" nil skk-kanagaki-handakuten) ("ty" nil ("¥Ø" . "¤Ø"))
+    ("t;" nil ("ã‚¥" . "ã…")) ("ta" nil ("ã‚¡" . "ã")) ("t'" nil ("ãƒ’" . "ã²"))
+    ("tq" nil ("ã‚»" . "ã›")) ("to" nil ("ãƒ¨" . "ã‚ˆ")) ("t," nil ("ã‚±" . "ã‘"))
+    ("tj" nil ("ã‚¢" . "ã‚")) ("te" nil ("ãƒ¥" . "ã‚…")) ("t." nil ("ã‚§" . "ã‡"))
+    ("tk" nil ("ãƒ¯" . "ã‚")) ("ti" nil ("ãƒ¤" . "ã‚„")) ("tp" nil ("ãƒ›" . "ã»"))
+    ("tx" nil ("ãƒ¦" . "ã‚†")) ("tu" nil skk-kanagaki-handakuten) ("ty" nil ("ãƒ˜" . "ã¸"))
     ;; prefix-key: d
-    ("eb" nil ("¥Í" . "¤Í")) ("eh" nil "¡¦")          ("ef" nil ("¥ã" . "¤ã"))
-    ("em" nil ("¥ß" . "¤ß")) ("eh" nil ("¥Õ" . "¤Õ")) ("eg" nil ("¥Ş" . "¤Ş"))
-    ("ew" nil ("¥ò" . "¤ò")) ("et" nil ("¥Á" . "¤Á")) ("ec" nil ("¥½" . "¤½"))
-    ("ev" nil ("¥ª" . "¤ª")) ("en" nil ("¥à" . "¤à")) ("er" nil ("¥â" . "¤â"))
-    ("ez" nil ("¥Ì" . "¤Ì")) ("es" nil ("¥©" . "¤©")) ("el" nil ("¥£" . "¤£"))
-                             ("e-" nil "¡×")          ("e/" nil "¡Ö")
+    ("eb" nil ("ãƒ" . "ã­")) ("eh" nil "ãƒ»")          ("ef" nil ("ãƒ£" . "ã‚ƒ"))
+    ("em" nil ("ãƒŸ" . "ã¿")) ("eh" nil ("ãƒ•" . "ãµ")) ("eg" nil ("ãƒ" . "ã¾"))
+    ("ew" nil ("ãƒ²" . "ã‚’")) ("et" nil ("ãƒ" . "ã¡")) ("ec" nil ("ã‚½" . "ã"))
+    ("ev" nil ("ã‚ª" . "ãŠ")) ("en" nil ("ãƒ " . "ã‚€")) ("er" nil ("ãƒ¢" . "ã‚‚"))
+    ("ez" nil ("ãƒŒ" . "ã¬")) ("es" nil ("ã‚©" . "ã‰")) ("el" nil ("ã‚£" . "ãƒ"))
+                             ("e-" nil "ã€")          ("e/" nil "ã€Œ")
     )
-  "Dvorak ¥­¡¼¥Ü¡¼¥É¤Ç²ÖÇÛÎó¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "Dvorak ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§èŠ±é…åˆ—ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-us
-  '(("z" nil ("¥¹" . "¤¹"))  ("a" nil ("¥Ï" . "¤Ï"))  ("q" nil ("¥½" . "¤½"))
-    ("x" nil ("¥±" . "¤±"))  ("s" nil ("¥«" . "¤«"))  ("w" nil ("¥³" . "¤³"))
-    ("c" nil ("¥Ë" . "¤Ë"))                           ("e" nil ("¥·" . "¤·"))
-    ("v" nil ("¥Ê" . "¤Ê"))  ("f" nil ("¥È" . "¤È"))  ("r" nil ("¥Æ" . "¤Æ"))
-    ("b" nil ("¥µ" . "¤µ"))  ("g" nil ("¥¿" . "¤¿"))  ("t" nil ("¥ç" . "¤ç"))
-    ("n" nil ("¥Ã" . "¤Ã"))  ("h" nil ("¥¯" . "¤¯"))  ("y" nil ("¥Ä" . "¤Ä"))
-    ("m" nil ("¥ë" . "¤ë"))  ("j" nil ("¥¦" . "¤¦"))  ("u" nil ("¥ó" . "¤ó"))
-    ("," nil skk-current-touten)                      ("i" nil ("¥¤" . "¤¤"))
-    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("¥Î" . "¤Î"))
-    ("/" nil skk-kanagaki-handakuten) (";" nil ("¥­" . "¤­")) ("p" nil ("¥ê" . "¤ê"))
-                             ("'" nil ("¥ì" . "¤ì"))  ("[" nil ("¥Á" . "¤Á"))
-                                                      ("]" nil "¡¦")
+  '(("z" nil ("ã‚¹" . "ã™"))  ("a" nil ("ãƒ" . "ã¯"))  ("q" nil ("ã‚½" . "ã"))
+    ("x" nil ("ã‚±" . "ã‘"))  ("s" nil ("ã‚«" . "ã‹"))  ("w" nil ("ã‚³" . "ã“"))
+    ("c" nil ("ãƒ‹" . "ã«"))                           ("e" nil ("ã‚·" . "ã—"))
+    ("v" nil ("ãƒŠ" . "ãª"))  ("f" nil ("ãƒˆ" . "ã¨"))  ("r" nil ("ãƒ†" . "ã¦"))
+    ("b" nil ("ã‚µ" . "ã•"))  ("g" nil ("ã‚¿" . "ãŸ"))  ("t" nil ("ãƒ§" . "ã‚‡"))
+    ("n" nil ("ãƒƒ" . "ã£"))  ("h" nil ("ã‚¯" . "ã"))  ("y" nil ("ãƒ„" . "ã¤"))
+    ("m" nil ("ãƒ«" . "ã‚‹"))  ("j" nil ("ã‚¦" . "ã†"))  ("u" nil ("ãƒ³" . "ã‚“"))
+    ("," nil skk-current-touten)                      ("i" nil ("ã‚¤" . "ã„"))
+    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ãƒ" . "ã®"))
+    ("/" nil skk-kanagaki-handakuten) (";" nil ("ã‚­" . "ã")) ("p" nil ("ãƒª" . "ã‚Š"))
+                             ("'" nil ("ãƒ¬" . "ã‚Œ"))  ("[" nil ("ãƒ" . "ã¡"))
+                                                      ("]" nil "ãƒ»")
     ;; prefix-key: k
-    ("kz" nil ("¥¥" . "¤¥")) ("ka" nil ("¥£" . "¤£")) ("kq" nil ("¥¡" . "¤¡"))
-    ("kx" nil ("¥Ø" . "¤Ø")) ("ks" nil ("¥ò" . "¤ò")) ("kw" nil ("¥Ò" . "¤Ò"))
-    ("kc" nil ("¥»" . "¤»")) ("kd" nil ("¥é" . "¤é")) ("ke" nil ("¥Û" . "¤Û"))
-    ("kv" nil ("¥å" . "¤å")) ("kf" nil ("¥¢" . "¤¢")) ("kr" nil ("¥Õ" . "¤Õ"))
-    ("kb" nil ("¥ã" . "¤ã")) ("kg" nil ("¥è" . "¤è")) ("kt" nil ("¥á" . "¤á"))
+    ("kz" nil ("ã‚¥" . "ã…")) ("ka" nil ("ã‚£" . "ãƒ")) ("kq" nil ("ã‚¡" . "ã"))
+    ("kx" nil ("ãƒ˜" . "ã¸")) ("ks" nil ("ãƒ²" . "ã‚’")) ("kw" nil ("ãƒ’" . "ã²"))
+    ("kc" nil ("ã‚»" . "ã›")) ("kd" nil ("ãƒ©" . "ã‚‰")) ("ke" nil ("ãƒ›" . "ã»"))
+    ("kv" nil ("ãƒ¥" . "ã‚…")) ("kf" nil ("ã‚¢" . "ã‚")) ("kr" nil ("ãƒ•" . "ãµ"))
+    ("kb" nil ("ãƒ£" . "ã‚ƒ")) ("kg" nil ("ãƒ¨" . "ã‚ˆ")) ("kt" nil ("ãƒ¡" . "ã‚"))
     ;; prefix-key: d
-    ("dn" nil ("¥à" . "¤à")) ("dh" nil ("¥Ş" . "¤Ş")) ("dy" nil ("¥Ì" . "¤Ì"))
-    ("dm" nil ("¥í" . "¤í")) ("dj" nil ("¥ª" . "¤ª")) ("du" nil ("¥¨" . "¤¨"))
-    ("d," nil ("¥Í" . "¤Í")) ("dk" nil ("¥â" . "¤â")) ("di" nil ("¥ß" . "¤ß"))
-    ("d." nil "¡¼")          ("dl" nil ("¥ï" . "¤ï")) ("do" nil ("¥ä" . "¤ä"))
-    ("d/" nil ("¥©" . "¤©")) ("d;" nil ("¥æ" . "¤æ")) ("dp" nil ("¥§" . "¤§"))
-                             ("d'" nil "¡×")          ("d[" nil "¡Ö")
+    ("dn" nil ("ãƒ " . "ã‚€")) ("dh" nil ("ãƒ" . "ã¾")) ("dy" nil ("ãƒŒ" . "ã¬"))
+    ("dm" nil ("ãƒ­" . "ã‚")) ("dj" nil ("ã‚ª" . "ãŠ")) ("du" nil ("ã‚¨" . "ãˆ"))
+    ("d," nil ("ãƒ" . "ã­")) ("dk" nil ("ãƒ¢" . "ã‚‚")) ("di" nil ("ãƒŸ" . "ã¿"))
+    ("d." nil "ãƒ¼")          ("dl" nil ("ãƒ¯" . "ã‚")) ("do" nil ("ãƒ¤" . "ã‚„"))
+    ("d/" nil ("ã‚©" . "ã‰")) ("d;" nil ("ãƒ¦" . "ã‚†")) ("dp" nil ("ã‚§" . "ã‡"))
+                             ("d'" nil "ã€")          ("d[" nil "ã€Œ")
     )
-  "US 101/104 ¥­¡¼¥Ü¡¼¥É¤Ç·îÇÛÎó 2-263 ¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "US 101/104 ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§æœˆé…åˆ— 2-263 ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-jis
-  '(("z" nil ("¥¹" . "¤¹"))  ("a" nil ("¥Ï" . "¤Ï"))  ("q" nil ("¥½" . "¤½"))
-    ("x" nil ("¥±" . "¤±"))  ("s" nil ("¥«" . "¤«"))  ("w" nil ("¥³" . "¤³"))
-    ("c" nil ("¥Ë" . "¤Ë"))                           ("e" nil ("¥·" . "¤·"))
-    ("v" nil ("¥Ê" . "¤Ê"))  ("f" nil ("¥È" . "¤È"))  ("r" nil ("¥Æ" . "¤Æ"))
-    ("b" nil ("¥µ" . "¤µ"))  ("g" nil ("¥¿" . "¤¿"))  ("t" nil ("¥ç" . "¤ç"))
-    ("n" nil ("¥Ã" . "¤Ã"))  ("h" nil ("¥¯" . "¤¯"))  ("y" nil ("¥Ä" . "¤Ä"))
-    ("m" nil ("¥ë" . "¤ë"))  ("j" nil ("¥¦" . "¤¦"))  ("u" nil ("¥ó" . "¤ó"))
-    ("," nil skk-current-touten)                      ("i" nil ("¥¤" . "¤¤"))
-    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("¥Î" . "¤Î"))
-    ("/" nil skk-kanagaki-handakuten) (";" nil ("¥­" . "¤­")) ("p" nil ("¥ê" . "¤ê"))
-    ("\\" nil "¡¦")          (":" nil ("¥ì" . "¤ì"))  ("@" nil ("¥Á" . "¤Á"))
+  '(("z" nil ("ã‚¹" . "ã™"))  ("a" nil ("ãƒ" . "ã¯"))  ("q" nil ("ã‚½" . "ã"))
+    ("x" nil ("ã‚±" . "ã‘"))  ("s" nil ("ã‚«" . "ã‹"))  ("w" nil ("ã‚³" . "ã“"))
+    ("c" nil ("ãƒ‹" . "ã«"))                           ("e" nil ("ã‚·" . "ã—"))
+    ("v" nil ("ãƒŠ" . "ãª"))  ("f" nil ("ãƒˆ" . "ã¨"))  ("r" nil ("ãƒ†" . "ã¦"))
+    ("b" nil ("ã‚µ" . "ã•"))  ("g" nil ("ã‚¿" . "ãŸ"))  ("t" nil ("ãƒ§" . "ã‚‡"))
+    ("n" nil ("ãƒƒ" . "ã£"))  ("h" nil ("ã‚¯" . "ã"))  ("y" nil ("ãƒ„" . "ã¤"))
+    ("m" nil ("ãƒ«" . "ã‚‹"))  ("j" nil ("ã‚¦" . "ã†"))  ("u" nil ("ãƒ³" . "ã‚“"))
+    ("," nil skk-current-touten)                      ("i" nil ("ã‚¤" . "ã„"))
+    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ãƒ" . "ã®"))
+    ("/" nil skk-kanagaki-handakuten) (";" nil ("ã‚­" . "ã")) ("p" nil ("ãƒª" . "ã‚Š"))
+    ("\\" nil "ãƒ»")          (":" nil ("ãƒ¬" . "ã‚Œ"))  ("@" nil ("ãƒ" . "ã¡"))
 
     ;; prefix-key: k
-    ("kz" nil ("¥¥" . "¤¥")) ("ka" nil ("¥£" . "¤£")) ("kq" nil ("¥¡" . "¤¡"))
-    ("kx" nil ("¥Ø" . "¤Ø")) ("ks" nil ("¥ò" . "¤ò")) ("kw" nil ("¥Ò" . "¤Ò"))
-    ("kc" nil ("¥»" . "¤»")) ("kd" nil ("¥é" . "¤é")) ("ke" nil ("¥Û" . "¤Û"))
-    ("kv" nil ("¥å" . "¤å")) ("kf" nil ("¥¢" . "¤¢")) ("kr" nil ("¥Õ" . "¤Õ"))
-    ("kb" nil ("¥ã" . "¤ã")) ("kg" nil ("¥è" . "¤è")) ("kt" nil ("¥á" . "¤á"))
+    ("kz" nil ("ã‚¥" . "ã…")) ("ka" nil ("ã‚£" . "ãƒ")) ("kq" nil ("ã‚¡" . "ã"))
+    ("kx" nil ("ãƒ˜" . "ã¸")) ("ks" nil ("ãƒ²" . "ã‚’")) ("kw" nil ("ãƒ’" . "ã²"))
+    ("kc" nil ("ã‚»" . "ã›")) ("kd" nil ("ãƒ©" . "ã‚‰")) ("ke" nil ("ãƒ›" . "ã»"))
+    ("kv" nil ("ãƒ¥" . "ã‚…")) ("kf" nil ("ã‚¢" . "ã‚")) ("kr" nil ("ãƒ•" . "ãµ"))
+    ("kb" nil ("ãƒ£" . "ã‚ƒ")) ("kg" nil ("ãƒ¨" . "ã‚ˆ")) ("kt" nil ("ãƒ¡" . "ã‚"))
     ;; prefix-key: d
-    ("dn" nil ("¥à" . "¤à")) ("dh" nil ("¥Ş" . "¤Ş")) ("dy" nil ("¥Ì" . "¤Ì"))
-    ("dm" nil ("¥í" . "¤í")) ("dj" nil ("¥ª" . "¤ª")) ("du" nil ("¥¨" . "¤¨"))
-    ("d," nil ("¥Í" . "¤Í")) ("dk" nil ("¥â" . "¤â")) ("di" nil ("¥ß" . "¤ß"))
-    ("d." nil "¡¼")          ("dl" nil ("¥ï" . "¤ï")) ("do" nil ("¥ä" . "¤ä"))
-    ("d/" nil ("¥©" . "¤©")) ("d;" nil ("¥æ" . "¤æ")) ("dp" nil ("¥§" . "¤§"))
-                             ("d:" nil "¡×")          ("d@" nil "¡Ö")
+    ("dn" nil ("ãƒ " . "ã‚€")) ("dh" nil ("ãƒ" . "ã¾")) ("dy" nil ("ãƒŒ" . "ã¬"))
+    ("dm" nil ("ãƒ­" . "ã‚")) ("dj" nil ("ã‚ª" . "ãŠ")) ("du" nil ("ã‚¨" . "ãˆ"))
+    ("d," nil ("ãƒ" . "ã­")) ("dk" nil ("ãƒ¢" . "ã‚‚")) ("di" nil ("ãƒŸ" . "ã¿"))
+    ("d." nil "ãƒ¼")          ("dl" nil ("ãƒ¯" . "ã‚")) ("do" nil ("ãƒ¤" . "ã‚„"))
+    ("d/" nil ("ã‚©" . "ã‰")) ("d;" nil ("ãƒ¦" . "ã‚†")) ("dp" nil ("ã‚§" . "ã‡"))
+                             ("d:" nil "ã€")          ("d@" nil "ã€Œ")
     )
-  "JIS X 6002-1980 ¥­¡¼¥Ü¡¼¥É¤Ç·îÇÛÎó 2-263 ¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "JIS X 6002-1980 ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§æœˆé…åˆ— 2-263 ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-dvorak
-  '((";" nil ("¥¹" . "¤¹"))  ("a" nil ("¥Ï" . "¤Ï"))  ("'" nil ("¥½" . "¤½"))
-    ("q" nil ("¥±" . "¤±"))  ("o" nil ("¥«" . "¤«"))  ("," nil ("¥³" . "¤³"))
-    ("j" nil ("¥Ë" . "¤Ë"))                           ("." nil ("¥·" . "¤·"))
-    ("k" nil ("¥Ê" . "¤Ê"))  ("u" nil ("¥È" . "¤È"))  ("p" nil ("¥Æ" . "¤Æ"))
-    ("x" nil ("¥µ" . "¤µ"))  ("i" nil ("¥¿" . "¤¿"))  ("y" nil ("¥ç" . "¤ç"))
-    ("b" nil ("¥Ã" . "¤Ã"))  ("d" nil ("¥¯" . "¤¯"))  ("f" nil ("¥Ä" . "¤Ä"))
-    ("m" nil ("¥ë" . "¤ë"))  ("h" nil ("¥¦" . "¤¦"))  ("g" nil ("¥ó" . "¤ó"))
-    ("w" nil skk-current-touten)                      ("c" nil ("¥¤" . "¤¤"))
-    ("v" nil skk-current-kuten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("¥Î" . "¤Î"))
-    ("z" nil skk-kanagaki-handakuten) ("s" nil ("¥­" . "¤­")) ("l" nil ("¥ê" . "¤ê"))
-                             ("-" nil ("¥ì" . "¤ì"))  ("/" nil ("¥Á" . "¤Á"))
-                                                      ("=" nil "¡¦")
+  '((";" nil ("ã‚¹" . "ã™"))  ("a" nil ("ãƒ" . "ã¯"))  ("'" nil ("ã‚½" . "ã"))
+    ("q" nil ("ã‚±" . "ã‘"))  ("o" nil ("ã‚«" . "ã‹"))  ("," nil ("ã‚³" . "ã“"))
+    ("j" nil ("ãƒ‹" . "ã«"))                           ("." nil ("ã‚·" . "ã—"))
+    ("k" nil ("ãƒŠ" . "ãª"))  ("u" nil ("ãƒˆ" . "ã¨"))  ("p" nil ("ãƒ†" . "ã¦"))
+    ("x" nil ("ã‚µ" . "ã•"))  ("i" nil ("ã‚¿" . "ãŸ"))  ("y" nil ("ãƒ§" . "ã‚‡"))
+    ("b" nil ("ãƒƒ" . "ã£"))  ("d" nil ("ã‚¯" . "ã"))  ("f" nil ("ãƒ„" . "ã¤"))
+    ("m" nil ("ãƒ«" . "ã‚‹"))  ("h" nil ("ã‚¦" . "ã†"))  ("g" nil ("ãƒ³" . "ã‚“"))
+    ("w" nil skk-current-touten)                      ("c" nil ("ã‚¤" . "ã„"))
+    ("v" nil skk-current-kuten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("ãƒ" . "ã®"))
+    ("z" nil skk-kanagaki-handakuten) ("s" nil ("ã‚­" . "ã")) ("l" nil ("ãƒª" . "ã‚Š"))
+                             ("-" nil ("ãƒ¬" . "ã‚Œ"))  ("/" nil ("ãƒ" . "ã¡"))
+                                                      ("=" nil "ãƒ»")
     ;; prefix-key: k
-    ("t;" nil ("¥¥" . "¤¥")) ("ta" nil ("¥£" . "¤£")) ("t'" nil ("¥¡" . "¤¡"))
-    ("tq" nil ("¥Ø" . "¤Ø")) ("to" nil ("¥ò" . "¤ò")) ("t," nil ("¥Ò" . "¤Ò"))
-    ("tj" nil ("¥»" . "¤»")) ("te" nil ("¥é" . "¤é")) ("t." nil ("¥Û" . "¤Û"))
-    ("tk" nil ("¥å" . "¤å")) ("tu" nil ("¥¢" . "¤¢")) ("tp" nil ("¥Õ" . "¤Õ"))
-    ("tx" nil ("¥ã" . "¤ã")) ("ti" nil ("¥è" . "¤è")) ("ty" nil ("¥á" . "¤á"))
+    ("t;" nil ("ã‚¥" . "ã…")) ("ta" nil ("ã‚£" . "ãƒ")) ("t'" nil ("ã‚¡" . "ã"))
+    ("tq" nil ("ãƒ˜" . "ã¸")) ("to" nil ("ãƒ²" . "ã‚’")) ("t," nil ("ãƒ’" . "ã²"))
+    ("tj" nil ("ã‚»" . "ã›")) ("te" nil ("ãƒ©" . "ã‚‰")) ("t." nil ("ãƒ›" . "ã»"))
+    ("tk" nil ("ãƒ¥" . "ã‚…")) ("tu" nil ("ã‚¢" . "ã‚")) ("tp" nil ("ãƒ•" . "ãµ"))
+    ("tx" nil ("ãƒ£" . "ã‚ƒ")) ("ti" nil ("ãƒ¨" . "ã‚ˆ")) ("ty" nil ("ãƒ¡" . "ã‚"))
     ;; prefix-key: d
-    ("eb" nil ("¥à" . "¤à")) ("ed" nil ("¥Ş" . "¤Ş")) ("ef" nil ("¥Ì" . "¤Ì"))
-    ("em" nil ("¥í" . "¤í")) ("eh" nil ("¥ª" . "¤ª")) ("eg" nil ("¥¨" . "¤¨"))
-    ("ew" nil ("¥Í" . "¤Í")) ("et" nil ("¥â" . "¤â")) ("ec" nil ("¥ß" . "¤ß"))
-    ("ev" nil "¡¼")          ("en" nil ("¥ï" . "¤ï")) ("er" nil ("¥ä" . "¤ä"))
-    ("ez" nil ("¥©" . "¤©")) ("es" nil ("¥æ" . "¤æ")) ("el" nil ("¥§" . "¤§"))
-                             ("e-" nil "¡×")          ("e/" nil "¡Ö")
+    ("eb" nil ("ãƒ " . "ã‚€")) ("ed" nil ("ãƒ" . "ã¾")) ("ef" nil ("ãƒŒ" . "ã¬"))
+    ("em" nil ("ãƒ­" . "ã‚")) ("eh" nil ("ã‚ª" . "ãŠ")) ("eg" nil ("ã‚¨" . "ãˆ"))
+    ("ew" nil ("ãƒ" . "ã­")) ("et" nil ("ãƒ¢" . "ã‚‚")) ("ec" nil ("ãƒŸ" . "ã¿"))
+    ("ev" nil "ãƒ¼")          ("en" nil ("ãƒ¯" . "ã‚")) ("er" nil ("ãƒ¤" . "ã‚„"))
+    ("ez" nil ("ã‚©" . "ã‰")) ("es" nil ("ãƒ¦" . "ã‚†")) ("el" nil ("ã‚§" . "ã‡"))
+                             ("e-" nil "ã€")          ("e/" nil "ã€Œ")
     )
-  "Dvorak ¥­¡¼¥Ü¡¼¥É¤Ç·îÇÛÎó 2-263 ¤ò¼Â¸½¤¹¤ë¤¿¤á¤Î¥ë¡¼¥ë¡£")
+  "Dvorak ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã§æœˆé…åˆ— 2-263 ã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã®ãƒ«ãƒ¼ãƒ«ã€‚")
 
 (put 'and-let* 'lisp-indent-function 1)
 (defmacro and-let* (clause &rest body)
@@ -400,8 +400,8 @@
 				 skk-pskana-dakuten-workaround
 				 activate compile)
   "\
-Á÷¤ê¤¬¤Ê¤Î³«»ÏÊ¸»ú¤¬ÂùÅÀ¡¦È¾ÂùÅÀ¤Î¤È¤­¡¢²ÄÇ½¤Ê¤é¤Ğ
-Ä¾Á°¤ÎÊ¸»ú¤Ë¤½¤ì¤òÉÕ¤·¤¿¤â¤Î¤òÁ÷¤ê¤¬¤Ê¤Î³«»ÏÊ¸»ú¤Ë¤¹¤ë¡£"
+é€ã‚ŠãŒãªã®é–‹å§‹æ–‡å­—ãŒæ¿ç‚¹ãƒ»åŠæ¿ç‚¹ã®ã¨ãã€å¯èƒ½ãªã‚‰ã°
+ç›´å‰ã®æ–‡å­—ã«ãã‚Œã‚’ä»˜ã—ãŸã‚‚ã®ã‚’é€ã‚ŠãŒãªã®é–‹å§‹æ–‡å­—ã«ã™ã‚‹ã€‚"
   (or (and-let* ((skk-henkan-mode)
 		 (c (skk-downcase last-command-event))
 		 (next (skk-select-branch
@@ -423,7 +423,7 @@
 	  (okuri-key (ad-get-arg 1)))
       (setq ad-return-value
 	    (if (string-match (concat "^" (regexp-quote okuri-key)) item)
-		;; okuri-key ¤¬ "¤Ã" ¤Ç item ¤¬ "¤Ã¤Æ" ¤Ê¤É¤À¤Ã¤¿¾ì¹ç¡£
+		;; okuri-key ãŒ "ã£" ã§ item ãŒ "ã£ã¦" ãªã©ã ã£ãŸå ´åˆã€‚
 		okuri-key
 	      item))))
 
