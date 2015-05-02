@@ -53,6 +53,15 @@ Failed to load warns error message."
       (warn "require*: %s is not loaded" (or filename feature)))
     res))
 
+(defun load* (file)
+  "loads FILE like `load', but never signals error.
+returns t if the file is loaded,
+otherwise displays a warnning message and returns nil."
+  (let ((res (load file t t)))
+    (unless res
+      (warn "load*: %s is not loaded" file))
+    res))
+
 ;;; path
 (add-to-load-path&recompile (expand-file-name "~/.emacs.d/lisp"))
 
@@ -281,3 +290,5 @@ Failed to load warns error message."
   (setq sml-indent-level 2)
   (push '("\\.\\(sml\\|smi\\|sig\\)\\'" . sml-mode)
         auto-mode-alist))
+
+(load* "ProofGeneral/generic/proof-site.el")
