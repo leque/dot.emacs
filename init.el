@@ -233,18 +233,17 @@ otherwise displays a warnning message and returns nil."
   (slime-setup '(slime-fuzzy slime-repl)))
 
 ;;; Gauche Mode
-(push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
-
-(mapcar #'(lambda (ext)
-            (push (cons ext 'gauche-mode) auto-mode-alist))
-        '("\\.scm\\'"))
-
-(push '("gauche-refj\\.info.*" utf-8 . utf-8)
-      file-coding-system-alist)
-
-(require 'gauche-mode)
-(when (featurep 'paredit)
-  (require 'gauche-paredit))
+(when (require* 'gauche-mode)
+  (when (featurep 'paredit)
+    (require 'gauche-paredit))
+  (push `(,(format "\\.%s\\'"
+                   (regexp-opt '("sci" "scm" "sld") t))
+          . gauche-mode)
+        auto-mode-alist)
+  (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
+  (push '("gauche-refj\\.info.*" utf-8 . utf-8)
+        file-coding-system-alist)
+  )
 
 (eval-after-load "cmuscheme"
   '(progn
