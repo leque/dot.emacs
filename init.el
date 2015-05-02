@@ -91,8 +91,8 @@ otherwise displays a warnning message and returns nil."
             katakana-jisx0201
             jisx0201
             ))
-    (setq face-font-rescale-alist
-          '(("^-apple-hiragino.*" . 1.2)))
+    (add-to-list 'face-font-rescale-alist
+                 '(".*Hiragino.*" . 1.2))
     (set-face-attribute 'default t :font fs-name)
     (push `(font . ,fs-name) default-frame-alist))
   )
