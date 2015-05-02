@@ -178,7 +178,12 @@ otherwise displays a warnning message and returns nil."
   )
 
 ;;; skk
-(require* 'skk-setup)
+(cond
+ ;; installed with package.el
+ ((fboundp 'skk-mode)
+  (global-set-key (kbd "C-x C-j") #'skk-mode))
+ (t
+  (require* 'skk-setup)))
 
 ;;; qs-complete
 (defun friend-major-mode-p (other-buffer)
