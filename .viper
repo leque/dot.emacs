@@ -23,13 +23,15 @@
 
 ;;;; Key bindings
 
-;;; ^[ is always escape, not meta.
-;;; use ^\ for meta.
-(define-key viper-insert-global-user-map [(control ?\[)]
-  #'viper-intercept-ESC-key)
+(cond
+ ((boundp 'input-decode-map)
+  (define-key input-decode-map [?\e] [escape]))
+ (t
+  (define-key viper-insert-global-user-map [(control ?\[)]
+    #'viper-intercept-ESC-key)
 
-(define-key viper-vi-global-user-map [(control ?\[)]
-  #'undefined)
+  (define-key viper-vi-global-user-map [(control ?\[)]
+    #'undefined)))
 
 
 ;;; Keybindings for Command mode
