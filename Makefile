@@ -4,12 +4,13 @@ TO_HOME = .viper .skk
 TO_EMACS_D = init.el
 TO_LISP = viper-paredit.el gauche-paredit.el skk-pskana.el seikana-ziom.el
 INSTALL = install
+CP = ln -f
 
 all:
 
 install:
-	$(INSTALL) -c $(TO_HOME) "$(HOME)"
+	$(CP) $(TO_HOME) "$(HOME)"
 	$(INSTALL) -d "$(EMACS_D)"
-	$(INSTALL) -c $(TO_EMACS_D) "$(EMACS_D)"
+	$(CP) $(TO_EMACS_D) "$(EMACS_D)"
 	$(INSTALL) -d "$(LISP)"
-	$(INSTALL) -c $(TO_LISP) "$(LISP)"
+	$(CP) $(TO_LISP) "$(LISP)"
