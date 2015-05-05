@@ -79,22 +79,24 @@ otherwise displays a warnning message and returns nil."
   (setq ns-option-modifier 'hyper)
   (prefer-coding-system 'utf-8)
 
-  (let* ((name "hiragino")
-         (fs-name (format "fontset-%s" name))
-         (monaco "Monaco-14:weight=normal:slant=normal")
-         (hiragino '("Hiragino Maru Gothic Pro" . "iso10646-1")))
-    (create-fontset-from-ascii-font monaco nil name)
+  (let ((size 14)
+        (ascii-font "Monaco")
+        (ja-font "Hiragino Maru Gothic Pro"))
+    (set-face-attribute 'default nil
+                        :family ascii-font
+                        :height (* size 10))
     (mapc #'(lambda (x)
-              (set-fontset-font fs-name x hiragino))
-          '(japanese-jisx0208
+              (set-fontset-font t x ja-font))
+          '(katakana-jisx0201
+            japanese-jisx0208
             japanese-jisx0212
-            katakana-jisx0201
-            jisx0201
+            japanese-jisx0213-1
+            japanese-jisx0213-2
             ))
+    (set-fontset-font t '(#x0080 . #x024F) ascii-font)
+    (setq frame-inherited-parameters '(font tool-bar-lines))
     (add-to-list 'face-font-rescale-alist
-                 '(".*Hiragino.*" . 1.2))
-    (set-face-attribute 'default t :font fs-name)
-    (push `(font . ,fs-name) default-frame-alist))
+                 '(".*Hiragino.*" . 1.2)))
   )
  ;; Carbon
  ((eq window-system 'mac)
