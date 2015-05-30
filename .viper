@@ -69,20 +69,6 @@
       (interactive)
       (viper-goto-line 1)))
 
-(defun splice-sexp ()
-  (interactive)
-  (save-excursion
-    (backward-up-list)
-    (save-excursion
-      (forward-sexp)
-      (backward-delete-char 1))
-    (delete-char 1)
-    (backward-up-list)
-    (indent-sexp)))
-
-(define-key viper-vi-global-user-map "K" #'raise-sexp)
-(define-key viper-vi-global-user-map "v" #'splice-sexp)
-
 (when (require 'viper-lisp nil t)
   ;; automatically `:set lisp' in lisp-related modes.
   (mapc #'(lambda (mode)
@@ -102,7 +88,26 @@
           (transpose-words 1))))
 
   (when (require 'paredit nil t)
-    (require 'viper-paredit))
+    (require 'viper-paredit)
+
+    (define-key viper-vi-my-g-map "s"
+      #'paredit-splice-sexp)
+
+    (define-key viper-vi-my-g-map "j"
+      #'paredit-splice-sexp-killing-forward)
+
+    (define-key viper-vi-my-g-map "k"
+      #'paredit-splice-sexp-killing-backward)
+
+    (define-key viper-vi-my-g-map "S"
+      #'paredit-split-sexp)
+
+    (define-key viper-vi-my-g-map "J"
+      #'paredit-join-sexps)
+
+    (define-key viper-vi-my-g-map "K"
+      #'paredit-raise-sexp)
+    )
 
   (define-viper-lisp-brac-function ?\j
     #'(lambda (arg)
