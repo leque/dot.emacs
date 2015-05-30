@@ -22,17 +22,7 @@
 
 
 ;;;; Key bindings
-
-(cond
- ((boundp 'input-decode-map)
-  (define-key input-decode-map [?\e] [escape]))
- (t
-  (define-key viper-insert-global-user-map [(control ?\[)]
-    #'viper-intercept-ESC-key)
-
-  (define-key viper-vi-global-user-map [(control ?\[)]
-    #'undefined)))
-
+(define-key input-decode-map [?\e] [escape])
 
 ;;; Keybindings for Command mode
 ;;;
