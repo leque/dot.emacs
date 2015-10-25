@@ -142,13 +142,11 @@ otherwise displays a warnning message and returns nil."
   (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
   nil)
 
-;;; completion-ui
-(when (require* 'completion-ui)
-  (setq completion-auto-show nil)
-  (define-key completion-overlay-map "\C-n" #'completion-cycle)
-  (define-key completion-overlay-map "\C-p" #'completion-cycle-backwards)
-  (define-key completion-overlay-map "\C-j" #'completion-accept)
-  (define-key completion-overlay-map "\C-g" #'completion-reject))
+;;; auto-complete
+(when (require* 'auto-complete-config)
+  (ac-config-default)
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  )
 
 ;;; mic-paren
 (when (require* 'mic-paren)
