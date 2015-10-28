@@ -233,6 +233,7 @@ otherwise displays a warnning message and returns nil."
   (slime-setup '(slime-fuzzy slime-repl)))
 
 ;;; Gauche Mode
+(setq gauche-mode-info-language 'ja)
 (when (require* 'gauche-mode)
   (when (featurep 'paredit)
     (require 'gauche-paredit))
