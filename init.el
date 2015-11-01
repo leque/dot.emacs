@@ -235,12 +235,8 @@ otherwise displays a warnning message and returns nil."
 ;;; Gauche Mode
 (setq gauche-mode-info-language 'ja)
 (when (require* 'gauche-mode)
-  (when (featurep 'paredit)
-    (require 'gauche-paredit))
-  (push `(,(format "\\.%s\\'"
-                   (regexp-opt '("sci" "scm" "sld") t))
-          . gauche-mode)
-        auto-mode-alist)
+  (require* 'gauche-paredit)
+  (require* 'ac-gauche)
   (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
   (push '("gauche-refj\\.info.*" utf-8 . utf-8)
         file-coding-system-alist)
