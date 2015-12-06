@@ -1,29 +1,26 @@
-;;; -*- coding: utf-8 -*-
-;;;
-;;; skk-pskana.el --- Prefix Shift Kana Input Method for SKK
-;;
-;; Copyright (C) 2006-2013 OOHASHI, Daichi <leque@katch.ne.jp>
-;; Copyright (C) 2000 Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
-;;
+;;; skk-pskana.el --- Prefix Shift Kana Input Method for SKK  -*- coding: utf-8; lexical-binding: t; -*-
+
+;; Copyright (C) 2006-2015 OOHASHI, Daichi <leque@katch.ne.jp>
+
 ;; Author: OOHASHI, Daichi <leque@katch.ne.jp>
-;; Author: Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
-;;         of ddskk/nicola/skk-kanagaki.el
-;;
-;; This file is *NOT* part of Daredevil SKK.
-;;
-;; This program is free software: you can redistribute it and/or modify
+;; Keywords:
+
+;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
-;;
+
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;;
+
 ;; You should have received a copy of the GNU General Public License
-;; long with this program.  If not, see <http://www.gnu.org/licenses/>.
-;;
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; This file is *NOT* part of Daredevil SKK.
 
 ;;
 ;; * What is this?
@@ -52,7 +49,7 @@
 ;;
 ;; Install Daredevil SKK and skk-kanagaki-util.el, and copy this file
 ;; to a dicrectory in *load-path*.
-;; 
+;;
 ;; To use this, put your .skk below:
 ;;   (require 'skk-kanagaki-util)
 ;;   (load "skk-pskana")
@@ -66,12 +63,12 @@
 ;; You could not have difficulty to use (at least once you have learned
 ;; the layout, and are familiar to SKK), but there is a little bit
 ;; difference from normal SKK to input an okurigana with dakuten/handakuten.
-;; 
+;;
 ;; On normal SKK, for instance, to input `遊ぶ', you have simply to type
 ;; `AsoBu'. But here, you have to type あそふ<Shift>゛: type a okurigana
 ;; character without dakuten/handakuten, and hold down a Shift key and
 ;; type dakuten/handakuten.
-;; 
+;;
 ;; I.e., with tsuki-2-263, for `遊ぶ', you have to type `KfqkrL':
 ;; `Kf' for `あ', `q' for `そ', `kr' for `ふ', and `L' for dakuten.
 ;; For `食べる', type `GkxLm': `G' for `た', `kx' for `へ', `L' for dakuten,
@@ -85,10 +82,11 @@
 ;; The source is always with you.
 ;;
 
+;;; Code:
 (eval-when-compile
   (require 'skk)
-  (require 'skk-kanagaki-util)
   (require 'skk-vars)
+  (require 'skk-kanagaki-util)
   )
 
 (defgroup skk-pskana nil "SKK prefix shift kana input related customization."
@@ -98,18 +96,17 @@
 (defcustom skk-pskana-keyboard-type 'us
   "*使用するキーボードの種別"
   :type '(choice (const us)
-		 (const jis)
-		 (const dvorak)
-		 (symbol :tag "Another Keyboard Type"))
+                 (const jis)
+                 (const dvorak)
+                 (symbol :tag "Another Keyboard Type"))
   :group 'skk-pskana)
 
 (defcustom skk-pskana-keyboard-layout 'tsuki-2-263
   "*使用するかな配列の種別"
   :type '(choice (const tsuki-2-263)
-		 (const hana)
-		 (symbol :tag "Another Keyboard Layout"))
+                 (const hana)
+                 (symbol :tag "Another Keyboard Layout"))
   :group 'skk-pskana)
-
 
 ;;; Function Keys
 (defconst skk-pskana-rom-kana-base-rule-list-hana-us
@@ -150,14 +147,12 @@
 (defconst skk-pskana-rom-kana-base-rule-list-tsuki-2-263-dvorak
   skk-pskana-rom-kana-base-rule-list-hana-dvorak)
 
-
 ;;; Use dakuten key for previous candidate
 (defconst skk-pskana-previous-candidate-char-us ?-)
 
 (defconst skk-pskana-previous-candidate-char-jis ?-)
 
 (defconst skk-pskana-previous-candidate-char-dvorak ?\[)
-
 
 (defconst skk-pskana-set-henkan-point-key-us
   '(?Q ?W ?E ?R ?T ?Y ?U ?I ?O ?P ?{
@@ -171,8 +166,8 @@
 
 (defconst skk-pskana-set-henkan-point-key-dvorak
   '(?\" ?, ?. ?P ?Y ?F ?G ?C ?R ?L ?\/ ?\=
-	?A ?O ?E ?U ?I ?D ?H ?T ?N ?S ?-
-	?\: ?Q ?J ?K ?X ?B ?M ?W ?V ?Z))
+        ?A ?O ?E ?U ?I ?D ?H ?T ?N ?S ?-
+        ?\: ?Q ?J ?K ?X ?B ?M ?W ?V ?Z))
 
 
 (defconst skk-pskana-downcase-alist-us
@@ -181,7 +176,7 @@
     (?\: . ?\;)
     (?\? . ?\/)
     (?\" . ?\')))
-	
+
 (defconst skk-pskana-downcase-alist-jis
   '((?\` . ?\@)
     (?\+ . ?\;)
@@ -376,85 +371,86 @@
     )
   "Dvorak キーボードで月配列 2-263 を実現するためのルール。")
 
-(put 'and-let* 'lisp-indent-function 1)
-(defmacro and-let* (clause &rest body)
+(defmacro srfi-and-let* (clause &rest body)
   "See SRFI-2: http://srfi.schemers.org/srfi-2/"
+  (declare (indent 1))
   (if (null clause)
       `(progn ,@body)
     (let ((cl (car clause)))
       (cond ((null (cdr cl))
-	     `(and ,(car cl)
-		   (and-let* ,(cdr clause)
-			     ,@body)))
-	    ((and (symbolp (car cl))
-		  (consp (cdr cl))
-		  (null (cddr cl)))
-	     `(let ((,(car cl) ,(cadr cl)))
-		(and ,(car cl)
-		     (and-let* ,(cdr clause)
-			       ,@body))))
-	    (t
-	     (error "malformed and-let* binding spec: %s" cl))))))
+             `(and ,(car cl)
+                   (srfi-and-let* ,(cdr clause)
+                             ,@body)))
+            ((and (symbolp (car cl))
+                  (consp (cdr cl))
+                  (null (cddr cl)))
+             `(let ((,(car cl) ,(cadr cl)))
+                (and ,(car cl)
+                     (srfi-and-let* ,(cdr clause)
+                               ,@body))))
+            (t
+             (error "malformed srfi-and-let* binding spec: %s" cl))))))
 
 (defadvice skk-set-henkan-point (around
-				 skk-pskana-dakuten-workaround
-				 activate compile)
+                                 skk-pskana-dakuten-workaround
+                                 activate compile)
   "\
 送りがなの開始文字が濁点・半濁点のとき、可能ならば
 直前の文字にそれを付したものを送りがなの開始文字にする。"
-  (or (and-let* ((skk-henkan-mode)
-		 (c (skk-downcase last-command-event))
-		 (next (skk-select-branch
-			(or skk-current-rule-tree skk-rule-tree) c))
-		 ((null (skk-get-branch-list next)))
-		 (s (skk-get-kana next))
-		 ((memq s '(skk-kanagaki-dakuten
-			    skk-kanagaki-handakuten))))
-	(funcall s)
-	(skk-set-char-before-as-okurigana)
-	t)
+  (or (srfi-and-let* ((skk-henkan-mode)
+                      (c (skk-downcase last-command-event))
+                      (next (skk-select-branch
+                             (or skk-current-rule-tree skk-rule-tree) c))
+                      ((null (skk-get-branch-list next)))
+                      (s (skk-get-kana next))
+                      ((memq s '(skk-kanagaki-dakuten
+                                 skk-kanagaki-handakuten))))
+        (funcall s)
+        (skk-set-char-before-as-okurigana)
+        t)
       ad-do-it))
 
-;; simplified version of the advice with the same name in nicola/skk-kanagaki.el
+;; simplified version of the advice with the same name in ddskk/nicola/skk-kanagaki.el
+;; Copyright (C) 2000 Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
+;; Author: Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
 (defadvice skk-compute-henkan-lists-sub-adjust-okuri (around
-						      skk-kanagaki-adjust-okuri
-						      activate compile)
+                                                      skk-kanagaki-adjust-okuri
+                                                      activate compile)
     (let ((item (ad-get-arg 0))
-	  (okuri-key (ad-get-arg 1)))
+          (okuri-key (ad-get-arg 1)))
       (setq ad-return-value
-	    (if (string-match (concat "^" (regexp-quote okuri-key)) item)
-		;; okuri-key が "っ" で item が "って" などだった場合。
-		okuri-key
-	      item))))
-
+            (if (string-match (concat "^" (regexp-quote okuri-key)) item)
+                ;; okuri-key が "っ" で item が "って" などだった場合。
+                okuri-key
+              item))))
 
 ;;; Initalization
-
 (defun skk-pskana-init ()
   (interactive)
   (setq skk-downcase-alist
-	(symbol-value (intern (format "skk-pskana-downcase-alist-%s"
-				      skk-pskana-keyboard-type))))
+        (symbol-value (intern (format "skk-pskana-downcase-alist-%s"
+                                      skk-pskana-keyboard-type))))
 
   (setq skk-set-henkan-point-key
-	(symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
-				      skk-pskana-keyboard-type))))
+        (symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
+                                      skk-pskana-keyboard-type))))
 
   (setq skk-previous-candidate-char
-	(symbol-value (intern (format "skk-pskana-previous-candidate-char-%s"
-				      skk-pskana-keyboard-type))))
+        (symbol-value (intern (format "skk-pskana-previous-candidate-char-%s"
+                                      skk-pskana-keyboard-type))))
 
-  (setq skk-rom-kana-base-rule-list 
-	(append
-	 (symbol-value (intern (format "skk-pskana-rom-kana-base-rule-list-%s-%s"
-				       skk-pskana-keyboard-layout
-				       skk-pskana-keyboard-type)))
-	 (symbol-value (intern (format "skk-pskana-rom-kana-rule-list-%s-%s"
-				       skk-pskana-keyboard-layout
-				       skk-pskana-keyboard-type)))))
+  (setq skk-rom-kana-base-rule-list
+        (append
+         (symbol-value (intern (format "skk-pskana-rom-kana-base-rule-list-%s-%s"
+                                       skk-pskana-keyboard-layout
+                                       skk-pskana-keyboard-type)))
+         (symbol-value (intern (format "skk-pskana-rom-kana-rule-list-%s-%s"
+                                       skk-pskana-keyboard-layout
+                                       skk-pskana-keyboard-type)))))
 
   (setq skk-rom-kana-rule-list nil))
 
 (skk-pskana-init)
 
 (provide 'skk-pskana)
+;;; skk-pskana.el ends here
