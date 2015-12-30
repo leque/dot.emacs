@@ -1,11 +1,18 @@
 ;; -*- coding: utf-8-unix -*-
-(when (require 'package nil t)
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
-  (package-initialize))
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
 
-(require 'cl)
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(unless (require 'el-get nil t)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(el-get-bundle tarao/with-eval-after-load-feature-el)
+
+(require 'cl-lib)
 
 ;;; start server
 (require 'server)
@@ -40,10 +47,6 @@
   (interactive "nnew width: ")
   (set-frame-width (selected-frame) w))
 
-(defun add-to-load-path&recompile (dir)
-  (add-to-list 'load-path dir)
-  (byte-recompile-directory dir 0))
-
 (defun require* (feature &optional filename)
   "loads FEATURE from FILENAME like `require', but never signals error.
 returns t if the feature is loaded,
@@ -63,10 +66,11 @@ otherwise displays a warnning message and returns nil."
     res))
 
 ;;; path
-(add-to-load-path&recompile (expand-file-name "~/.emacs.d/lisp"))
+(add-to-list 'load-path (locate-user-emacs-file "lisp"))
 
-(when (require* 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+(el-get-bundle! exec-path-from-shell
+  (exec-path-from-shell-initialize)
+  )
 
 ;;; environment-dependent setting
 (set-language-environment 'Japanese)
@@ -133,29 +137,20 @@ otherwise displays a warnning message and returns nil."
 (setq-default show-trailing-whitespace t)
 (global-whitespace-mode)
 
-;;; Viperize
-(setq viper-mode t)
-(require 'viper)
-
-;; kludge to avoid cursor flicker on Cocoa Emacs
-(defadvice viper-change-cursor-color
-  (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
-  nil)
-
 ;;; auto-complete
-(when (require* 'auto-complete-config)
+(el-get-bundle! auto-complete
   (ac-config-default)
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   )
 
 ;;; mic-paren
-(when (require* 'mic-paren)
+(el-get-bundle! mic-paren
   (paren-activate)
   (setq paren-match-face 'region)
   (setq paren-sexp-mode t))
 
 ;;; paredit
-(when (require* 'paredit)
+(el-get-bundle! paredit
   (mapc #'(lambda (mode)
             (add-hook mode #'enable-paredit-mode))
         '(emacs-lisp-mode-hook
@@ -177,42 +172,19 @@ otherwise displays a warnning message and returns nil."
     #'paredit-backward-barf-sexp)
   )
 
+;;; Viperize
+(setq viper-mode t)
+(el-get-bundle leque/viper-lisp)
+(require 'viper)
+
+;; kludge to avoid cursor flicker on Cocoa Emacs
+(defadvice viper-change-cursor-color
+  (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
+  nil)
+
 ;;; skk
-(cond
- ;; installed with package.el
- ((fboundp 'skk-mode)
+(el-get-bundle ddskk
   (global-set-key (kbd "C-x C-j") #'skk-mode))
- (t
-  (require* 'skk-setup)))
-
-;;; qs-complete
-(defun friend-major-mode-p (other-buffer)
-  (let ((mod (save-excursion
-                 (set-buffer other-buffer)
-                 major-mode)))
-    (or (eq major-mode mod)
-        (and (memq mod
-                   (find major-mode
-                         friend-major-modes
-                         :test #'memq))
-             t))))
-
-(defvar friend-major-modes
-  '((emacs-lisp-mode lisp-interaction-mode)
-    ))
-
-(when (and (require* 'completion-ui)
-           (require* 'qs-complete))
-  (global-set-key [(meta ??)]
-                  #'(lambda ()
-                      (interactive)
-                      (let ((dabbrev-check-all-buffers nil)
-                            (dabbrev-friend-buffer-function
-                             #'friend-major-mode-p))
-                        (complete-qs)))))
-
-;;; zsh-like minibuffer completion
-(require* 'zlc)
 
 ;;; haskell mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
@@ -221,78 +193,64 @@ otherwise displays a warnning message and returns nil."
 (setq ruby-indent-level 3)
 
 ;;; scala-mode
-(when (require* 'scala-mode-auto)
-  (defadvice scala-block-indentation (around improve-indentation-after-brace activate)
-    (if (eq (char-before) ?\{)
-        (setq ad-return-value (+ (current-indentation) scala-mode-indent:step))
-      ad-do-it)))
+(el-get-bundle scala-mode2)
 
 ;;; SLIME
 (setq inferior-lisp-program "sbcl")
-(when (require* 'slime)
-  (slime-setup '(slime-fuzzy slime-repl)))
+(el-get-bundle slime
+  (with-eval-after-load-feature 'slime
+    (slime-setup '(slime-fuzzy slime-repl))))
 
 ;;; Gauche Mode
 (setq gauche-mode-info-language 'ja)
-(when (require* 'gauche-mode)
-  (require* 'gauche-paredit)
-  (require* 'ac-gauche)
+(el-get-bundle leque/gauche-mode
   (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
   (push '("gauche-refj\\.info.*" utf-8 . utf-8)
         file-coding-system-alist)
+  (with-eval-after-load 'gauche-mode
+    (require 'gauche-paredit)
+    (require 'ac-gauche))
   )
 
-(eval-after-load "cmuscheme"
-  '(progn
-     (defadvice scheme-send-region (after show-ischeme-buffer activate)
-       "show *scheme* buffer always"
-       (let ((buf (and scheme-buffer
-                       (get-buffer scheme-buffer))))
-         (when (loop for frame in (frame-list)
-                     never (loop for w in (window-list frame)
-                                 thereis (eq buf (window-buffer w))))
-           (switch-to-buffer-other-window buf)
-           (goto-char (point-max))
-           (other-window 1))))
-     (mapc '(lambda (s)
-              (put (car s) 'scheme-indent-function (cdr s)))
-           '((define/cmdargs . 1)
-             (let-cmdargs . 2)
-             (parse-cmdargs . 1)
-             ))
-     ))
+(with-eval-after-load "cmuscheme"
+  (defadvice scheme-send-region (after show-ischeme-buffer activate)
+    "show *scheme* buffer always"
+    (let ((buf (and scheme-buffer
+                    (get-buffer scheme-buffer))))
+      (when (cl-loop for frame in (frame-list)
+                     never (cl-loop for w in (window-list frame)
+                                    thereis (eq buf (window-buffer w))))
+        (switch-to-buffer-other-window buf)
+        (goto-char (point-max))
+        (other-window 1))))
+  )
 
 ;;; c-mode
-(eval-after-load "cc-mode"
-  '(progn
-     (c-add-style "ruby"
-                  '("bsd"
-                    (c-basic-offset . 4)
-                    (c-offsets-alist
-                     (case-label . 2)
-                     (label . 2)
-                     (statement-case-intro . 2)
-                     (statement-case-open . 2))))
+(with-eval-after-load "cc-mode"
+  (c-add-style "ruby"
+               '("bsd"
+                 (c-basic-offset . 4)
+                 (c-offsets-alist
+                  (case-label . 2)
+                  (label . 2)
+                  (statement-case-intro . 2)
+                  (statement-case-open . 2))))
 
-     (c-add-style "gauche"
-                  '("bsd"
-                    (c-basic-offset . 4)
-                    (c-offsets-alist
-                     (label . 2)
-                     (statement-case-open . 4))))
-     ))
+  (c-add-style "gauche"
+               '("bsd"
+                 (c-basic-offset . 4)
+                 (c-offsets-alist
+                  (label . 2)
+                  (statement-case-open . 4))))
+  )
 
-(when (require* 'caml)
-  (require 'caml-font)
+(el-get-bundle caml-mode
+  (with-eval-after-load-feature 'caml
+    (require 'caml-font))
+  (autoload 'caml-mode "caml" nil t)
   (push (cons "\\.ml[ily]?\\'" 'caml-mode)
-        auto-mode-alist))
-
-(when (require* 'sml-mode)
-  (setq sml-indent-level 2)
-  (push '("\\.\\(sml\\|smi\\|sig\\)\\'" . sml-mode)
-        auto-mode-alist))
-
-(load* "ProofGeneral/generic/proof-site.el")
+        auto-mode-alist)
+  )
 
 ;; Add opam emacs directory to the load-path
 (when (locate-file "opam" exec-path)
@@ -303,10 +261,16 @@ otherwise displays a warnning message and returns nil."
          -1))
   (add-to-list 'load-path (concat opam-share "/emacs/site-lisp")))
 
-;; Start merlin on ocaml files
-(add-hook 'tuareg-mode-hook 'merlin-mode t)
-(add-hook 'caml-mode-hook 'merlin-mode t)
-;; Enable auto-complete
-(setq merlin-use-auto-complete-mode 'easy)
-;; Use opam switch to lookup ocamlmerlin binary
-(setq merlin-command 'opam)
+(progn
+  (autoload 'merlin-mode "merlin" "Merlin mode" t)
+  (add-hook 'caml-mode-hook 'merlin-mode t)
+  (setq merlin-use-auto-complete-mode 'easy)
+  (setq merlin-command 'opam))
+
+(el-get-bundle sml-mode
+  (with-eval-after-load-feature 'sml-mode
+    (setq sml-indent-level 2)
+    (push '("\\.\\(sml\\|smi\\|sig\\)\\'" . sml-mode)
+          auto-mode-alist)))
+
+(load* "ProofGeneral/generic/proof-site.el")
