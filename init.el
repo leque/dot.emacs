@@ -70,6 +70,7 @@ otherwise displays a warnning message and returns nil."
 
 ;;; environment-dependent setting
 (set-language-environment 'Japanese)
+(prefer-coding-system 'utf-8)
 
 (cond
  ;; Cocoa
@@ -77,7 +78,6 @@ otherwise displays a warnning message and returns nil."
   (setq ns-command-modifier 'meta)
   ;; super is used in ns-win.el
   (setq ns-option-modifier 'hyper)
-  (prefer-coding-system 'utf-8)
 
   (let ((size 14)
         (ascii-font "Monaco")
