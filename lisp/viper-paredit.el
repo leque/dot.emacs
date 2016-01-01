@@ -1,4 +1,4 @@
-(require 'viper-lisp)
+(require 'paredit)
 
 ;; for now, do not use replace overlay with paredit.
 (defadvice viper-change (around viper-change-with-paredit activate)
