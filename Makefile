@@ -1,7 +1,7 @@
 EMACS_D = $(HOME)/.emacs.d
 LISP = $(EMACS_D)/lisp
 TO_HOME = .viper .skk
-TO_EMACS_D = init.el
+TO_EMACS_D = init.el recipes
 TO_LISP = viper-paredit.el gauche-paredit.el skk-pskana.el seikana-ziom.el
 INSTALL = install
 CP = ln -sf

@@ -10,6 +10,8 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+(add-to-list 'el-get-recipe-path (locate-user-emacs-file "recipes"))
+
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
 (require 'cl-lib)
@@ -273,4 +275,4 @@ otherwise displays a warnning message and returns nil."
     (push '("\\.\\(sml\\|smi\\|sig\\)\\'" . sml-mode)
           auto-mode-alist)))
 
-(load* "ProofGeneral/generic/proof-site.el")
+(el-get-bundle "ProofGeneral")
