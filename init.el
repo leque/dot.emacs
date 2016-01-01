@@ -188,6 +188,8 @@ otherwise displays a warnning message and returns nil."
 (el-get-bundle ddskk
   (global-set-key (kbd "C-x C-j") #'skk-mode))
 
+(el-get-bundle nicola-ddskk)
+
 ;;; haskell mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 

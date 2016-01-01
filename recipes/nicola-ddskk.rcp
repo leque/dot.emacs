@@ -1,0 +1,15 @@
+(:name nicola-ddskk
+       :website "http://openlab.ring.gr.jp/skk/ddskk.html"
+       :description "Kana input support for DDSKK"
+       :type github
+       :pkgname "skk-dev/ddskk"
+       :depends (ddskk)
+       :load-path "nicola"
+       :build `(("sh" "-c"
+                 ,(concat
+                   "cd nicola; "
+                   el-get-emacs
+                   " -batch -q -no-site-file"
+                   " -L " (el-get-package-directory "ddskk")
+                   " -l NICOLA-DDSKK-MK -f compile-nicola-ddskk NONE")))
+       )
