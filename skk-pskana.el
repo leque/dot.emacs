@@ -47,12 +47,9 @@
 ;;
 ;; * How to use
 ;;
-;; Install Daredevil SKK and skk-kanagaki-util.el, and copy this file
-;; to a dicrectory in *load-path*.
-;;
-;; To use this, put your .skk below:
-;;   (require 'skk-kanagaki-util)
-;;   (load "skk-pskana")
+;; Install Daredevil SKK and skk-kanagaki-util.el, copy this file
+;; to a dicrectory in *load-path*, and put your .skk below:
+;;   (require 'skk-pskana)
 ;;
 ;; The default layout is Tsuki-2-263 on US keyboard.
 ;; To use Hana layout on Dvorak keyboard, for example, put your .skk
