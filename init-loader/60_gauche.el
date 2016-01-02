@@ -1,0 +1,1 @@
+../init/gauche.el

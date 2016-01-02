@@ -1,6 +1,6 @@
 EMACS_D = $(HOME)/.emacs.d
 TO_HOME = .viper .skk
-TO_EMACS_D = init.el lisp recipes
+TO_EMACS_D = init.el init init-loader lisp recipes
 INSTALL = install
 CP = ln -sf
 
