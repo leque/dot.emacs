@@ -127,6 +127,7 @@ otherwise displays a warnning message and returns nil."
 
 ;;; Viperize
 (setq viper-mode t)
+(setq viper-custom-file-name (locate-user-emacs-file ".viper"))
 (el-get-bundle leque/viper-lisp)
 (require 'viper)
 
@@ -136,6 +137,8 @@ otherwise displays a warnning message and returns nil."
   nil)
 
 ;;; skk
+(setq skk-init-file (locate-user-emacs-file ".skk"))
+
 (el-get-bundle ddskk
   (global-set-key (kbd "C-x C-j") #'skk-mode))
 
