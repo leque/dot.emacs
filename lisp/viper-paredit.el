@@ -1,3 +1,4 @@
+(require 'cl-lib)
 (require 'paredit)
 
 ;; for now, do not use replace overlay with paredit.
@@ -8,7 +9,7 @@
           (paredit-in-string-p)
           (paredit-in-comment-p))
       ad-do-it
-    (flet ((viper-same-line (_beg _end) nil))
+    (cl-flet ((viper-same-line (_beg _end) nil))
       ad-do-it)))
 
 (defadvice viper-set-destructive-command
