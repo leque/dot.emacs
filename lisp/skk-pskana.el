@@ -145,11 +145,14 @@
   skk-pskana-rom-kana-base-rule-list-hana-dvorak)
 
 ;;; Use dakuten key for previous candidate
-(defconst skk-pskana-previous-candidate-char-us ?-)
+(defconst skk-pskana-previous-candidate-keys-us
+  '("-" "\C-p"))
 
-(defconst skk-pskana-previous-candidate-char-jis ?-)
+(defconst skk-pskana-previous-candidate-keys-jis
+  '("-" "\C-p"))
 
-(defconst skk-pskana-previous-candidate-char-dvorak ?\[)
+(defconst skk-pskana-previous-candidate-keys-dvorak
+  '("[" "\C-p"))
 
 (defconst skk-pskana-set-henkan-point-key-us
   '(?Q ?W ?E ?R ?T ?Y ?U ?I ?O ?P ?{
@@ -432,8 +435,8 @@
         (symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
                                       skk-pskana-keyboard-type))))
 
-  (setq skk-previous-candidate-char
-        (symbol-value (intern (format "skk-pskana-previous-candidate-char-%s"
+  (setq skk-previous-candidate-keys
+        (symbol-value (intern (format "skk-pskana-previous-candidate-keys-%s"
                                       skk-pskana-keyboard-type))))
 
   (setq skk-rom-kana-base-rule-list
