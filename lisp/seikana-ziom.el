@@ -1,4 +1,4 @@
-;;; -*- coding: utf-8 -*-
+;;; -*- coding: utf-8; lexical-binding: t -*-
 ;;; seikana-ziom.el - 字音かなづかひユーティリティ
 ;;;
 ;;;  Copyright (c) 2006 OOHASHI Daichi, All rights reserved.
@@ -29,89 +29,7 @@
 ;;;  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 ;;;  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ;;;  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-(eval-when-compile
-  (require 'cl))
-
-(defun seikana-display-ziom-for-char-at-point ()
-  "カーソル位置の漢字の字音を表示する"
-  (interactive)
-  (let* ((ch (char-before))
-         (ziom (gethash ch seikana-kanzi-ziom-table ())))
-    (if (null ziom)
-        (message "can't find ziom for `%c'" ch)
-      (message "%s" ziom))))
-
-(defun seikana-ryakuzi-region (beg end do-force)
-  "領域内の康煕字典體の漢字を新字體の漢字におきかへる
-前置引數を指定すると置換時に確認をしない"
-  (interactive "*r\nP")
-  (seikana-replace seikana-seizi-pat
-                   seikana-seizi-ryakuzi-table
-                   beg end
-                   do-force))
-
-(defun seikana-seizi-region (beg end do-force)
-  "領域内の新字體の漢字を康煕字典體の漢字におきかへる
-前置引數を指定すると置換時に確認をしない"
-  (interactive "*r\nP")
-  (seikana-replace seikana-ryakuzi-pat
-                   seikana-ryakuzi-seizi-table
-                   beg end
-                   do-force))
-
-(defun seikana-replace (pat table beg end &optional do-force)
-  "新字體・康煕字典體相互變換關數の實體"
-  (save-excursion
-    (save-match-data
-      (goto-char beg)
-      (while (re-search-forward pat end t)
-        (let* ((str (match-string 0))
-               (rep (gethash str table '())))
-          (goto-char (match-beginning 0))
-          (cond
-           ((null rep)
-            (error "internal error. table is inconsistent."))
-           ((null (cdr rep))
-            (when (or do-force
-                      (y-or-n-p (format "replace with `%s'?" (car rep))))
-              (replace-match (car rep))))
-           (t
-            (let ((r (seikana-select rep)))
-              (when r
-                (replace-match r)))))
-          (goto-char (match-end 0))))
-      (message "done."))))
-
-(defconst seikana-menu-keys '(?a ?s ?d ?f ?j ?k ?l)
-  "複數の康煕字典體漢字の候補があったときの選擇につかふキー")
-
-(defun seikana-select (cs)
-  "複數候補選擇用の下請け關數"
-  (cond
-   ((null cs)
-    nil)
-   ((> (length cs) (length seikana-menu-keys))
-    (error "internal error. candidates list too long."))
-   (t
-    (let* ((alis (mapcar* #'cons seikana-menu-keys cs))
-           (rs
-            (mapcar* #'(lambda (k c)
-                         (format "%c:%s\(%s\)  " k (car c) (cdr c)))
-                     seikana-menu-keys cs))
-           (msg
-            (apply #'concat (append rs '("n: not replace ")))))
-      (catch 'break
-        (while t
-          (message msg)
-          (let* ((c (read-char))
-                 (res (assoc c alis)))
-            (cond (res
-                   (throw 'break (cadr res)))
-                  ((char-equal c ?n)
-                   (throw 'break nil))
-                  (t
-                   (message "`%c' is not valid here." c))))))))))
+(require 'cl-lib)
 
 (defconst seikana-ryakuzi-seizi-alist
   '(("亜" "亞")
@@ -1009,5 +927,84 @@
        ("ワン"  ?椀 ?碗 ?腕 ?弯 ?彎 ?灣 ?湾 ?綰)))
     table))
 
-(provide 'seikana-ziom)
+(defconst seikana-menu-keys '(?a ?s ?d ?f ?j ?k ?l)
+  "複數の康煕字典體漢字の候補があったときの選擇につかふキー")
 
+(defun seikana-select (cs)
+  "複數候補選擇用の下請け關數"
+  (cond
+   ((null cs)
+    nil)
+   ((> (length cs) (length seikana-menu-keys))
+    (error "internal error. candidates list too long."))
+   (t
+    (let* ((alis (cl-mapcar #'cons seikana-menu-keys cs))
+           (rs
+            (cl-mapcar #'(lambda (k c)
+                           (format "%c:%s\(%s\)  " k (car c) (cdr c)))
+                       seikana-menu-keys cs))
+           (msg
+            (apply #'concat (append rs '("n: not replace ")))))
+      (catch 'break
+        (while t
+          (message msg)
+          (let* ((c (read-char))
+                 (res (assoc c alis)))
+            (cond (res
+                   (throw 'break (cadr res)))
+                  ((char-equal c ?n)
+                   (throw 'break nil))
+                  (t
+                   (message "`%c' is not valid here." c))))))))))
+
+(defun seikana-display-ziom-for-char-at-point ()
+  "カーソル位置の漢字の字音を表示する"
+  (interactive)
+  (let* ((ch (char-before))
+         (ziom (gethash ch seikana-kanzi-ziom-table ())))
+    (if (null ziom)
+        (message "can't find ziom for `%c'" ch)
+      (message "%s" ziom))))
+
+(defun seikana-ryakuzi-region (beg end do-force)
+  "領域内の康煕字典體の漢字を新字體の漢字におきかへる
+前置引數を指定すると置換時に確認をしない"
+  (interactive "*r\nP")
+  (seikana-replace seikana-seizi-pat
+                   seikana-seizi-ryakuzi-table
+                   beg end
+                   do-force))
+
+(defun seikana-seizi-region (beg end do-force)
+  "領域内の新字體の漢字を康煕字典體の漢字におきかへる
+前置引數を指定すると置換時に確認をしない"
+  (interactive "*r\nP")
+  (seikana-replace seikana-ryakuzi-pat
+                   seikana-ryakuzi-seizi-table
+                   beg end
+                   do-force))
+
+(defun seikana-replace (pat table beg end &optional do-force)
+  "新字體・康煕字典體相互變換關數の實體"
+  (save-excursion
+    (save-match-data
+      (goto-char beg)
+      (while (re-search-forward pat end t)
+        (let* ((str (match-string 0))
+               (rep (gethash str table '())))
+          (goto-char (match-beginning 0))
+          (cond
+           ((null rep)
+            (error "internal error. table is inconsistent."))
+           ((null (cdr rep))
+            (when (or do-force
+                      (y-or-n-p (format "replace with `%s'?" (car rep))))
+              (replace-match (car rep))))
+           (t
+            (let ((r (seikana-select rep)))
+              (when r
+                (replace-match r)))))
+          (goto-char (match-end 0))))
+      (message "done."))))
+
+(provide 'seikana-ziom)
