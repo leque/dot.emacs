@@ -1,5 +1,6 @@
-(require 'cl-lib)
 (require 'paredit)
+(eval-when-compile
+  (require 'cl))
 
 ;; for now, do not use replace overlay with paredit.
 (defadvice viper-change (around viper-change-with-paredit activate)
@@ -9,7 +10,7 @@
           (paredit-in-string-p)
           (paredit-in-comment-p))
       ad-do-it
-    (cl-flet ((viper-same-line (_beg _end) nil))
+    (flet ((viper-same-line (_beg _end) nil))
       ad-do-it)))
 
 (defadvice viper-set-destructive-command
