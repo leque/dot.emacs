@@ -380,14 +380,14 @@
       (cond ((null (cdr cl))
              `(and ,(car cl)
                    (srfi-and-let* ,(cdr clause)
-                             ,@body)))
+                     ,@body)))
             ((and (symbolp (car cl))
                   (consp (cdr cl))
                   (null (cddr cl)))
              `(let ((,(car cl) ,(cadr cl)))
                 (and ,(car cl)
                      (srfi-and-let* ,(cdr clause)
-                               ,@body))))
+                       ,@body))))
             (t
              (error "malformed srfi-and-let* binding spec: %s" cl))))))
 
@@ -416,13 +416,13 @@
 (defadvice skk-compute-henkan-lists-sub-adjust-okuri (around
                                                       skk-kanagaki-adjust-okuri
                                                       activate compile)
-    (let ((item (ad-get-arg 0))
-          (okuri-key (ad-get-arg 1)))
-      (setq ad-return-value
-            (if (string-match (concat "^" (regexp-quote okuri-key)) item)
-                ;; okuri-key が "っ" で item が "って" などだった場合。
-                okuri-key
-              item))))
+  (let ((item (ad-get-arg 0))
+        (okuri-key (ad-get-arg 1)))
+    (setq ad-return-value
+          (if (string-match (concat "^" (regexp-quote okuri-key)) item)
+              ;; okuri-key が "っ" で item が "って" などだった場合。
+              okuri-key
+            item))))
 
 ;;; Initalization
 (defun skk-pskana-init ()

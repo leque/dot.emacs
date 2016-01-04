@@ -133,7 +133,7 @@ otherwise displays a warnning message and returns nil."
 
 ;; kludge to avoid cursor flicker on Cocoa Emacs
 (defadvice viper-change-cursor-color
-  (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
+    (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
   nil)
 
 ;;; skk
