@@ -1,4 +1,4 @@
-(with-eval-after-load "cc-mode"
+(with-eval-after-load-feature 'cc-mode
   (c-add-style "ruby"
                '("bsd"
                  (c-basic-offset . 4)

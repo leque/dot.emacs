@@ -8,7 +8,7 @@
     (require 'ac-gauche))
   )
 
-(with-eval-after-load "cmuscheme"
+(with-eval-after-load-feature 'cmuscheme
   (defadvice scheme-send-region (after show-ischeme-buffer activate)
     "show *scheme* buffer always"
     (let ((buf (and scheme-buffer
