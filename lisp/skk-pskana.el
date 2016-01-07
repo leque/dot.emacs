@@ -90,7 +90,7 @@
   :prefix "skk-pskana-"
   :group 'skk-custom-by-filename)
 
-(defcustom skk-pskana-keyboard-type 'us
+(defcustom skk-pskana-keyboard-layout 'us
   "*使用するキーボードの物理配列"
   :type '(choice (const us)
                  (const jis)
@@ -98,7 +98,7 @@
                  (symbol :tag "Another Keyboard Type"))
   :group 'skk-pskana)
 
-(defcustom skk-pskana-keyboard-layout 'tsuki-2-263
+(defcustom skk-pskana-kana-layout 'tsuki-2-263
   "*使用するかな配列の種別"
   :type '(choice (const tsuki-2-263)
                  (const hana)
@@ -429,24 +429,24 @@
   (interactive)
   (setq skk-downcase-alist
         (symbol-value (intern (format "skk-pskana-downcase-alist-%s"
-                                      skk-pskana-keyboard-type))))
+                                      skk-pskana-keyboard-layout))))
 
   (setq skk-set-henkan-point-key
         (symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
-                                      skk-pskana-keyboard-type))))
+                                      skk-pskana-keyboard-layout))))
 
   (setq skk-previous-candidate-keys
         (symbol-value (intern (format "skk-pskana-previous-candidate-keys-%s"
-                                      skk-pskana-keyboard-type))))
+                                      skk-pskana-keyboard-layout))))
 
   (setq skk-rom-kana-base-rule-list
         (append
          (symbol-value (intern (format "skk-pskana-rom-kana-base-rule-list-%s-%s"
-                                       skk-pskana-keyboard-layout
-                                       skk-pskana-keyboard-type)))
+                                       skk-pskana-kana-layout
+                                       skk-pskana-keyboard-layout)))
          (symbol-value (intern (format "skk-pskana-rom-kana-rule-list-%s-%s"
-                                       skk-pskana-keyboard-layout
-                                       skk-pskana-keyboard-type)))))
+                                       skk-pskana-kana-layout
+                                       skk-pskana-keyboard-layout)))))
 
   (setq skk-rom-kana-rule-list nil))
 

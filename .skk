@@ -132,7 +132,7 @@
       ("ee " nil "　")
       ))
 
-  (cl-case skk-pskana-keyboard-type
+  (cl-case skk-pskana-keyboard-layout
     ((us)
      (setq skk-rom-kana-rule-list my-skk-rom-kana-rule-list-us)
      (setq skk-downcase-alist
