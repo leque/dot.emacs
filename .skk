@@ -18,8 +18,8 @@
       (setq ad-return-value "零"))))
 
 (when (require* 'seikana-ziom)
-  (define-key skk-j-mode-map
-    "\C-c\C-h" #'seikana-display-ziom-for-char-at-point))
+  (define-key skk-j-mode-map (kbd "C-c C-h")
+    #'seikana-display-ziom-for-char-at-point))
 
 (when (and (require* 'skk-kanagaki-util)
            (require* 'skk-pskana))

@@ -22,7 +22,7 @@
 
 
 ;;;; Key bindings
-(define-key input-decode-map [?\e] [escape])
+(define-key input-decode-map (kbd "\e") [escape])
 
 ;;; Keybindings for Command mode
 ;;;
@@ -62,9 +62,9 @@
 
 (defvar viper-vi-my-g-map (make-sparse-keymap))
 
-(define-key viper-vi-global-user-map "g" viper-vi-my-g-map)
+(define-key viper-vi-global-user-map (kbd "g") viper-vi-my-g-map)
 
-(define-key viper-vi-my-g-map "g"
+(define-key viper-vi-my-g-map (kbd "g")
   #'(lambda ()
       (interactive)
       (viper-goto-line 1)))
@@ -80,7 +80,7 @@
           scheme-mode-hook
           clojure-mode-hook))
 
-  (define-key viper-vi-global-user-map [(control ?t)]
+  (define-key viper-vi-global-user-map (kbd "C-t")
     #'(lambda ()
         (interactive)
         (if viper-lisp-mode
@@ -90,22 +90,22 @@
   (when (require 'paredit nil t)
     (require 'viper-paredit)
 
-    (define-key viper-vi-my-g-map "s"
+    (define-key viper-vi-my-g-map (kbd "s")
       #'paredit-splice-sexp)
 
-    (define-key viper-vi-my-g-map "j"
+    (define-key viper-vi-my-g-map (kbd "j")
       #'paredit-splice-sexp-killing-forward)
 
-    (define-key viper-vi-my-g-map "k"
+    (define-key viper-vi-my-g-map (kbd "k")
       #'paredit-splice-sexp-killing-backward)
 
-    (define-key viper-vi-my-g-map "S"
+    (define-key viper-vi-my-g-map (kbd "S")
       #'paredit-split-sexp)
 
-    (define-key viper-vi-my-g-map "J"
+    (define-key viper-vi-my-g-map (kbd "J")
       #'paredit-join-sexps)
 
-    (define-key viper-vi-my-g-map "K"
+    (define-key viper-vi-my-g-map (kbd "K")
       #'paredit-raise-sexp)
     )
 

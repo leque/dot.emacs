@@ -69,8 +69,8 @@ otherwise displays a warnning message and returns nil."
 (transient-mark-mode nil)
 
 ;;; key bindings
-(global-set-key [(control ?h)] #'backward-delete-char)
-(global-set-key [(control ?x) ?h] #'help)
+(global-set-key (kbd "C-h") #'backward-delete-char)
+(global-set-key (kbd "C-x h") #'help)
 
 ;;; path
 (add-to-list 'load-path (locate-user-emacs-file "lisp"))
@@ -115,13 +115,13 @@ otherwise displays a warnning message and returns nil."
     (if (eq major-mode 'lisp-interaction-mode)
         (eval-print-last-sexp)
       ad-do-it))
-  (define-key paredit-mode-map [(meta ?\])]
+  (define-key paredit-mode-map (kbd "M-]")
     #'paredit-forward-slurp-sexp)
-  (define-key paredit-mode-map [(meta ?\[)]
+  (define-key paredit-mode-map (kbd "M-[")
     #'paredit-backward-slurp-sexp)
-  (define-key paredit-mode-map [(meta ?\})]
+  (define-key paredit-mode-map (kbd "M-}")
     #'paredit-forward-barf-sexp)
-  (define-key paredit-mode-map [(meta ?\{)]
+  (define-key paredit-mode-map (kbd "M-{")
     #'paredit-backward-barf-sexp)
   )
 
