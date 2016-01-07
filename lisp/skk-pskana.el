@@ -1,6 +1,6 @@
 ;;; skk-pskana.el --- Prefix Shift Kana Input Method for SKK  -*- coding: utf-8; lexical-binding: t; -*-
 
-;; Copyright (C) 2006-2015 OOHASHI, Daichi <leque@katch.ne.jp>
+;; Copyright (C) 2006-2016 OOHASHI, Daichi <leque@katch.ne.jp>
 
 ;; Author: OOHASHI, Daichi <leque@katch.ne.jp>
 ;; Keywords:
@@ -91,7 +91,7 @@
   :group 'skk-custom-by-filename)
 
 (defcustom skk-pskana-keyboard-type 'us
-  "*使用するキーボードの種別"
+  "*使用するキーボードの物理配列"
   :type '(choice (const us)
                  (const jis)
                  (const dvorak)
@@ -125,7 +125,7 @@
 (defconst skk-pskana-rom-kana-base-rule-list-hana-jis
   skk-pskana-rom-kana-base-rule-list-hana-us)
 
-(defconst skk-pskana-rom-kana-base-rule-list-hana-jis
+(defconst skk-pskana-rom-kana-base-rule-list-tsuki-2-263-jis
   skk-pskana-rom-kana-base-rule-list-tsuki-2-263-us)
 
 (defconst skk-pskana-rom-kana-base-rule-list-hana-dvorak
