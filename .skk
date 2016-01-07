@@ -27,7 +27,7 @@
         (append skk-kanagaki-dakuten-alist '(("ゝ" "ゞ")
                                              ("ヽ" "ヾ"))))
 
-  (defconst my-skk-rom-kana-rule-list-qwerty
+  (defconst my-skk-rom-kana-rule-list-us
     '(("\C-k" nil skk-toggle-kana)
       ("\C-l" nil skk-latin-mode)
       ("\C-u" nil skk-purge-from-jisyo)
@@ -58,6 +58,37 @@
       ("ddl" nil "→")
       ("dd;" nil ";")
       ("dd:" nil ":")
+      ("dd," nil "‥")
+      ("dd." nil "…")
+      ("dd/" nil "・")
+      ("dd " nil "　")
+      ))
+
+  (defconst my-skk-rom-kana-rule-list-jis
+    '(("\C-k" nil skk-toggle-kana)
+      ("\C-l" nil skk-latin-mode)
+      ("\C-u" nil skk-purge-from-jisyo)
+      ("^" nil skk-abbrev-mode)
+      ("&" nil skk-set-henkan-point-subr)
+      ("%" nil skk-input-by-code-or-menu)
+      ("!" nil "！")
+      ("(" nil "（")
+      (")" nil "）")
+      ("d[" nil "」")
+      ("d:" nil "ー")
+      ("d." nil "？")
+      ("ds" nil ("ヮ" . "ゎ"))
+      ("ki" nil ("ヰ" . "ゐ"))
+      ("ko" nil ("ヱ" . "ゑ"))
+      ("km" nil "々")
+      ("kn" nil ("ヽ" . "ゝ"))
+      ("dd:" nil "〜")
+      ("dd@" nil "『")
+      ("dd[" nil "』")
+      ("ddh" nil "←")
+      ("ddj" nil "↓")
+      ("ddk" nil "↑")
+      ("ddl" nil "→")
       ("dd," nil "‥")
       ("dd." nil "…")
       ("dd/" nil "・")
@@ -101,12 +132,14 @@
       ("ee " nil "　")
       ))
 
-  (setq skk-rom-kana-rule-list my-skk-rom-kana-rule-list-qwerty)
-
-  (setq skk-downcase-alist
-        (cons '(?\| . ?\\)
-              skk-downcase-alist))
-
-  (setq skk-set-henkan-point-key
-        (cons ?\| skk-set-henkan-point-key))
-  )
+  (cl-case skk-pskana-keyboard-type
+    ((us)
+     (setq skk-rom-kana-rule-list my-skk-rom-kana-rule-list-us)
+     (setq skk-downcase-alist
+           (cons '(?\| . ?\\)
+                 skk-downcase-alist))
+     (setq skk-set-henkan-point-key
+           (cons ?\| skk-set-henkan-point-key)))
+    ((jis)
+     (setq skk-rom-kana-rule-list my-skk-rom-kana-rule-list-jis))
+   ))
