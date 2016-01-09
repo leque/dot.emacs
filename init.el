@@ -84,11 +84,16 @@ otherwise displays a warnning message and returns nil."
 (require 'font-lock)
 (global-font-lock-mode 1)
 
-;;; show tabs and traling spaces
+;;; show tabs, traling spaces, and long lines
 (require 'whitespace)
-(setq whitespace-style '(face tabs))
-(setq-default show-trailing-whitespace t)
+(setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode)
+
+(custom-set-faces
+ '(whitespace-line
+   ((t (
+        :inherit t
+        :background "gray85")))))
 
 ;;; auto-complete
 (el-get-bundle! auto-complete
