@@ -1,7 +1,5 @@
 (setq ns-command-modifier 'meta)
-
-;; super is used in ns-win.el
-(setq ns-option-modifier 'hyper)
+(setq ns-option-modifier 'super)
 
 (let ((size 14)
       (ascii-font "Monaco")
