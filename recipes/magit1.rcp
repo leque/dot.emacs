@@ -1,0 +1,16 @@
+(:name magit1
+       :website "https://github.com/magit/magit#readme"
+       :description "It's Magit! An Emacs mode for Git."
+       :type github
+       :pkgname "magit/magit"
+       :checkout "1.4.2"
+       :depends (dash git-modes-for-magit1)
+       ;; Use the Makefile to produce the info manual, el-get can
+       ;; handle compilation and autoloads on its own.  Create an
+       ;; empty autoloads file because magit.el explicitly checks for
+       ;; a file of that name.
+       :build `(("make" ,(format "EMACSBIN=%s" el-get-emacs) "docs")
+                )
+       :build/berkeley-unix `(("gmake" ,(format "EMACSBIN=%s" el-get-emacs) "docs")
+                              )
+       )
