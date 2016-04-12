@@ -68,6 +68,8 @@ otherwise displays a warnning message and returns nil."
 (blink-cursor-mode t)
 (transient-mark-mode nil)
 
+(setq dired-bind-jump nil)
+
 ;;; key bindings
 (global-set-key (kbd "C-h") #'backward-delete-char)
 (global-set-key (kbd "C-x h") #'help)
