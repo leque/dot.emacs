@@ -69,7 +69,10 @@
       (interactive)
       (viper-goto-line 1)))
 
-(when (require 'viper-lisp nil t)
+(with-eval-after-load-feature 'paredit
+  (require 'viper-paredit)
+  (require 'viper-lisp)
+
   ;; automatically `:set lisp' in lisp-related modes.
   (mapc #'(lambda (mode)
             (add-hook mode
@@ -87,27 +90,24 @@
             (transpose-sexps 1)
           (transpose-words 1))))
 
-  (when (require 'paredit nil t)
-    (require 'viper-paredit)
+  (define-key viper-vi-my-g-map (kbd "s")
+    #'paredit-splice-sexp)
 
-    (define-key viper-vi-my-g-map (kbd "s")
-      #'paredit-splice-sexp)
+  (define-key viper-vi-my-g-map (kbd "j")
+    #'paredit-splice-sexp-killing-forward)
 
-    (define-key viper-vi-my-g-map (kbd "j")
-      #'paredit-splice-sexp-killing-forward)
+  (define-key viper-vi-my-g-map (kbd "k")
+    #'paredit-splice-sexp-killing-backward)
 
-    (define-key viper-vi-my-g-map (kbd "k")
-      #'paredit-splice-sexp-killing-backward)
+  (define-key viper-vi-my-g-map (kbd "S")
+    #'paredit-split-sexp)
 
-    (define-key viper-vi-my-g-map (kbd "S")
-      #'paredit-split-sexp)
+  (define-key viper-vi-my-g-map (kbd "J")
+    #'paredit-join-sexps)
 
-    (define-key viper-vi-my-g-map (kbd "J")
-      #'paredit-join-sexps)
+  (define-key viper-vi-my-g-map (kbd "K")
+    #'paredit-raise-sexp)
 
-    (define-key viper-vi-my-g-map (kbd "K")
-      #'paredit-raise-sexp)
-    )
 
   (define-viper-lisp-brac-function ?\j
     #'(lambda (arg)

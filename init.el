@@ -23,24 +23,6 @@
   (interactive "nnew width: ")
   (set-frame-width (selected-frame) w))
 
-(defun require* (feature &optional filename)
-  "loads FEATURE from FILENAME like `require', but never signals error.
-returns t if the feature is loaded,
-otherwise displays a warnning message and returns nil."
-  (let ((res (require feature filename t)))
-    (unless res
-      (warn "require*: %s is not loaded" (or filename feature)))
-    res))
-
-(defun load* (file)
-  "loads FILE like `load', but never signals error.
-returns t if the file is loaded,
-otherwise displays a warnning message and returns nil."
-  (let ((res (load file t t)))
-    (unless res
-      (warn "load*: %s is not loaded" file))
-    res))
-
 ;;;; Basic Settings
 (set-language-environment 'Japanese)
 (prefer-coding-system 'utf-8)
@@ -97,42 +79,6 @@ otherwise displays a warnning message and returns nil."
         :inherit t
         :background "gray85")))))
 
-;;; auto-complete
-(el-get-bundle! auto-complete
-  (ac-config-default)
-  (setq ac-auto-start nil)
-  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-  )
-
-;;; mic-paren
-(el-get-bundle! mic-paren
-  (paren-activate)
-  (setq paren-match-face 'region)
-  (setq paren-sexp-mode t))
-
-;;; paredit
-(el-get-bundle! paredit
-  (mapc #'(lambda (mode)
-            (add-hook mode #'enable-paredit-mode))
-        '(emacs-lisp-mode-hook
-          lisp-mode-hook
-          lisp-interaction-mode-hook
-          scheme-mode-hook
-          clojure-mode-hook))
-  (defadvice paredit-newline (around eval-print-last-sexp activate)
-    (if (eq major-mode 'lisp-interaction-mode)
-        (eval-print-last-sexp)
-      ad-do-it))
-  (define-key paredit-mode-map (kbd "M-]")
-    #'paredit-forward-slurp-sexp)
-  (define-key paredit-mode-map (kbd "M-[")
-    #'paredit-backward-slurp-sexp)
-  (define-key paredit-mode-map (kbd "M-}")
-    #'paredit-forward-barf-sexp)
-  (define-key paredit-mode-map (kbd "M-{")
-    #'paredit-backward-barf-sexp)
-  )
-
 ;;; Viperize
 (setq viper-mode t)
 (setq viper-custom-file-name (locate-user-emacs-file ".viper"))
@@ -143,14 +89,6 @@ otherwise displays a warnning message and returns nil."
 (defadvice viper-change-cursor-color
     (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
   nil)
-
-;;; skk
-(setq skk-init-file (locate-user-emacs-file ".skk"))
-
-(el-get-bundle ddskk
-  (global-set-key (kbd "C-x C-j") #'skk-mode))
-
-(el-get-bundle nicola-ddskk)
 
 ;;;; other
 (el-get-bundle! emacs-jp/init-loader
