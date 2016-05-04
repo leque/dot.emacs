@@ -5,13 +5,16 @@ INSTALL = install
 CP = ln -sf
 GIT = git
 
-.PHONY: all install setup
+.PHONY: help install setup
 
-all:
+help: ## show this message
+	@awk -F ':.*##' '/^[^	]+:.*##/ { printf "%s\t\t%s\n", $$1, $$2 }' \
+	  Makefile \
+	| sort
 
-install:
+install: ## install files under ~/.emacs.d
 	$(INSTALL) -d "$(EMACS_D)"
 	for f in $(TO_EMACS_D); do $(CP) $$PWD/$$f "$(EMACS_D)"; done
 
-setup:
+setup: ## setup files to develop dotfiles
 	$(GIT) update-index --skip-worktree $(LOCAL)
