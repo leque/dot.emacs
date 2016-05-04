@@ -1,1 +1,1 @@
-(el-get-bundle ProofGeneral)
+(el-get-bundle proof-general)
