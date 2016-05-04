@@ -15,7 +15,9 @@
           japanese-jisx0213-1
           japanese-jisx0213-2
           ))
-  (set-fontset-font t '(#x0080 . #x024F) ascii-font)
-  (setq frame-inherited-parameters '(font tool-bar-lines))
-  (add-to-list 'face-font-rescale-alist
-               '(".*Hiragino.*" . 1.2)))
+  (set-fontset-font t '(#x0080 . #x024F) ascii-font))
+
+(setq frame-inherited-parameters '(font tool-bar-lines))
+
+(add-to-list 'face-font-rescale-alist
+             '(".*Hiragino.*" . 1.2))
