@@ -144,7 +144,6 @@
 (defconst skk-pskana-rom-kana-base-rule-list-tsuki-2-263-dvorak
   skk-pskana-rom-kana-base-rule-list-hana-dvorak)
 
-;;; Use dakuten key for previous candidate
 (defconst skk-pskana-previous-candidate-keys-us
   '("-" "\C-p"))
 
