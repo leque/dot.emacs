@@ -37,11 +37,6 @@
 (el-get-bundle leque/viper-lisp)
 (require 'viper)
 
-;; kludge to avoid cursor flicker on Cocoa Emacs
-(defadvice viper-change-cursor-color
-    (around kludge-to-avoid-cursor-flicker-on-Cocoa-Emacs activate)
-  nil)
-
 ;;;; other
 (el-get-bundle! emacs-jp/init-loader
   (setq init-loader-show-log-after-init 'error-only)
