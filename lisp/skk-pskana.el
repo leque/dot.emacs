@@ -111,10 +111,10 @@
   '(("dq" nil skk-toggle-kana)
     ("kl" nil skk-latin-mode)
     ("ko" nil skk-jisx0208-latin-mode)
-    ("dx" nil skk-purge-from-jisyo)
+    ("#" nil skk-purge-from-jisyo)
     ("k/" nil skk-abbrev-mode)
     ("da" nil skk-set-henkan-point-subr)
-    ("\\" nil skk-input-by-code-or-menu)
+    ("%" nil skk-input-by-code-or-menu)
     ("$" nil skk-display-code-for-char-at-point)
     ("&" nil skk-today)
     (skk-kakutei-key nil skk-kakutei)
@@ -133,10 +133,10 @@
   '(("eq" nil skk-toggle-kana)
     ("tl" nil skk-latin-mode)
     ("tr" nil skk-jisx0208-latin-mode)
-    ("ex" nil skk-purge-from-jisyo)
+    ("#" nil skk-purge-from-jisyo)
     ("t/" nil skk-abbrev-mode)
-    ("eo" nil skk-set-henkan-point-subr)
-    ("#" nil skk-input-by-code-or-menu)
+    ("ea" nil skk-set-henkan-point-subr)
+    ("%" nil skk-input-by-code-or-menu)
     ("$" nil skk-display-code-for-char-at-point)
     ("&" nil skk-today)
     (skk-kakutei-key nil skk-kakutei)
@@ -169,7 +169,6 @@
         ?A ?O ?E ?U ?I ?D ?H ?T ?N ?S ?-
         ?\: ?Q ?J ?K ?X ?B ?M ?W ?V ?Z))
 
-
 (defconst skk-pskana-downcase-alist-us
   '((?\{ . ?\[)
     (?\} . ?\])
@@ -191,9 +190,7 @@
     (?\_ . ?\-)
     (?\: . ?\;)))
 
-
 ;;; Layouts
-
 (defconst skk-pskana-rom-kana-rule-list-hana-us
   '(("z" nil ("サ" . "さ"))  ("a" nil ("ス" . "す"))  ("q" nil ("ョ" . "ょ"))
     ("x" nil ("シ" . "し"))  ("s" nil ("カ" . "か"))  ("w" nil ("テ" . "て"))
@@ -282,7 +279,6 @@
     )
   "Dvorak キーボードで花配列を実現するためのルール。")
 
-
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-us
   '(("z" nil ("ス" . "す"))  ("a" nil ("ハ" . "は"))  ("q" nil ("ソ" . "そ"))
     ("x" nil ("ケ" . "け"))  ("s" nil ("カ" . "か"))  ("w" nil ("コ" . "こ"))
@@ -311,7 +307,6 @@
                              ("d'" nil "」")          ("d[" nil "「")
     )
   "US 101/104 キーボードで月配列 2-263 を実現するためのルール。")
-
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-jis
   '(("z" nil ("ス" . "す"))  ("a" nil ("ハ" . "は"))  ("q" nil ("ソ" . "そ"))
@@ -410,15 +405,12 @@
   (setq skk-downcase-alist
         (symbol-value (intern (format "skk-pskana-downcase-alist-%s"
                                       skk-pskana-keyboard-layout))))
-
   (setq skk-set-henkan-point-key
         (symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
                                       skk-pskana-keyboard-layout))))
-
   (setq skk-previous-candidate-keys
         (symbol-value (intern (format "skk-pskana-previous-candidate-keys-%s"
                                       skk-pskana-keyboard-layout))))
-
   (setq skk-rom-kana-base-rule-list
         (append
          (symbol-value (intern (format "skk-pskana-rom-kana-base-rule-list-%s-%s"
@@ -427,7 +419,6 @@
          (symbol-value (intern (format "skk-pskana-rom-kana-rule-list-%s-%s"
                                        skk-pskana-kana-layout
                                        skk-pskana-keyboard-layout)))))
-
   (setq skk-rom-kana-rule-list nil))
 
 (skk-pskana-init)
