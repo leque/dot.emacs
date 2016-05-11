@@ -399,27 +399,34 @@
               okuri-key
             item))))
 
-;;; Initalization
+(defsubst skk-pskana--val (str &rest objs)
+  (symbol-value (intern (apply #'format str objs))))
+
 (defun skk-pskana-init ()
-  (interactive)
   (setq skk-downcase-alist
-        (symbol-value (intern (format "skk-pskana-downcase-alist-%s"
-                                      skk-pskana-keyboard-layout))))
+        (skk-pskana--val "skk-pskana-downcase-alist-%s"
+                         skk-pskana-keyboard-layout))
   (setq skk-set-henkan-point-key
-        (symbol-value (intern (format "skk-pskana-set-henkan-point-key-%s"
-                                      skk-pskana-keyboard-layout))))
+        (skk-pskana--val "skk-pskana-set-henkan-point-key-%s"
+                         skk-pskana-keyboard-layout))
   (setq skk-previous-candidate-keys
-        (symbol-value (intern (format "skk-pskana-previous-candidate-keys-%s"
-                                      skk-pskana-keyboard-layout))))
+        (skk-pskana--val "skk-pskana-previous-candidate-keys-%s"
+                         skk-pskana-keyboard-layout))
   (setq skk-rom-kana-base-rule-list
         (append
-         (symbol-value (intern (format "skk-pskana-rom-kana-base-rule-list-%s-%s"
-                                       skk-pskana-kana-layout
-                                       skk-pskana-keyboard-layout)))
-         (symbol-value (intern (format "skk-pskana-rom-kana-rule-list-%s-%s"
-                                       skk-pskana-kana-layout
-                                       skk-pskana-keyboard-layout)))))
-  (setq skk-rom-kana-rule-list nil))
+         (skk-pskana--val "skk-pskana-rom-kana-base-rule-list-%s-%s"
+                          skk-pskana-kana-layout
+                          skk-pskana-keyboard-layout)
+         (skk-pskana--val "skk-pskana-rom-kana-rule-list-%s-%s"
+                          skk-pskana-kana-layout
+                          skk-pskana-keyboard-layout)))
+  )
+
+(defadvice skk-restart (after skk-pskana-restart activate)
+  "skk-restart時にskk-pskanaも再設定されるようにする"
+  (skk-pskana-init)
+  (setq skk-rule-tree (skk-compile-rule-list skk-rom-kana-base-rule-list
+                                             skk-rom-kana-rule-list)))
 
 (skk-pskana-init)
 
