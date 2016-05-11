@@ -3,6 +3,7 @@
 ;; Copyright (C) 2006-2016 OOHASHI, Daichi <leque@katch.ne.jp>
 
 ;; Author: OOHASHI, Daichi <leque@katch.ne.jp>
+;; Package-Requires: ((ddskk "20160315.708") (dash "2.12.1"))
 ;; Keywords:
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -370,40 +371,20 @@
     )
   "Dvorak キーボードで月配列 2-263 を実現するためのルール。")
 
-(defmacro srfi-and-let* (clause &rest body)
-  "See SRFI-2: http://srfi.schemers.org/srfi-2/"
-  (declare (indent 1))
-  (if (null clause)
-      `(progn ,@body)
-    (let ((cl (car clause)))
-      (cond ((null (cdr cl))
-             `(and ,(car cl)
-                   (srfi-and-let* ,(cdr clause)
-                     ,@body)))
-            ((and (symbolp (car cl))
-                  (consp (cdr cl))
-                  (null (cddr cl)))
-             `(let ((,(car cl) ,(cadr cl)))
-                (and ,(car cl)
-                     (srfi-and-let* ,(cdr clause)
-                       ,@body))))
-            (t
-             (error "malformed srfi-and-let* binding spec: %s" cl))))))
-
 (defadvice skk-set-henkan-point (around
                                  skk-pskana-dakuten-workaround
                                  activate compile)
   "\
 送りがなの開始文字が濁点・半濁点のとき、可能ならば
 直前の文字にそれを付したものを送りがなの開始文字にする。"
-  (or (srfi-and-let* ((skk-henkan-mode)
-                      (c (skk-downcase last-command-event))
-                      (next (skk-select-branch
-                             (or skk-current-rule-tree skk-rule-tree) c))
-                      ((null (skk-get-branch-list next)))
-                      (s (skk-get-kana next))
-                      ((memq s '(skk-kanagaki-dakuten
-                                 skk-kanagaki-handakuten))))
+  (or (-when-let* ((_ skk-henkan-mode)
+                   (c (skk-downcase last-command-event))
+                   (next (skk-select-branch
+                          (or skk-current-rule-tree skk-rule-tree) c))
+                   (_ (null (skk-get-branch-list next)))
+                   (s (skk-get-kana next))
+                   (_ (memq s '(skk-kanagaki-dakuten
+                                skk-kanagaki-handakuten))))
         (funcall s)
         (skk-set-char-before-as-okurigana)
         t)

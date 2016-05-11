@@ -39,4 +39,5 @@
         :inherit t
         :background "gray85")))))
 
+(el-get-bundle dash)
 (el-get-bundle! popup)
