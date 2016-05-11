@@ -3,6 +3,8 @@
 (setq skk-server-host "localhost")
 (setq skk-server-portnum 1178)
 
+(setq skk-large-jisyo (locate-file "SKK-JISYO.L" (list user-emacs-directory)))
+
 (setq skk-use-viper t)
 (viper-harness-minor-mode "skk-annotation")
 
