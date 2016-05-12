@@ -1,5 +1,5 @@
 EMACS_D = $(HOME)/.emacs.d
-TO_EMACS_D = init.el .skk .viper init init-loader lisp recipes
+TO_EMACS_D = init.el .skk.el .viper.el init init-loader lisp recipes
 LOCAL = init-loader/99_local.el
 INSTALL = install
 CP = ln -sf

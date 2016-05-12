@@ -33,7 +33,7 @@
 
 ;;; Viperize
 (setq viper-mode t)
-(setq viper-custom-file-name (locate-user-emacs-file ".viper"))
+(setq viper-custom-file-name (locate-user-emacs-file ".viper.el"))
 (el-get-bundle leque/viper-lisp)
 (require 'viper)
 
