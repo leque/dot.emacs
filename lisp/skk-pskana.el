@@ -82,9 +82,13 @@
 
 ;;; Code:
 (eval-when-compile
+  (require 'cl-lib)
   (require 'skk)
   (require 'skk-vars)
   (require 'skk-kanagaki-util)
+  (require 'dash)
+  (defvar skk-jisx0201-rule-list)
+  (defvar skk-jisx0201-base-rule-list)
   )
 
 (defgroup skk-pskana nil "SKK prefix shift kana input related customization."
@@ -429,6 +433,38 @@
                                              skk-rom-kana-rule-list)))
 
 (skk-pskana-init)
+
+(defun skk-pskana-make-hankaku-rule (rule-list)
+  (cl-loop for (in next out) in rule-list
+           collect (list in
+                         next
+                         (cond ((consp out)
+                                (japanese-hankaku (car out)))
+                               ((stringp out)
+                                (japanese-hankaku out))
+                               (t
+                                out)))))
+
+(defun skk-pskana-jisx0201-init ()
+  (setq skk-jisx0201-base-rule-list
+        (skk-pskana-make-hankaku-rule skk-rom-kana-base-rule-list))
+  (setq skk-jisx0201-rule-list
+        (skk-pskana-make-hankaku-rule skk-rom-kana-rule-list)))
+
+(defun skk-pskana-jisx0201-compile-tree ()
+  (setq skk-jisx0201-base-rule-tree
+        (skk-compile-rule-list skk-jisx0201-base-rule-list
+                               skk-jisx0201-rule-list)))
+
+(eval-after-load "skk-jisx0201"
+  '(progn
+     (defadvice skk-pskana-init (after skk-pskana-jisx0201-init last activate)
+       (skk-pskana-jisx0201-init))
+     (defadvice skk-restart (after skk-pskana-jisx0201-restart last activate)
+       (skk-pskana-jisx0201-compile-tree))
+     (skk-pskana-jisx0201-init)
+     (skk-pskana-jisx0201-compile-tree)
+     ))
 
 (provide 'skk-pskana)
 ;;; skk-pskana.el ends here

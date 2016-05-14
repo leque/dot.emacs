@@ -12,6 +12,8 @@
 (setq skk-henkan-strict-okuri-precedence t)
 (setq skk-show-annotation t)
 
+(setq skk-use-jisx0201-input-method t)
+
 (defadvice skk-num-to-kanji (after type3-zero-to-rei)
   "#3 型数値変換で `0' を `〇' でなく `零' に変換する"
   (let ((type (ad-get-arg 1)))
@@ -45,6 +47,7 @@
 (defconst my-skk-rom-kana-rule-list-qwerty
   '(("\C-k" nil skk-toggle-kana)
     ("\C-l" nil skk-latin-mode)
+    ("dw" nil skk-jisx0201-mode)
     ("kj" nil skk-jisx0208-latin-mode)
     ("!" nil "！")
     ("(" nil "（")
