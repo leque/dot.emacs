@@ -389,20 +389,6 @@
         t)
       ad-do-it))
 
-;; simplified version of the advice with the same name in ddskk/nicola/skk-kanagaki.el
-;; Copyright (C) 2000 Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
-;; Author: Tetsuo Tsukamoto <czkmt@remus.dti.ne.jp>
-(defadvice skk-compute-henkan-lists-sub-adjust-okuri (around
-                                                      skk-kanagaki-adjust-okuri
-                                                      activate compile)
-  (let ((item (ad-get-arg 0))
-        (okuri-key (ad-get-arg 1)))
-    (setq ad-return-value
-          (if (string-match (concat "^" (regexp-quote okuri-key)) item)
-              ;; okuri-key が "っ" で item が "って" などだった場合。
-              okuri-key
-            item))))
-
 (defsubst skk-pskana--val (str &rest objs)
   (symbol-value (intern (apply #'format str objs))))
 
