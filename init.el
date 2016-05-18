@@ -37,6 +37,12 @@
 (el-get-bundle leque/viper-lisp)
 (require 'viper)
 
+(custom-set-faces
+ '(viper-minibuffer-insert
+   ((t (
+        :inherit t
+        :background nil)))))
+
 ;;;; other
 (el-get-bundle! emacs-jp/init-loader
   (setq init-loader-show-log-after-init 'error-only)
