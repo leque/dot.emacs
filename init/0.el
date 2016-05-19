@@ -24,20 +24,5 @@
 (global-set-key (kbd "C-h") #'backward-delete-char)
 (global-set-key (kbd "C-x h") #'help)
 
-;;; font lock
-(require 'font-lock)
-(global-font-lock-mode 1)
-
-;;; show tabs, traling spaces, and long lines
-(require 'whitespace)
-(setq whitespace-style '(face tabs trailing lines-tail))
-(global-whitespace-mode)
-
-(custom-set-faces
- '(whitespace-line
-   ((t (
-        :inherit t
-        :background "gray85")))))
-
 (el-get-bundle dash)
 (el-get-bundle! popup)
