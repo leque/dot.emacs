@@ -10,6 +10,15 @@
   (setq paren-match-face 'region)
   (setq paren-sexp-mode t))
 
+(el-get-bundle! indent-guide
+  (indent-guide-global-mode)
+  (with-eval-after-load-feature 'indent-guide
+    (setq indent-guide-recursive t)
+    (set-face-foreground 'indent-guide-face "#ddd")
+    (dolist (x '(Info-mode))
+      (cl-pushnew x indent-guide-inhibit-modes))
+    ))
+
 (custom-set-faces
  '(whitespace-line
    ((t (
