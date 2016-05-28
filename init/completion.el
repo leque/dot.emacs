@@ -11,7 +11,6 @@
   (global-set-key (kbd "C-x C-f") #'counsel-find-file)
   (with-eval-after-load-feature 'ivy
     (setq ivy-display-style 'fancy)
-    (setq ivy-use-virtual-buffers t)
     (setq ivy-initial-inputs-alist '())
     (setq ivy-re-builders-alist
           '((t . ivy--regex-fuzzy)))
