@@ -3,9 +3,9 @@
 (el-get-bundle leque/gauche-mode
   (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
   (with-eval-after-load-feature 'gauche-mode
-    (require 'gauche-paredit)
-    (require 'ac-gauche))
-  )
+    (add-hook 'gauche-mode-hook #'enable-gauche-paredit-mode)
+    (add-hook 'gauche-mode-hook #'ac-gauche-setup)
+    ))
 
 (with-eval-after-load-feature 'cmuscheme
   (defadvice scheme-send-region (after show-ischeme-buffer activate)
