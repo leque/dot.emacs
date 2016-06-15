@@ -1,0 +1,8 @@
+(:name gauche-mode
+       :description "An Emacs major mode for Gauche Scheme Interpreter"
+       :minimum-emacs-version "24.4"
+       :type github
+       :pkgname "leque/gauche-mode"
+       :depends (paredit auto-complete)
+       :load-path (".")
+       )

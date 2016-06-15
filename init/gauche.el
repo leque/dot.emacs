@@ -1,6 +1,6 @@
 (set-variable 'gauche-mode-info-language 'ja)
 
-(el-get-bundle leque/gauche-mode
+(el-get-bundle gauche-mode
   (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
   (with-eval-after-load-feature 'gauche-mode
     (add-hook 'gauche-mode-hook #'enable-gauche-paredit-mode)
