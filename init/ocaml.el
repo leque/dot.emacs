@@ -1,9 +1,6 @@
 (el-get-bundle caml-mode
   (with-eval-after-load-feature 'caml
     (require 'caml-font))
-  (autoload 'caml-mode "caml" nil t)
-  (push (cons "\\.ml[ily]?\\'" 'caml-mode)
-        auto-mode-alist)
   )
 
 (defvar opam-share nil)
