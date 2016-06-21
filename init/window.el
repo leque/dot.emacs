@@ -1,7 +1,7 @@
-(global-set-key (kbd "s-h") 'windmove-right)
+(global-set-key (kbd "s-h") 'windmove-left)
 (global-set-key (kbd "s-j") 'windmove-down)
 (global-set-key (kbd "s-k") 'windmove-up)
-(global-set-key (kbd "s-l") 'windmove-left)
+(global-set-key (kbd "s-l") 'windmove-right)
 
 (global-set-key (kbd "s-H") 'shrink-window-horizontally)
 (global-set-key (kbd "s-J") 'shrink-window)
