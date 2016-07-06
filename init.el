@@ -18,6 +18,11 @@
 
 (el-get-bundle tarao/with-eval-after-load-feature-el)
 
+(setq load-prefer-newer t)
+
+(el-get-bundle! auto-compile
+  (auto-compile-on-load-mode))
+
 ;;; start server
 (require 'server)
 
