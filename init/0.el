@@ -29,4 +29,5 @@
 (global-set-key (kbd "C-x h") #'help)
 
 (el-get-bundle dash)
+(el-get-bundle! s)
 (el-get-bundle! popup)
