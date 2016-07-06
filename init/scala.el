@@ -1,1 +1,1 @@
-(el-get-bundle scala-mode2)
+(el-get-bundle ensime)
