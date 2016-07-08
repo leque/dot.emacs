@@ -11,6 +11,10 @@
         (tool-bar-lines . nil)
         (line-spacing . 1)
         ))
+(setq initial-frame-alist
+      `((left . (- 0))
+        (user-position . t)
+        (fullscreen . fullheight)))
 
 (setq-default indent-tabs-mode nil)
 (setq-default indicate-buffer-boundaries t)
