@@ -12,6 +12,7 @@
   (with-eval-after-load-feature 'ivy
     (setq ivy-display-style 'fancy)
     (setq ivy-initial-inputs-alist '())
+    (setq ivy-magic-tilde nil)
     (setq ivy-re-builders-alist
           '((t . ivy--regex-fuzzy)))
     (define-key ivy-minibuffer-map (kbd "TAB") #'ivy-partial)
