@@ -4,8 +4,9 @@
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   )
 
+(el-get-bundle! flx)
+
 (el-get-bundle! swiper
-  (el-get-bundle! flx)
   (ivy-mode +1)
   (global-set-key (kbd "M-x") #'counsel-M-x)
   (global-set-key (kbd "C-x C-f") #'counsel-find-file)
