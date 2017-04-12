@@ -35,7 +35,7 @@
   (interactive)
   (when (featurep 'ocp-indent)
     (unload-feature 'ocp-indent t))
-  (require 'ocp-indent))
+  (require 'ocp-indent nil t))
 
 (add-hook 'opam-config-hook #'opam-config-ocp-indent)
 
