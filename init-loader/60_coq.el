@@ -1,1 +1,1 @@
-../init/coq.el
+(el-get-bundle proof-general)

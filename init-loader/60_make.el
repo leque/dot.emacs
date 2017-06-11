@@ -1,1 +1,1 @@
-../init/make.el
+(el-get-bundle cmake-mode)
