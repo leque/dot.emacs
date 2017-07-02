@@ -40,9 +40,10 @@
 ;;; path
 (add-to-list 'load-path (locate-user-emacs-file "lisp"))
 
-(el-get-bundle! exec-path-from-shell
-  (exec-path-from-shell-initialize)
-  )
+(unless (featurep 'dos-w32)
+  (el-get-bundle! exec-path-from-shell
+    (exec-path-from-shell-initialize)
+    ))
 
 ;;; Viperize
 (setq viper-mode t)
