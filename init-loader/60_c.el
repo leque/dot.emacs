@@ -27,15 +27,16 @@
       (flycheck-irony-setup))
     ))
 
-(el-get-bundle rtags
-  (defun my-setup-rtags-mode ()
-    (rtags-start-process-unless-running)
-    (when (rtags-is-indexed)
-      (local-set-key (kbd "M-.") 'rtags-find-symbol-at-point)
-      (local-set-key (kbd "M-;") 'rtags-find-symbol)
-      (local-set-key (kbd "M-@") 'rtags-find-references)
-      (local-set-key (kbd "M-,") 'rtags-location-stack-back)))
-  (with-eval-after-load-feature 'rtags
-    (dolist (hook '(c-mode-hook c++-mode-hook objc-mode-hook))
-      (add-hook hook #'my-setup-rtags-mode))
-    ))
+(when (executable-find "llvm-config")
+  (el-get-bundle rtags
+    (defun my-setup-rtags-mode ()
+      (rtags-start-process-unless-running)
+      (when (rtags-is-indexed)
+        (local-set-key (kbd "M-.") 'rtags-find-symbol-at-point)
+        (local-set-key (kbd "M-;") 'rtags-find-symbol)
+        (local-set-key (kbd "M-@") 'rtags-find-references)
+        (local-set-key (kbd "M-,") 'rtags-location-stack-back)))
+    (with-eval-after-load-feature 'rtags
+      (dolist (hook '(c-mode-hook c++-mode-hook objc-mode-hook))
+        (add-hook hook #'my-setup-rtags-mode))
+      )))
