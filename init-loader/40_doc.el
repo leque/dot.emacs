@@ -18,3 +18,11 @@
                 #'org-preview-html/export-github-markup-as-html)
           org-preview-html/export-html-function-alist)
     ))
+
+(el-get-bundle smaximov/org-commentary
+  :prepare (progn
+             (autoload 'org-commentary-update "org-commentary"
+               "Update library headers using the content of an Org document."
+               t)
+             )
+  )
