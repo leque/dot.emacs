@@ -195,26 +195,34 @@
     (?\: . ?\;)))
 
 ;;; Layouts
+(defconst skk-pskana-K 'skk-current-kuten)
+(defconst skk-pskana-T 'skk-current-touten)
+(defconst skk-pskana-D 'skk-kanagaki-dakuten)
+(defconst skk-pskana-H 'skk-kanagaki-handakuten)
+
 (defconst skk-pskana-rom-kana-rule-list-hana-us
-  '(("z" nil ("サ" . "さ"))  ("a" nil ("ス" . "す"))  ("q" nil ("ョ" . "ょ"))
-    ("x" nil ("シ" . "し"))  ("s" nil ("カ" . "か"))  ("w" nil ("テ" . "て"))
-    ("c" nil ("ナ" . "な"))                           ("e" nil ("ト" . "と"))
-    ("v" nil ("ノ" . "の"))  ("f" nil ("キ" . "き"))  ("r" nil ("コ" . "こ"))
-    ("b" nil ("ニ" . "に"))  ("g" nil ("タ" . "た"))  ("t" nil ("ハ" . "は"))
-    ("n" nil ("イ" . "い"))  ("h" nil ("ン" . "ん"))  ("y" nil ("ッ" . "っ"))
-    ("m" nil ("ツ" . "つ"))  ("j" nil ("レ" . "れ"))  ("u" nil ("ク" . "く"))
-    ("," nil skk-current-kuten)                       ("i" nil ("ウ" . "う"))
-    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ル" . "る"))
-    ("/" nil ("メ" . "め"))  (";" nil ("ロ" . "ろ"))  ("p" nil ("ラ" . "ら"))
-                             ("'" nil ("リ" . "り"))  ("[" nil "ー")
-                                                      ("]" nil ("エ" . "え"))
-    ;; prefix-key: k
+  `(
+    ;; left
+    ("z"  nil ("サ" . "さ")) ("a"  nil ("ス" . "す")) ("q"  nil ("ョ" . "ょ"))
+    ("x"  nil ("シ" . "し")) ("s"  nil ("カ" . "か")) ("w"  nil ("テ" . "て"))
+    ("c"  nil ("ナ" . "な"))                          ("e"  nil ("ト" . "と"))
+    ("v"  nil ("ノ" . "の")) ("f"  nil ("キ" . "き")) ("r"  nil ("コ" . "こ"))
+    ("b"  nil ("ニ" . "に")) ("g"  nil ("タ" . "た")) ("t"  nil ("ハ" . "は"))
+    ;; right
+    ("n"  nil ("イ" . "い")) ("h"  nil ("ン" . "ん")) ("y"  nil ("ッ" . "っ"))
+    ("m"  nil ("ツ" . "つ")) ("j"  nil ("レ" . "れ")) ("u"  nil ("ク" . "く"))
+    (","  nil ,skk-pskana-K)                          ("i"  nil ("ウ" . "う"))
+    ("."  nil ,skk-pskana-T) ("l"  nil ,skk-pskana-D) ("o"  nil ("ル" . "る"))
+    ("/"  nil ("メ" . "め")) (";"  nil ("ロ" . "ろ")) ("p"  nil ("ラ" . "ら"))
+                             ("'"  nil ("リ" . "り")) ("["  nil "ー")
+                                                      ("]"  nil ("エ" . "え"))
+    ;; right-to-left
     ("kz" nil ("ゥ" . "ぅ")) ("ka" nil ("ァ" . "ぁ")) ("kq" nil ("ヒ" . "ひ"))
     ("kx" nil ("セ" . "せ")) ("ks" nil ("ヨ" . "よ")) ("kw" nil ("ケ" . "け"))
     ("kc" nil ("ア" . "あ")) ("kd" nil ("ュ" . "ゅ")) ("ke" nil ("ェ" . "ぇ"))
     ("kv" nil ("ワ" . "わ")) ("kf" nil ("ヤ" . "や")) ("kr" nil ("ホ" . "ほ"))
-    ("kb" nil ("ユ" . "ゆ")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("ヘ" . "へ"))
-    ;; prefix-key: d
+    ("kb" nil ("ユ" . "ゆ")) ("kg" nil ,skk-pskana-H) ("kt" nil ("ヘ" . "へ"))
+    ;; left-to-right
     ("dn" nil ("ネ" . "ね")) ("dh" nil "・")          ("dy" nil ("ャ" . "ゃ"))
     ("dm" nil ("ミ" . "み")) ("dj" nil ("フ" . "ふ")) ("du" nil ("マ" . "ま"))
     ("d," nil ("ヲ" . "を")) ("dk" nil ("チ" . "ち")) ("di" nil ("ソ" . "そ"))
@@ -226,25 +234,28 @@
   "US 101/104 キーボードで花配列を実現するためのルール。")
 
 (defconst skk-pskana-rom-kana-rule-list-hana-jis
-  '(("z" nil ("サ" . "さ"))  ("a" nil ("ス" . "す"))  ("q" nil ("ョ" . "ょ"))
-    ("x" nil ("シ" . "し"))  ("s" nil ("カ" . "か"))  ("w" nil ("テ" . "て"))
-    ("c" nil ("ナ" . "な"))                           ("e" nil ("ト" . "と"))
-    ("v" nil ("ノ" . "の"))  ("f" nil ("キ" . "き"))  ("r" nil ("コ" . "こ"))
-    ("b" nil ("ニ" . "に"))  ("g" nil ("タ" . "た"))  ("t" nil ("ハ" . "は"))
-    ("n" nil ("イ" . "い"))  ("h" nil ("ン" . "ん"))  ("y" nil ("ッ" . "っ"))
-    ("m" nil ("ツ" . "つ"))  ("j" nil ("レ" . "れ"))  ("u" nil ("ク" . "く"))
-    ("," nil skk-current-kuten)                       ("i" nil ("ウ" . "う"))
-    ("." nil skk-current-touten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ル" . "る"))
-    ("/" nil ("メ" . "め"))  (";" nil ("ロ" . "ろ"))  ("p" nil ("ラ" . "ら"))
-    ("\\" nil ("エ" . "え")) (":" nil ("リ" . "り"))  ("@" nil "ー")
+  `(
+    ;; left
+    ("z"  nil ("サ" . "さ")) ("a"  nil ("ス" . "す")) ("q"  nil ("ョ" . "ょ"))
+    ("x"  nil ("シ" . "し")) ("s"  nil ("カ" . "か")) ("w"  nil ("テ" . "て"))
+    ("c"  nil ("ナ" . "な"))                          ("e"  nil ("ト" . "と"))
+    ("v"  nil ("ノ" . "の")) ("f"  nil ("キ" . "き")) ("r"  nil ("コ" . "こ"))
+    ("b"  nil ("ニ" . "に")) ("g"  nil ("タ" . "た")) ("t"  nil ("ハ" . "は"))
+    ;; right
+    ("n"  nil ("イ" . "い")) ("h"  nil ("ン" . "ん")) ("y"  nil ("ッ" . "っ"))
+    ("m"  nil ("ツ" . "つ")) ("j"  nil ("レ" . "れ")) ("u"  nil ("ク" . "く"))
+    (","  nil ,skk-pskana-K)                          ("i"  nil ("ウ" . "う"))
+    ("."  nil ,skk-pskana-T) ("l"  nil ,skk-pskana-D) ("o"  nil ("ル" . "る"))
+    ("/"  nil ("メ" . "め")) (";"  nil ("ロ" . "ろ")) ("p"  nil ("ラ" . "ら"))
+    ("\\" nil ("エ" . "え")) (":"  nil ("リ" . "り")) ("@"  nil "ー")
 
-    ;; prefix-key: k
+    ;; right-to-left
     ("kz" nil ("ゥ" . "ぅ")) ("ka" nil ("ァ" . "ぁ")) ("kq" nil ("ヒ" . "ひ"))
     ("kx" nil ("セ" . "せ")) ("ks" nil ("ヨ" . "よ")) ("kw" nil ("ケ" . "け"))
     ("kc" nil ("ア" . "あ")) ("kd" nil ("ュ" . "ゅ")) ("ke" nil ("ェ" . "ぇ"))
     ("kv" nil ("ワ" . "わ")) ("kf" nil ("ヤ" . "や")) ("kr" nil ("ホ" . "ほ"))
-    ("kb" nil ("ユ" . "ゆ")) ("kg" nil skk-kanagaki-handakuten) ("kt" nil ("ヘ" . "へ"))
-    ;; prefix-key: d
+    ("kb" nil ("ユ" . "ゆ")) ("kg" nil ,skk-pskana-H) ("kt" nil ("ヘ" . "へ"))
+    ;; left-to-right
     ("dn" nil ("ネ" . "ね")) ("dh" nil "・")          ("dy" nil ("ャ" . "ゃ"))
     ("dm" nil ("ミ" . "み")) ("dj" nil ("フ" . "ふ")) ("du" nil ("マ" . "ま"))
     ("d," nil ("ヲ" . "を")) ("dk" nil ("チ" . "ち")) ("di" nil ("ソ" . "そ"))
@@ -255,25 +266,28 @@
   "JIS X 6002-1980 キーボードで花配列を実現するためのルール。")
 
 (defconst skk-pskana-rom-kana-rule-list-hana-dvorak
-  '((";" nil ("サ" . "さ"))  ("a" nil ("ス" . "す"))  ("'" nil ("ョ" . "ょ"))
-    ("q" nil ("シ" . "し"))  ("o" nil ("カ" . "か"))  ("," nil ("テ" . "て"))
-    ("j" nil ("ナ" . "な"))                           ("." nil ("ト" . "と"))
-    ("k" nil ("ノ" . "の"))  ("i" nil ("キ" . "き"))  ("p" nil ("コ" . "こ"))
-    ("x" nil ("ニ" . "に"))  ("u" nil ("タ" . "た"))  ("y" nil ("ハ" . "は"))
-    ("b" nil ("イ" . "い"))  ("d" nil ("ン" . "ん"))  ("f" nil ("ッ" . "っ"))
-    ("m" nil ("ツ" . "つ"))  ("h" nil ("レ" . "れ"))  ("g" nil ("ク" . "く"))
-    ("w" nil skk-current-kuten)                       ("c" nil ("ウ" . "う"))
-    ("v" nil skk-current-touten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("ル" . "る"))
-    ("z" nil ("メ" . "め"))  ("s" nil ("ロ" . "ろ"))  ("l" nil ("ラ" . "ら"))
-                             ("-" nil ("リ" . "り"))  ("/" nil "ー")
-                                                      ("=" nil ("エ" . "え"))
-    ;; prefix-key: k
+  `(
+    ;; left
+    (";"  nil ("サ" . "さ")) ("a"  nil ("ス" . "す")) ("'"  nil ("ョ" . "ょ"))
+    ("q"  nil ("シ" . "し")) ("o"  nil ("カ" . "か")) (","  nil ("テ" . "て"))
+    ("j"  nil ("ナ" . "な"))                          ("."  nil ("ト" . "と"))
+    ("k"  nil ("ノ" . "の")) ("i"  nil ("キ" . "き")) ("p"  nil ("コ" . "こ"))
+    ("x"  nil ("ニ" . "に")) ("u"  nil ("タ" . "た")) ("y"  nil ("ハ" . "は"))
+    ;; right
+    ("b"  nil ("イ" . "い")) ("d"  nil ("ン" . "ん")) ("f"  nil ("ッ" . "っ"))
+    ("m"  nil ("ツ" . "つ")) ("h"  nil ("レ" . "れ")) ("g"  nil ("ク" . "く"))
+    ("w"  nil ,skk-pskana-K)                          ("c"  nil ("ウ" . "う"))
+    ("v"  nil ,skk-pskana-T) ("n"  nil ,skk-pskana-D) ("r"  nil ("ル" . "る"))
+    ("z"  nil ("メ" . "め")) ("s"  nil ("ロ" . "ろ")) ("l"  nil ("ラ" . "ら"))
+                             ("-"  nil ("リ" . "り")) ("/"  nil "ー")
+                                                      ("="  nil ("エ" . "え"))
+    ;; right-to-left
     ("t;" nil ("ゥ" . "ぅ")) ("ta" nil ("ァ" . "ぁ")) ("t'" nil ("ヒ" . "ひ"))
     ("tq" nil ("セ" . "せ")) ("to" nil ("ヨ" . "よ")) ("t," nil ("ケ" . "け"))
     ("tj" nil ("ア" . "あ")) ("te" nil ("ュ" . "ゅ")) ("t." nil ("ェ" . "ぇ"))
     ("tk" nil ("ワ" . "わ")) ("ti" nil ("ヤ" . "や")) ("tp" nil ("ホ" . "ほ"))
-    ("tx" nil ("ユ" . "ゆ")) ("tu" nil skk-kanagaki-handakuten) ("ty" nil ("ヘ" . "へ"))
-    ;; prefix-key: d
+    ("tx" nil ("ユ" . "ゆ")) ("tu" nil ,skk-pskana-H) ("ty" nil ("ヘ" . "へ"))
+    ;; left-to-right
     ("eb" nil ("ネ" . "ね")) ("eh" nil "・")          ("ef" nil ("ャ" . "ゃ"))
     ("em" nil ("ミ" . "み")) ("eh" nil ("フ" . "ふ")) ("eg" nil ("マ" . "ま"))
     ("ew" nil ("ヲ" . "を")) ("et" nil ("チ" . "ち")) ("ec" nil ("ソ" . "そ"))
@@ -284,25 +298,28 @@
   "Dvorak キーボードで花配列を実現するためのルール。")
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-us
-  '(("z" nil ("ス" . "す"))  ("a" nil ("ハ" . "は"))  ("q" nil ("ソ" . "そ"))
-    ("x" nil ("ケ" . "け"))  ("s" nil ("カ" . "か"))  ("w" nil ("コ" . "こ"))
-    ("c" nil ("ニ" . "に"))                           ("e" nil ("シ" . "し"))
-    ("v" nil ("ナ" . "な"))  ("f" nil ("ト" . "と"))  ("r" nil ("テ" . "て"))
-    ("b" nil ("サ" . "さ"))  ("g" nil ("タ" . "た"))  ("t" nil ("ョ" . "ょ"))
-    ("n" nil ("ッ" . "っ"))  ("h" nil ("ク" . "く"))  ("y" nil ("ツ" . "つ"))
-    ("m" nil ("ル" . "る"))  ("j" nil ("ウ" . "う"))  ("u" nil ("ン" . "ん"))
-    ("," nil skk-current-touten)                      ("i" nil ("イ" . "い"))
-    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ノ" . "の"))
-    ("/" nil skk-kanagaki-handakuten) (";" nil ("キ" . "き")) ("p" nil ("リ" . "り"))
-                             ("'" nil ("レ" . "れ"))  ("[" nil ("チ" . "ち"))
-                                                      ("]" nil "・")
-    ;; prefix-key: k
+  `(
+    ;; left
+    ("z"  nil ("ス" . "す")) ("a"  nil ("ハ" . "は")) ("q"  nil ("ソ" . "そ"))
+    ("x"  nil ("ケ" . "け")) ("s"  nil ("カ" . "か")) ("w"  nil ("コ" . "こ"))
+    ("c"  nil ("ニ" . "に"))                          ("e"  nil ("シ" . "し"))
+    ("v"  nil ("ナ" . "な")) ("f"  nil ("ト" . "と")) ("r"  nil ("テ" . "て"))
+    ("b"  nil ("サ" . "さ")) ("g"  nil ("タ" . "た")) ("t"  nil ("ョ" . "ょ"))
+    ;; right
+    ("n"  nil ("ッ" . "っ")) ("h"  nil ("ク" . "く")) ("y"  nil ("ツ" . "つ"))
+    ("m"  nil ("ル" . "る")) ("j"  nil ("ウ" . "う")) ("u"  nil ("ン" . "ん"))
+    (","  nil ,skk-pskana-T)                          ("i"  nil ("イ" . "い"))
+    ("."  nil ,skk-pskana-K) ("l"  nil ,skk-pskana-D) ("o"  nil ("ノ" . "の"))
+    ("/"  nil ,skk-pskana-H) (";"  nil ("キ" . "き")) ("p"  nil ("リ" . "り"))
+                             ("'"  nil ("レ" . "れ")) ("["  nil ("チ" . "ち"))
+                                                      ("]"  nil "・")
+    ;; right-to-left
     ("kz" nil ("ゥ" . "ぅ")) ("ka" nil ("ィ" . "ぃ")) ("kq" nil ("ァ" . "ぁ"))
     ("kx" nil ("ヘ" . "へ")) ("ks" nil ("ヲ" . "を")) ("kw" nil ("ヒ" . "ひ"))
     ("kc" nil ("セ" . "せ")) ("kd" nil ("ラ" . "ら")) ("ke" nil ("ホ" . "ほ"))
     ("kv" nil ("ュ" . "ゅ")) ("kf" nil ("ア" . "あ")) ("kr" nil ("フ" . "ふ"))
     ("kb" nil ("ャ" . "ゃ")) ("kg" nil ("ヨ" . "よ")) ("kt" nil ("メ" . "め"))
-    ;; prefix-key: d
+    ;; left-to-right
     ("dn" nil ("ム" . "む")) ("dh" nil ("マ" . "ま")) ("dy" nil ("ヌ" . "ぬ"))
     ("dm" nil ("ロ" . "ろ")) ("dj" nil ("オ" . "お")) ("du" nil ("エ" . "え"))
     ("d," nil ("ネ" . "ね")) ("dk" nil ("モ" . "も")) ("di" nil ("ミ" . "み"))
@@ -313,25 +330,28 @@
   "US 101/104 キーボードで月配列 2-263 を実現するためのルール。")
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-jis
-  '(("z" nil ("ス" . "す"))  ("a" nil ("ハ" . "は"))  ("q" nil ("ソ" . "そ"))
-    ("x" nil ("ケ" . "け"))  ("s" nil ("カ" . "か"))  ("w" nil ("コ" . "こ"))
-    ("c" nil ("ニ" . "に"))                           ("e" nil ("シ" . "し"))
-    ("v" nil ("ナ" . "な"))  ("f" nil ("ト" . "と"))  ("r" nil ("テ" . "て"))
-    ("b" nil ("サ" . "さ"))  ("g" nil ("タ" . "た"))  ("t" nil ("ョ" . "ょ"))
-    ("n" nil ("ッ" . "っ"))  ("h" nil ("ク" . "く"))  ("y" nil ("ツ" . "つ"))
-    ("m" nil ("ル" . "る"))  ("j" nil ("ウ" . "う"))  ("u" nil ("ン" . "ん"))
-    ("," nil skk-current-touten)                      ("i" nil ("イ" . "い"))
-    ("." nil skk-current-kuten) ("l" nil skk-kanagaki-dakuten) ("o" nil ("ノ" . "の"))
-    ("/" nil skk-kanagaki-handakuten) (";" nil ("キ" . "き")) ("p" nil ("リ" . "り"))
-    ("\\" nil "・")          (":" nil ("レ" . "れ"))  ("@" nil ("チ" . "ち"))
+  `(
+    ;; left
+    ("z"  nil ("ス" . "す")) ("a"  nil ("ハ" . "は")) ("q"  nil ("ソ" . "そ"))
+    ("x"  nil ("ケ" . "け")) ("s"  nil ("カ" . "か")) ("w"  nil ("コ" . "こ"))
+    ("c"  nil ("ニ" . "に"))                          ("e"  nil ("シ" . "し"))
+    ("v"  nil ("ナ" . "な")) ("f"  nil ("ト" . "と")) ("r"  nil ("テ" . "て"))
+    ("b"  nil ("サ" . "さ")) ("g"  nil ("タ" . "た")) ("t"  nil ("ョ" . "ょ"))
+    ;; right
+    ("n"  nil ("ッ" . "っ")) ("h"  nil ("ク" . "く")) ("y"  nil ("ツ" . "つ"))
+    ("m"  nil ("ル" . "る")) ("j"  nil ("ウ" . "う")) ("u"  nil ("ン" . "ん"))
+    (","  nil ,skk-pskana-T)                          ("i"  nil ("イ" . "い"))
+    ("."  nil ,skk-pskana-K) ("l"  nil ,skk-pskana-D) ("o"  nil ("ノ" . "の"))
+    ("/"  nil ,skk-pskana-H) (";"  nil ("キ" . "き")) ("p"  nil ("リ" . "り"))
+    ("\\" nil "・")          (":"  nil ("レ" . "れ")) ("@"  nil ("チ" . "ち"))
 
-    ;; prefix-key: k
+    ;; right-to-left
     ("kz" nil ("ゥ" . "ぅ")) ("ka" nil ("ィ" . "ぃ")) ("kq" nil ("ァ" . "ぁ"))
     ("kx" nil ("ヘ" . "へ")) ("ks" nil ("ヲ" . "を")) ("kw" nil ("ヒ" . "ひ"))
     ("kc" nil ("セ" . "せ")) ("kd" nil ("ラ" . "ら")) ("ke" nil ("ホ" . "ほ"))
     ("kv" nil ("ュ" . "ゅ")) ("kf" nil ("ア" . "あ")) ("kr" nil ("フ" . "ふ"))
     ("kb" nil ("ャ" . "ゃ")) ("kg" nil ("ヨ" . "よ")) ("kt" nil ("メ" . "め"))
-    ;; prefix-key: d
+    ;; left-to-right
     ("dn" nil ("ム" . "む")) ("dh" nil ("マ" . "ま")) ("dy" nil ("ヌ" . "ぬ"))
     ("dm" nil ("ロ" . "ろ")) ("dj" nil ("オ" . "お")) ("du" nil ("エ" . "え"))
     ("d," nil ("ネ" . "ね")) ("dk" nil ("モ" . "も")) ("di" nil ("ミ" . "み"))
@@ -342,25 +362,28 @@
   "JIS X 6002-1980 キーボードで月配列 2-263 を実現するためのルール。")
 
 (defconst skk-pskana-rom-kana-rule-list-tsuki-2-263-dvorak
-  '((";" nil ("ス" . "す"))  ("a" nil ("ハ" . "は"))  ("'" nil ("ソ" . "そ"))
-    ("q" nil ("ケ" . "け"))  ("o" nil ("カ" . "か"))  ("," nil ("コ" . "こ"))
-    ("j" nil ("ニ" . "に"))                           ("." nil ("シ" . "し"))
-    ("k" nil ("ナ" . "な"))  ("u" nil ("ト" . "と"))  ("p" nil ("テ" . "て"))
-    ("x" nil ("サ" . "さ"))  ("i" nil ("タ" . "た"))  ("y" nil ("ョ" . "ょ"))
-    ("b" nil ("ッ" . "っ"))  ("d" nil ("ク" . "く"))  ("f" nil ("ツ" . "つ"))
-    ("m" nil ("ル" . "る"))  ("h" nil ("ウ" . "う"))  ("g" nil ("ン" . "ん"))
-    ("w" nil skk-current-touten)                      ("c" nil ("イ" . "い"))
-    ("v" nil skk-current-kuten) ("n" nil skk-kanagaki-dakuten) ("r" nil ("ノ" . "の"))
-    ("z" nil skk-kanagaki-handakuten) ("s" nil ("キ" . "き")) ("l" nil ("リ" . "り"))
-                             ("-" nil ("レ" . "れ"))  ("/" nil ("チ" . "ち"))
-                                                      ("=" nil "・")
-    ;; prefix-key: k
+  `(
+    ;; left
+    (";"  nil ("ス" . "す")) ("a"  nil ("ハ" . "は")) ("'"  nil ("ソ" . "そ"))
+    ("q"  nil ("ケ" . "け")) ("o"  nil ("カ" . "か")) (","  nil ("コ" . "こ"))
+    ("j"  nil ("ニ" . "に"))                          ("."  nil ("シ" . "し"))
+    ("k"  nil ("ナ" . "な")) ("u"  nil ("ト" . "と")) ("p"  nil ("テ" . "て"))
+    ("x"  nil ("サ" . "さ")) ("i"  nil ("タ" . "た")) ("y"  nil ("ョ" . "ょ"))
+    ;; right
+    ("b"  nil ("ッ" . "っ")) ("d"  nil ("ク" . "く")) ("f"  nil ("ツ" . "つ"))
+    ("m"  nil ("ル" . "る")) ("h"  nil ("ウ" . "う")) ("g"  nil ("ン" . "ん"))
+    ("w"  nil ,skk-pskana-T)                          ("c"  nil ("イ" . "い"))
+    ("v"  nil ,skk-pskana-K) ("n"  nil ,skk-pskana-D) ("r"  nil ("ノ" . "の"))
+    ("z"  nil ,skk-pskana-H) ("s"  nil ("キ" . "き")) ("l"  nil ("リ" . "り"))
+                             ("-"  nil ("レ" . "れ")) ("/"  nil ("チ" . "ち"))
+                                                      ("="  nil "・")
+    ;; right-to-left
     ("t;" nil ("ゥ" . "ぅ")) ("ta" nil ("ィ" . "ぃ")) ("t'" nil ("ァ" . "ぁ"))
     ("tq" nil ("ヘ" . "へ")) ("to" nil ("ヲ" . "を")) ("t," nil ("ヒ" . "ひ"))
     ("tj" nil ("セ" . "せ")) ("te" nil ("ラ" . "ら")) ("t." nil ("ホ" . "ほ"))
     ("tk" nil ("ュ" . "ゅ")) ("tu" nil ("ア" . "あ")) ("tp" nil ("フ" . "ふ"))
     ("tx" nil ("ャ" . "ゃ")) ("ti" nil ("ヨ" . "よ")) ("ty" nil ("メ" . "め"))
-    ;; prefix-key: d
+    ;; left-to-right
     ("eb" nil ("ム" . "む")) ("ed" nil ("マ" . "ま")) ("ef" nil ("ヌ" . "ぬ"))
     ("em" nil ("ロ" . "ろ")) ("eh" nil ("オ" . "お")) ("eg" nil ("エ" . "え"))
     ("ew" nil ("ネ" . "ね")) ("et" nil ("モ" . "も")) ("ec" nil ("ミ" . "み"))
