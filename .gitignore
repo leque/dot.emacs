@@ -1,4 +1,5 @@
 *.elc
+/.cask
 /ac-comphist.dat
 /auto-save-list/
 /abbrev_defs

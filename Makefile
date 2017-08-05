@@ -6,17 +6,26 @@ CP = ln -sf
 RM = rm -f
 GIT = git
 EMACS = emacs -l $(EMACS_D)/init.el
+TARGETS = lisp/skk-pskana.el
 
-.PHONY: help install setup clean test
+.PHONY: help install build setup clean test
 
 help: ## show this message
 	@awk -F ':.*##' '/^[^	]+:.*##/ { printf "%s\t\t%s\n", $$1, $$2 }' \
 	  Makefile \
 	| sort
 
-install: ## install files under ~/.emacs.d
+install: build ## install files under ~/.emacs.d
 	$(INSTALL) -d "$(EMACS_D)"
 	for f in $(TO_EMACS_D); do $(CP) $$PWD/$$f "$(EMACS_D)"; done
+
+build: $(TARGETS)
+
+lisp/skk-pskana.el: lisp/README.skk-pskana.org
+	cask emacs --batch \
+		-l org-commentary-cli \
+		-eval '(setq org-ascii-links-to-notes nil)' \
+		-f org-commentary -- $< $@
 
 setup: ## setup files to develop dotfiles
 	$(GIT) update-index --skip-worktree $(LOCAL)

@@ -1,0 +1,57 @@
+* skk-pskana.el
+
+This is an utility to input Japanese with prefix shift kana layout,
+such as
+
+- [[http://togasi.my.coocan.jp/hana_no_kuni/][花配列 (Hana layout)]]
+- [[http://jisx6004.client.jp/tsuki.html][月配列 2-263 (Tsuki-2-263 layout)]]
+- [[http://yellow.ribbon.to/%7Eujiro/hairetu.htm][Some other variants of Tsuki]]
+
+We currently provide Hana layout and Tsuki-2-263 layout
+for US/JIS/Dvorak keyboards.
+
+** Requirements:
+
+- [[http://openlab.jp/skk/main-ja.html][Daredevil SKK]]
+- ~skk-kanagaki-util.el~ (in Daredevil SKK package)
+- [[https://github.com/magnars/dash.el][dash.el]]
+
+** How to use
+
+Install Daredevil SKK and ~skk-kanagaki-util.el~, copy this file
+to a dicrectory in ~load-path~, and put in your ~.skk~ below:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'skk-pskana)
+#+END_SRC
+
+The default layout is Tsuki-2-263 on US keyboard.
+To use Hana layout on Dvorak keyboard, for example, put in your ~.skk~
+
+#+BEGIN_SRC emacs-lisp
+  (setq skk-pskana-keyboard-layout 'dvorak)
+  (setq skk-pskana-kana-layout 'hana)
+#+END_SRC
+
+before loading ~skk-pskana~, or do ~M-x skk-pskana-init~ after setting.
+
+You would not have difficulty to use (at least once you have learned
+the layout, and are familiar to SKK), but there is a little bit
+difference from normal SKK to input an okurigana with dakuten/handakuten.
+
+On normal SKK, for instance, to input =遊ぶ=, you have simply to type
+=AsoBu=. But here, you have to type =あそふ<Shift>゛=: type a okurigana
+character without dakuten/handakuten, and hold down a Shift key and
+type dakuten/handakuten.
+
+I.e., with Tsuki-2-263, for =遊ぶ=, you have to type =KfqkrL=:
+=Kf= for =あ=, =q= for =そ=, =kr= for =ふ=, and =L= for dakuten.
+For =食べる=, type =GkxLm=: =G= for =た=, =kx= for =へ=, =L= for dakuten,
+and =m= for =る=.
+
+** Note
+
+I use only Tsuki-2-263-us and Tsuki-2-263-jis, the others are not tested at all.
+Use them at your own risk. The source is always with you.
+
+#+OPTIONS: toc:nil num:nil
