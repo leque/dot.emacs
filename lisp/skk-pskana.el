@@ -26,7 +26,7 @@
 ;; skk-pskana.el
 ;; =============
 
-;;   This is an utility to input Japanese with prefix shift kana layout,
+;;   This is an utility to input Japanese with prefix shift kana layouts,
 ;;   such as
 
 ;;   - [花配列 (Hana layout)] (http://togasi.my.coocan.jp/hana_no_kuni/)
@@ -50,15 +50,15 @@
 ;; How to use
 ;; ~~~~~~~~~~
 
-;;   Install Daredevil SKK and `skk-kanagaki-util.el', copy this file to a
-;;   dicrectory in `load-path', and put in your `.skk' below:
+;;   Copy `skk-pskana.el' to a dicrectory in `load-path', and put in your
+;;   `.skk' below:
 
 ;;   ,----
 ;;   | (require 'skk-pskana)
 ;;   `----
 
-;;   The default layout is Tsuki-2-263 on US keyboard.  To use Hana layout
-;;   on Dvorak keyboard, for example, put in your `.skk'
+;;   The default layout is Tsuki-2-263 on US keyboards.  To use Hana layout
+;;   on Dvorak keyboards, for example, put in your `.skk'
 
 ;;   ,----
 ;;   | (setq skk-pskana-keyboard-layout 'dvorak)
@@ -68,9 +68,9 @@
 ;;   before loading `skk-pskana', or do `M-x skk-pskana-init' after
 ;;   setting.
 
-;;   You would not have difficulty to use (at least once you have learned
-;;   the layout, and are familiar to SKK), but there is a little bit
-;;   difference from normal SKK to input an okurigana with
+;;   You would not have difficulty to use `skk-pskana' (at least once you
+;;   have learned the layout, and are familiar to SKK), but there is a
+;;   little bit difference from normal SKK to input an okurigana with
 ;;   dakuten/handakuten.
 
 ;;   On normal SKK, for instance, to input `遊ぶ', you have simply to type
