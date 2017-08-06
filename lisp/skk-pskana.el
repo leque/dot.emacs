@@ -111,14 +111,14 @@
   :type '(choice (const us)
                  (const jis)
                  (const dvorak)
-                 (symbol :tag "Another Keyboard Type"))
+                 (symbol :tag "Another Keyboard Layout"))
   :group 'skk-pskana)
 
 (defcustom skk-pskana-kana-layout 'tsuki-2-263
   "*使用するかな配列の種別"
   :type '(choice (const tsuki-2-263)
                  (const hana)
-                 (symbol :tag "Another Keyboard Layout"))
+                 (symbol :tag "Another Kana Layout"))
   :group 'skk-pskana)
 
 ;;; Function Keys
