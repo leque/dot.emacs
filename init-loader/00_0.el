@@ -31,3 +31,12 @@
 (el-get-bundle dash)
 (el-get-bundle! s)
 (el-get-bundle! popup)
+
+(el-get-bundle! leoliu/easy-kill
+  (global-set-key [remap kill-ring-save] 'easy-kill))
+
+(el-get-bundle indent-tools
+  :type elpa
+  :repo ("melpa" . "https://melpa.org/packages/")
+  :depends (s hydra yafolding)
+  )
