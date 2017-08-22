@@ -12,6 +12,8 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
+(setq custom-file (locate-user-emacs-file "custom.el"))
+
 ;;;; el-get
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 
