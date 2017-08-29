@@ -30,6 +30,7 @@
 
 (el-get-bundle dash)
 (el-get-bundle! s)
+(el-get-bundle! request)
 (el-get-bundle! popup)
 
 (el-get-bundle! leoliu/easy-kill
