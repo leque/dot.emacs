@@ -11,8 +11,11 @@
                '("bsd"
                  (c-basic-offset . 4)
                  (c-offsets-alist
+                  (arglist-intro . +)
                   (label . 2)
                   (statement-case-open . 4))))
+  (add-to-list 'c-default-style
+               '(other . "gauche"))
   )
 
 (el-get-bundle irony-mode
