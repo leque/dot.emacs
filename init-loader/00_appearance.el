@@ -5,6 +5,22 @@
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 
+(el-get-bundle rainbow-mode)
+
+(el-get-bundle! symbol-overlay
+  (setq symbol-overlay-colors
+        '("#ffd1d1"
+          "#ffff99"
+          "#cbf266"
+          "#b4ebfa"
+          "#edc58f"
+          "#87e7b0"
+          "#c7b2de"
+          ))
+  (set-face-background 'symbol-overlay-temp-face
+                       (car (last symbol-overlay-colors)))
+  (add-hook 'prog-mode-hook #'symbol-overlay-mode))
+
 (el-get-bundle! mic-paren
   (paren-activate)
   (setq paren-match-face 'region)
