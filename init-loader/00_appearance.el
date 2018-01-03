@@ -7,18 +7,40 @@
 
 (el-get-bundle rainbow-mode)
 
+(defvar my-cud-red-color "#ff2800")
+(defvar my-cud-yellow-color "#faf500")
+(defvar my-cud-green-color "#35a16b")
+(defvar my-cud-blue-color "#0041ff")
+(defvar my-cud-skyblue-color "#66ccff")
+(defvar my-cud-pink-color "#ff99a0")
+(defvar my-cud-orange-color "#ff9900")
+(defvar my-cud-purple-color "#9a0079")
+(defvar my-cud-brown-color "#663300")
+(defvar my-cud-light-pink-color "#ffd1d1")
+(defvar my-cud-cream-color "#ffff99")
+(defvar my-cud-lime-color "#cbf266")
+(defvar my-cud-light-skyblue-color "#b4ebfa")
+(defvar my-cud-beige-color "#edc58f")
+(defvar my-cud-light-green-color "#87e7b0")
+(defvar my-cud-light-purple-color "#c7b2de")
+(defvar my-cud-light-gray-color "#c8c8cb")
+(defvar my-cud-gray-color "#7f878f")
+
 (el-get-bundle! symbol-overlay
   (setq symbol-overlay-colors
-        '("#ffd1d1"
-          "#ffff99"
-          "#cbf266"
-          "#b4ebfa"
-          "#edc58f"
-          "#87e7b0"
-          "#c7b2de"
-          ))
-  (set-face-background 'symbol-overlay-temp-face
-                       (car (last symbol-overlay-colors)))
+        (list
+         my-cud-light-pink-color
+         my-cud-cream-color
+         my-cud-lime-color
+         my-cud-light-skyblue-color
+         my-cud-beige-color
+         my-cud-light-skyblue-color
+         my-cud-light-green-color
+         my-cud-light-purple-color
+         ))
+  (with-eval-after-load-feature 'symbol-overlay
+    (set-face-background 'symbol-overlay-temp-face
+                         my-cud-light-purple-color))
   (add-hook 'prog-mode-hook #'symbol-overlay-mode))
 
 (el-get-bundle! mic-paren
