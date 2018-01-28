@@ -32,6 +32,7 @@
 (el-get-bundle! s)
 (el-get-bundle! request)
 (el-get-bundle! popup)
+(el-get-bundle xmlgen)
 
 (el-get-bundle! leoliu/easy-kill
   (global-set-key [remap kill-ring-save] 'easy-kill))
