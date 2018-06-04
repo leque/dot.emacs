@@ -39,7 +39,7 @@
          my-cud-light-purple-color
          ))
   (with-eval-after-load-feature 'symbol-overlay
-    (set-face-background 'symbol-overlay-temp-face
+    (set-face-background 'symbol-overlay-default-face
                          my-cud-light-purple-color))
   (add-hook 'prog-mode-hook #'symbol-overlay-mode))
 
