@@ -3,6 +3,16 @@
     (require 'caml-font))
   )
 
+(el-get-bundle dune-mode
+  (push `(,(rx (or (seq "jbuild"
+                        (opt ".inc"))
+                   "dune-project"
+                   "dune-workspace"
+                   )
+               eos)
+          . dune-mode)
+        auto-mode-alist))
+
 (defvar opam-share nil)
 
 (defun opam-site-lisp ()

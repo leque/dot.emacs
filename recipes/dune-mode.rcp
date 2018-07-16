@@ -1,0 +1,6 @@
+(:name dune-mode
+       :description "Integration with the dune build system"
+       :type github
+       :pkgname "ocaml/dune"
+       :load-path ("editor-integration/emacs")
+       )
