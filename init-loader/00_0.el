@@ -34,9 +34,6 @@
 (el-get-bundle! popup)
 (el-get-bundle xmlgen)
 
-(el-get-bundle! leoliu/easy-kill
-  (global-set-key [remap kill-ring-save] 'easy-kill))
-
 (el-get-bundle indent-tools
   :type elpa
   :repo ("melpa" . "https://melpa.org/packages/")
