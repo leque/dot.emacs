@@ -1,1 +1,1 @@
-(el-get-bundle! rust-mode)
+(el-get-bundle rust-mode)
