@@ -42,7 +42,21 @@
            (insert "</pre>")))
     (insert "</body></html>")))
 
+(add-to-list 'auto-mode-alist
+             `(,(rx "."
+                    (or (or "md" "markdown")
+                        (or "adoc" "asciidoc")
+                        "txt")
+                    eos)
+               . text-mode))
+
 (el-get-bundle impatient-mode
+  (declare-function imp-set-user-filter "impatient-mode")
+  (cl-loop for mode-hook in '(text-mode-hook)
+           do (add-hook mode-hook
+                        #'(lambda ()
+                            (impatient-mode)
+                            (imp-set-user-filter #'my-github-markup-filter))))
   )
 
 (el-get-bundle smaximov/org-commentary
