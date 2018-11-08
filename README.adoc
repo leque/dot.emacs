@@ -1,0 +1,10 @@
+= dot.emacs
+
+This is my emacs configuration.
+
+You can try this configuration as below without messing your environment (installing files under `$(dirname /path/to/init.el)`):
+
+[source,console]
+----
+$ emacs -q -l init.el
+----
