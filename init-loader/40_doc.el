@@ -61,17 +61,19 @@
       (insert "</div>"))
     (insert "</body></html>")))
 
+(define-derived-mode my-doc-mode text-mode "my-doc")
+
 (add-to-list 'auto-mode-alist
              `(,(rx "."
                     (or (or "md" "markdown")
                         (or "adoc" "asciidoc")
                         "txt")
                     eos)
-               . text-mode))
+               . my-doc-mode))
 
 (el-get-bundle impatient-mode
   (declare-function imp-set-user-filter "impatient-mode")
-  (cl-loop for mode-hook in '(text-mode-hook)
+  (cl-loop for mode-hook in '(my-doc-mode-hook)
            do (add-hook mode-hook
                         #'(lambda ()
                             (impatient-mode)
