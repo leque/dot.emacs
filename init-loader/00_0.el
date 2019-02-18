@@ -34,6 +34,13 @@
 (el-get-bundle! popup)
 (el-get-bundle xmlgen)
 
+(el-get-bundle csv-mode)
+
+(custom-set-variables
+ '(csv-invisibility-default nil)
+ '(csv-align-style 'right)
+ )
+
 (el-get-bundle indent-tools
   :type elpa
   :repo ("melpa" . "https://melpa.org/packages/")
