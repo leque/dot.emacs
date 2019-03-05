@@ -5,6 +5,21 @@
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 
+(el-get-bundle! diminish)
+
+(defmacro my-diminish (&rest modes)
+  `(progn ,@(cl-loop for (feature mode) in modes
+                     collect `(with-eval-after-load-feature ',feature
+                                (diminish ',mode)))))
+
+(my-diminish
+ (git-gutter git-gutter-mode)
+ (indent-guide indent-guide-mode)
+ (ivy ivy-mode)
+ (whitespace global-whitespace-mode)
+ (zoom zoom-mode)
+ )
+
 (el-get-bundle! dimmer
   (dimmer-mode)
   (with-eval-after-load-feature 'dimmer
