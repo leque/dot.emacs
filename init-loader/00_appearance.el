@@ -5,6 +5,11 @@
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 
+(el-get-bundle! dimmer
+  (dimmer-mode)
+  (with-eval-after-load-feature 'dimmer
+    (setq dimmer-fraction 0.3)))
+
 (el-get-bundle rainbow-mode)
 
 (defvar my-cud-red-color "#ff2800")
@@ -68,4 +73,3 @@
         :inherit t
         :background nil))))
  )
-
