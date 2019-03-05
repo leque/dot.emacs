@@ -1,3 +1,6 @@
+(el-get-bundle! zoom
+  (zoom-mode))
+
 (global-set-key (kbd "s-h") 'windmove-left)
 (global-set-key (kbd "s-j") 'windmove-down)
 (global-set-key (kbd "s-k") 'windmove-up)
