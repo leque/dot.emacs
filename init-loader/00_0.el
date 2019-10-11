@@ -34,22 +34,10 @@
 (el-get-bundle! popup)
 (el-get-bundle xmlgen)
 
-(defvar-local my-csv-mode-auto-align-fields nil)
-
 (el-get-bundle csv-mode
   (with-eval-after-load-feature 'csv-mode
-    (defun my-csv-mode-auto-align-fields (_beg _end _len)
-      (when my-csv-mode-auto-align-fields
-        (csv-align-fields nil (window-start) (window-end))))
-
-    (defun my-csv-mode-setup-auto-align ()
-      (setq my-csv-mode-auto-align-fields t)
-      (csv-align-fields nil (point-min) (point-max))
-      (setq-local after-change-functions
-                  (cons 'my-csv-mode-auto-align-fields
-                        after-change-functions)))
-
-    (add-hook 'csv-mode-hook 'my-csv-mode-setup-auto-align)
+    (autoload 'csv-auto-align-fields-minior-mode "csv-auto-align-fields")
+    (add-hook 'csv-mode-hook 'csv-auto-align-fields-minior-mode)
     ))
 
 (custom-set-variables
