@@ -37,6 +37,10 @@
 (el-get-bundle emacsmirror/csv-mode
   (with-eval-after-load-feature 'csv-mode
     (add-hook 'csv-mode-hook 'csv-align-fields-mode)
+    (autoload 'my-csv-open-column "my-csv")
+    (add-hook 'csv-mode-hook
+              (lambda ()
+                (define-key csv-mode-map (kbd "C-c C-o") 'my-csv-open-column)))
     ))
 
 (custom-set-variables
