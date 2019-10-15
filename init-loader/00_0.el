@@ -34,10 +34,9 @@
 (el-get-bundle! popup)
 (el-get-bundle xmlgen)
 
-(el-get-bundle csv-mode
+(el-get-bundle emacsmirror/csv-mode
   (with-eval-after-load-feature 'csv-mode
-    (autoload 'csv-auto-align-fields-minior-mode "csv-auto-align-fields")
-    (add-hook 'csv-mode-hook 'csv-auto-align-fields-minior-mode)
+    (add-hook 'csv-mode-hook 'csv-align-fields-mode)
     ))
 
 (custom-set-variables
