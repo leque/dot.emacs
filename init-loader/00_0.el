@@ -45,7 +45,7 @@
 
 (custom-set-variables
  '(csv-invisibility-default nil)
- '(csv-align-style 'right)
+ '(csv-align-style 'auto)
  )
 
 (el-get-bundle indent-tools
