@@ -11,3 +11,10 @@
 (defun change-frame-width (w)
   (interactive "nnew width: ")
   (set-frame-width (selected-frame) w))
+
+(defun my-align-frame-top-right ()
+  (interactive)
+  (set-frame-position
+   (selected-frame)
+   (cadr (frame-geom-value-cons 'left '(- 0)))
+   0))
