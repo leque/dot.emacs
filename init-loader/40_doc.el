@@ -23,17 +23,18 @@
                           (setq error err)
                           nil))
                      (delete-file err-file)))))
-    (insert "<html>")
-    (insert (xmlgen
-             `(head
-               (title ,(or filename (buffer-name buffer)))
-               ;; https://github.com/sindresorhus/github-markdown-css
-               ;; https://cdnjs.com/libraries/github-markdown-css
-               (link :rel "stylesheet"
-                     :type "text/css"
-                     :href "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css")
-               (style :type "text/css"
-                      "\
+    (insert
+     (xmlgen
+      `(html
+        (head
+         (title ,(or filename (buffer-name buffer)))
+         ;; https://github.com/sindresorhus/github-markdown-css
+         ;; https://cdnjs.com/libraries/github-markdown-css
+         (link :rel "stylesheet"
+               :type "text/css"
+               :href "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css")
+         (style :type "text/css"
+                "\
 .markdown-body, .error, .stderr {
   box-sizing: border-box;
   min-width: 200px;
@@ -49,17 +50,15 @@
   border-bottom : 1px solid #ccc;
 }
 ")
-               )))
-    (insert "<body>")
-    (when error
-      (insert (xmlgen `(pre :class "error" ,(format "%S" error)))))
-    (when (s-present? stderr)
-      (insert (xmlgen `(pre :class "stderr" ,stderr))))
-    (when (eql status 0)
-      (insert "<div class=\"markdown-body\">")
-      (insert output)
-      (insert "</div>"))
-    (insert "</body></html>")))
+         )
+        (body
+         ,@(when error
+             `((pre :class "error" ,(format "%S" error))))
+         ,@(when (s-present? stderr)
+             `((pre :class "stderr" ,stderr)))
+         ,@(when (eql status 0)
+             `((div :class "markdown-body" (!unescape ,output))))
+         ))))))
 
 (define-derived-mode my-doc-mode text-mode "my-doc")
 
