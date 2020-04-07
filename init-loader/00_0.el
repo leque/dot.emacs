@@ -47,6 +47,7 @@
 (custom-set-variables
  '(csv-invisibility-default nil)
  '(csv-align-style 'auto)
+ `(httpd-root ,(locate-user-emacs-file "www"))
  )
 
 (el-get-bundle indent-tools

@@ -60,6 +60,48 @@
              `((div :class "markdown-body" (!unescape ,output))))
          ))))))
 
+(defun my-asciidoctor-js-filter (buffer)
+  "Convert contents of BUFFER to HTML by using github-markup
+\(URL `https://github.com/github/markup')."
+  (insert
+   (xmlgen
+    `(html
+      (head
+       (title ,(or (buffer-file-name buffer) (buffer-name buffer)))
+       (link :rel "stylesheet"
+             :type "text/css"
+             :href "/js/node_modules/@asciidoctor/core/dist/css/asciidoctor.css")
+       (style :type "text/css"
+              (!unescape "\
+#content { display : none; }
+
+#body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px;
+}
+"))
+       (script :src "/js/node_modules/@asciidoctor/core/dist/browser/asciidoctor.js" " ")
+       (script (!unescape "
+window.addEventListener('load', function(ev) {
+  document.getElementById('body').innerHTML =
+    Asciidoctor().convert(
+      document.getElementById('content').textContent,
+      {
+        attributes: {
+          showtitle: true
+        }
+      });
+})
+"))
+       )
+      (body
+       (div :id "content" ,(with-current-buffer buffer (buffer-string)))
+       (div :id "body")
+       )))))
+
 (define-derived-mode my-doc-mode text-mode "my-doc")
 
 (add-to-list 'auto-mode-alist
