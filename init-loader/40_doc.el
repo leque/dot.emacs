@@ -1,3 +1,25 @@
+(defvar my-syntax-highlighter-url-prefix
+  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0")
+
+(defvar my-syntax-highlighter-stylesheets
+  `(
+    (link :href ,(format "%s/themes/prism.min.css"
+                         my-syntax-highlighter-url-prefix)
+          :type "text/css"
+          :rel "stylesheet")
+    ))
+
+(defvar my-syntax-highlighter-scripts
+  `(
+    (script :src ,(format "%s/components/prism-core.min.js"
+                          my-syntax-highlighter-url-prefix)
+            :data-manual ""
+            "")
+    (script :src ,(format "%s/plugins/autoloader/prism-autoloader.min.js"
+                          my-syntax-highlighter-url-prefix)
+            "")
+    ))
+
 (defun my-github-markup-filter (buffer)
   "Convert contents of BUFFER to HTML by using github-markup
 \(URL `https://github.com/github/markup')."
@@ -28,6 +50,7 @@
       `(html
         (head
          (title ,(or filename (buffer-name buffer)))
+         ,@my-syntax-highlighter-stylesheets
          ;; https://github.com/sindresorhus/github-markdown-css
          ;; https://cdnjs.com/libraries/github-markdown-css
          (link :rel "stylesheet"
@@ -36,6 +59,8 @@
          (link :rel "stylesheet"
                :type "text/css"
                :href "/css/github-markup-preview.css")
+         (script :src "/js/github-markup-preview.js"
+                 "")
          )
         (body
          ,@(when error
@@ -44,6 +69,7 @@
              `((pre :class "stderr" ,stderr)))
          ,@(when (eql status 0)
              `((div :class "markdown-body" (!unescape ,output))))
+         ,@my-syntax-highlighter-scripts
          ))))))
 
 (defun my-asciidoctor-js-filter (buffer)
@@ -54,6 +80,7 @@
     `(html
       (head
        (title ,(or (buffer-file-name buffer) (buffer-name buffer)))
+       ,@my-syntax-highlighter-stylesheets
        (link :rel "stylesheet"
              :type "text/css"
              :href "/js/node_modules/@asciidoctor/core/dist/css/asciidoctor.css")
@@ -66,6 +93,7 @@
       (body
        (div :id "content" ,(with-current-buffer buffer (buffer-string)))
        (div :id "body")
+       ,@my-syntax-highlighter-scripts
        )))))
 
 (define-derived-mode my-doc-mode text-mode "my-doc")
