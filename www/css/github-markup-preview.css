@@ -1,0 +1,16 @@
+.markdown-body, .error, .stderr {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+.error {
+    color : red;
+    font-weight : bold;
+}
+
+.stderr {
+    border-bottom : 1px solid #ccc;
+}

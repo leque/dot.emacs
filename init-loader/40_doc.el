@@ -33,23 +33,9 @@
          (link :rel "stylesheet"
                :type "text/css"
                :href "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css")
-         (style :type "text/css"
-                "\
-.markdown-body, .error, .stderr {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 45px;
-}
-.error {
-  color : red;
-  font-weight : bold;
-}
-.stderr {
-  border-bottom : 1px solid #ccc;
-}
-")
+         (link :rel "stylesheet"
+               :type "text/css"
+               :href "/css/github-markup-preview.css")
          )
         (body
          ,@(when error
@@ -71,31 +57,11 @@
        (link :rel "stylesheet"
              :type "text/css"
              :href "/js/node_modules/@asciidoctor/core/dist/css/asciidoctor.css")
-       (style :type "text/css"
-              (!unescape "\
-#content { display : none; }
-
-#body {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 20px;
-}
-"))
+       (link :rel "stylesheet"
+             :type "text/css"
+             :href "/css/asciidoc-preview.css")
        (script :src "/js/node_modules/@asciidoctor/core/dist/browser/asciidoctor.js" " ")
-       (script (!unescape "
-window.addEventListener('load', function(ev) {
-  document.getElementById('body').innerHTML =
-    Asciidoctor().convert(
-      document.getElementById('content').textContent,
-      {
-        attributes: {
-          showtitle: true
-        }
-      });
-})
-"))
+       (script :src "/js/asciidoc-preview.js" "")
        )
       (body
        (div :id "content" ,(with-current-buffer buffer (buffer-string)))
