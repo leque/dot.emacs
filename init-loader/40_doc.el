@@ -3,20 +3,20 @@
 
 (defvar my-syntax-highlighter-stylesheets
   `(
-    (link :href ,(format "%s/themes/prism.min.css"
-                         my-syntax-highlighter-url-prefix)
+    (link :href ,(concat my-syntax-highlighter-url-prefix
+                         "/themes/prism.min.css")
           :type "text/css"
           :rel "stylesheet")
     ))
 
 (defvar my-syntax-highlighter-scripts
   `(
-    (script :src ,(format "%s/components/prism-core.min.js"
-                          my-syntax-highlighter-url-prefix)
+    (script :src ,(concat my-syntax-highlighter-url-prefix
+                          "/components/prism-core.min.js")
             :data-manual ""
             "")
-    (script :src ,(format "%s/plugins/autoloader/prism-autoloader.min.js"
-                          my-syntax-highlighter-url-prefix)
+    (script :src ,(concat my-syntax-highlighter-url-prefix
+                          "/plugins/autoloader/prism-autoloader.min.js")
             "")
     ))
 
@@ -85,7 +85,7 @@
        (link :rel "stylesheet"
              :type "text/css"
              :href "/css/asciidoc-preview.css")
-       (script :src "/js/node_modules/@asciidoctor/core/dist/browser/asciidoctor.js" " ")
+       (script :src "/js/node_modules/@asciidoctor/core/dist/browser/asciidoctor.js" "")
        (script :src "/js/asciidoc-preview.js" "")
        )
       (body
