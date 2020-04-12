@@ -73,8 +73,8 @@
          ))))))
 
 (defun my-asciidoctor-js-filter (buffer)
-  "Convert contents of BUFFER to HTML by using github-markup
-\(URL `https://github.com/github/markup')."
+  "Convert contents of BUFFER to HTML by using asciidocor.js
+\(URL `https://github.com/asciidoctor/asciidoctor.js/')."
   (insert
    (xmlgen
     `(html
