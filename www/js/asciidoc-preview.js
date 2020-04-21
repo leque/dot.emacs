@@ -1,6 +1,6 @@
-window.addEventListener('load', function(ev) {
-    var content = document.getElementById('content').textContent;
-    var html = Asciidoctor().convert(
+window.addEventListener('load', (ev) => {
+    const content = document.getElementById('content').textContent;
+    const html = Asciidoctor().convert(
         content,
         {
             attributes: {

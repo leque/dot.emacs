@@ -1,6 +1,6 @@
-window.addEventListener('load', function(ev) {
-    document.querySelectorAll('pre[lang]').forEach(function(elem) {
-        elem.classList.add('language-' + elem.getAttribute('lang'));
+window.addEventListener('load', (ev) => {
+    document.querySelectorAll('pre[lang]').forEach((elem) => {
+        elem.classList.add(`language-${elem.getAttribute('lang')}`);
     });
     Prism.highlightAll();
 });
