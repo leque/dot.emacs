@@ -7,8 +7,8 @@
   (set-face-attribute 'default nil
                       :family ascii-font
                       :height (* size 10))
-  (mapc #'(lambda (x)
-            (set-fontset-font t x ja-font))
+  (mapc (lambda (x)
+          (set-fontset-font t x ja-font))
         '(katakana-jisx0201
           japanese-jisx0208
           japanese-jisx0212

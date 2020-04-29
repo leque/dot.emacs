@@ -65,18 +65,18 @@
 (define-key viper-vi-global-user-map (kbd "g") viper-vi-my-g-map)
 
 (define-key viper-vi-my-g-map (kbd "g")
-  #'(lambda ()
-      (interactive)
-      (viper-goto-line 1)))
+  (lambda ()
+    (interactive)
+    (viper-goto-line 1)))
 
 (with-eval-after-load-feature 'paredit
   (require 'viper-paredit)
   (require 'viper-lisp)
 
   ;; automatically `:set lisp' in lisp-related modes.
-  (mapc #'(lambda (mode)
-            (add-hook mode
-                      #'enable-viper-lisp-mode))
+  (mapc (lambda (mode)
+          (add-hook mode
+                    #'enable-viper-lisp-mode))
         '(emacs-lisp-mode-hook
           lisp-mode-hook
           lisp-interaction-mode-hook
@@ -84,11 +84,11 @@
           clojure-mode-hook))
 
   (define-key viper-vi-global-user-map (kbd "C-t")
-    #'(lambda ()
-        (interactive)
-        (if viper-lisp-mode
-            (transpose-sexps 1)
-          (transpose-words 1))))
+    (lambda ()
+      (interactive)
+      (if viper-lisp-mode
+          (transpose-sexps 1)
+        (transpose-words 1))))
 
   (define-key viper-vi-my-g-map (kbd "s")
     #'paredit-splice-sexp)
@@ -110,26 +110,26 @@
 
 
   (define-viper-lisp-brac-function ?\j
-    #'(lambda (arg)
-        (down-list (- (or arg 1)))))
+    (lambda (arg)
+      (down-list (- (or arg 1)))))
 
   (define-viper-lisp-brac-function ?\k
-    #'(lambda (arg)
-        (up-list (- (or arg 1)))))
+    (lambda (arg)
+      (up-list (- (or arg 1)))))
 
   (define-viper-lisp-ket-function ?\j
-    #'(lambda (arg)
-        (down-list arg)))
+    (lambda (arg)
+      (down-list arg)))
 
   (define-viper-lisp-ket-function ?\k
-    #'(lambda (arg)
-        (up-list arg)))
+    (lambda (arg)
+      (up-list arg)))
 
   (define-viper-lisp-brac-function ?y
-    #'(lambda (arg)
-        (pop-tag-mark)))
+    (lambda (arg)
+      (pop-tag-mark)))
 
   (define-viper-lisp-ket-function ?y
-    #'(lambda (arg)
-        (find-tag (car (find-tag-interactive "Find tag: ")))))
+    (lambda (arg)
+      (find-tag (car (find-tag-interactive "Find tag: ")))))
   )

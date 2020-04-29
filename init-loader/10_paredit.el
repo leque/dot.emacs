@@ -1,7 +1,7 @@
 (el-get-bundle! paredit
   (with-eval-after-load-feature 'paredit
-    (mapc #'(lambda (mode)
-              (add-hook mode #'enable-paredit-mode))
+    (mapc (lambda (mode)
+            (add-hook mode #'enable-paredit-mode))
           '(emacs-lisp-mode-hook
             lisp-mode-hook
             lisp-interaction-mode-hook

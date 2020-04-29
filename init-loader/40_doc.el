@@ -108,9 +108,9 @@
   (declare-function imp-set-user-filter "impatient-mode")
   (cl-loop for mode-hook in '(my-doc-mode-hook)
            do (add-hook mode-hook
-                        #'(lambda ()
-                            (impatient-mode)
-                            (imp-set-user-filter #'my-github-markup-filter))))
+                        (lambda ()
+                          (impatient-mode)
+                          (imp-set-user-filter #'my-github-markup-filter))))
   )
 
 (el-get-bundle smaximov/org-commentary
