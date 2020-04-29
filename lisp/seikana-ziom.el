@@ -347,21 +347,21 @@
 
 (defconst seikana-ryakuzi-seizi-table
   (let ((table (make-hash-table :test 'equal)))
-    (mapc #'(lambda (xs)
-              (puthash (car xs) (cdr xs) table))
+    (mapc (lambda (xs)
+            (puthash (car xs) (cdr xs) table))
           seikana-ryakuzi-seizi-alist)
     table)
   "新字體の漢字から康煕字典體の漢字への對應表。値には説明文を含む")
 
 (defconst seikana-seizi-ryakuzi-table
   (let ((table (make-hash-table :test 'equal)))
-    (mapc #'(lambda (xs)
-              (let ((r (car xs)))
-                (mapc #'(lambda (s)
-                          (puthash (if (consp s) (car s) s)
-                                   (list r)
-                                   table))
-                      (cdr xs))))
+    (mapc (lambda (xs)
+            (let ((r (car xs)))
+              (mapc (lambda (s)
+                      (puthash (if (consp s) (car s) s)
+                               (list r)
+                               table))
+                    (cdr xs))))
           seikana-ryakuzi-seizi-alist)
     table)
   "康煕字典體の漢字から新字體の漢字への對應表")
@@ -372,10 +372,10 @@
 
 (defconst seikana-seizi-pat
   (regexp-opt
-   (mapcar #'(lambda (x)
-               (if (consp x)
-                   (car x)
-                 x))
+   (mapcar (lambda (x)
+             (if (consp x)
+                 (car x)
+               x))
            (apply #'append
                   (mapcar #'cdr seikana-ryakuzi-seizi-alist))))
   "新字體にあらためられた康煕字典體の漢字にマッチするパターン")
@@ -385,11 +385,11 @@
 (defconst seikana-kanzi-ziom-table
   (let ((table (make-hash-table)))
     (mapc
-     #'(lambda (xs)
-         (mapc #'(lambda (zi)
-                   (let ((v (gethash zi table ())))
-                     (puthash zi (cons (car xs) v) table)))
-               (cdr xs)))
+     (lambda (xs)
+       (mapc (lambda (zi)
+               (let ((v (gethash zi table ())))
+                 (puthash zi (cons (car xs) v) table)))
+             (cdr xs)))
      '(("ア"    ?閼 ?阿 ?婀 ?痾 ?蛙 ?亞 ?亜 ?唖 ?錏 ?堊 ?鴉)
        ("アイ"  ?藹 ?靄 ?娃 ?哇 ?鞋 ?隘 ?哀 ?愛 ?曖 ?靉 ?挨 ?埃 ?欸)
        ("アク"  ?幄 ?齷 ?握 ?渥 ?惡 ?悪 ?軛 ?阨)
@@ -940,8 +940,8 @@
    (t
     (let* ((alis (cl-mapcar #'cons seikana-menu-keys cs))
            (rs
-            (cl-mapcar #'(lambda (k c)
-                           (format "%c:%s\(%s\)  " k (car c) (cdr c)))
+            (cl-mapcar (lambda (k c)
+                         (format "%c:%s\(%s\)  " k (car c) (cdr c)))
                        seikana-menu-keys cs))
            (msg
             (apply #'concat (append rs '("n: not replace ")))))
