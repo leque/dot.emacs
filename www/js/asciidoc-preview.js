@@ -1,4 +1,5 @@
-window.addEventListener('load', (ev) => {
+/* global Asciidoctor Prism */
+window.addEventListener('load', (_ev) => {
     const content = document.getElementById('content').textContent;
     const html = Asciidoctor().convert(
         content,
