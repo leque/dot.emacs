@@ -33,6 +33,7 @@
 (el-get-bundle! request)
 (el-get-bundle! popup)
 (el-get-bundle xmlgen)
+(el-get-bundle elpa:keypression)
 
 (el-get-bundle leque/csv-mode
   :checkout "dev"
