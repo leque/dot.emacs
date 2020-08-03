@@ -2,6 +2,7 @@
 (global-font-lock-mode +1)
 
 (require 'whitespace)
+(setq whitespace-line-column my-frame-width)
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 

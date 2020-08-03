@@ -1,12 +1,14 @@
 (set-language-environment 'Japanese)
 (prefer-coding-system 'utf-8)
 
+(defvar my-frame-width 100)
+
 (setq inhibit-startup-message t)
 (setq initial-frame-alist '())
 (setq make-backup-files nil)
 (setq require-final-newline t)
 (setq default-frame-alist
-      `((width . 80)
+      `((width . ,my-frame-width)
         (menu-bar-lines . ,(if window-system 1 0))
         (tool-bar-lines . nil)
         (line-spacing . 1)
