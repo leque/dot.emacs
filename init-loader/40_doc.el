@@ -95,23 +95,32 @@
        )))))
 
 (define-derived-mode my-doc-mode text-mode "my-doc")
+(define-derived-mode my-adoc-mode text-mode "my-adoc")
 
 (add-to-list 'auto-mode-alist
              `(,(rx "."
                     (or (or "md" "markdown")
-                        (or "adoc" "asciidoc")
                         "txt")
                     eos)
                . my-doc-mode))
 
+(add-to-list 'auto-mode-alist
+             `(,(rx "."
+                    (or "adoc" "asciidoc")
+                    eos)
+               . my-adoc-mode))
+
 (el-get-bundle impatient-mode
-  (declare-function imp-set-user-filter "impatient-mode")
-  (cl-loop for mode-hook in '(my-doc-mode-hook)
-           do (add-hook mode-hook
-                        (lambda ()
-                          (impatient-mode)
-                          (imp-set-user-filter #'my-github-markup-filter))))
-  )
+  (with-eval-after-load-feature 'impatient-mode
+    (defun my-imp-setup-doc-filter ()
+      (impatient-mode)
+      (imp-set-user-filter #'my-github-markup-filter))
+    (defun my-imp-setup-adoc-filter ()
+      (impatient-mode)
+      (imp-set-user-filter #'my-asciidoctor-js-filter))
+    (add-hook 'my-doc-mode-hook 'my-imp-setup-doc-filter)
+    (add-hook 'my-adoc-mode-hook 'my-imp-setup-adoc-filter)
+    ))
 
 (el-get-bundle smaximov/org-commentary
   :prepare (progn
