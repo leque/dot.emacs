@@ -1,5 +1,5 @@
 (defvar my-syntax-highlighter-url-prefix
-  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0")
+  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0")
 
 (defvar my-syntax-highlighter-stylesheets
   `(
