@@ -9,6 +9,8 @@
 
 (require 'cl-lib)
 
+(setq default-directory (expand-file-name "~/"))
+
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
