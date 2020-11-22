@@ -6,7 +6,9 @@
             lisp-mode-hook
             lisp-interaction-mode-hook
             scheme-mode-hook
-            clojure-mode-hook))
+            clojure-mode-hook
+            dune-mode-hook
+            ))
     (defadvice paredit-newline (around eval-print-last-sexp activate)
       (if (eq major-mode 'lisp-interaction-mode)
           (eval-print-last-sexp)
