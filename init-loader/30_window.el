@@ -1,4 +1,6 @@
 (el-get-bundle! zoom
+  :type elpa
+  :repo ("melpa" . "https://melpa.org/packages/")
   (zoom-mode))
 
 (global-set-key (kbd "s-h") 'windmove-left)

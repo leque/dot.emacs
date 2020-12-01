@@ -1,4 +1,6 @@
 (el-get-bundle lice
+  :type elpa
+  :repo ("melpa" . "https://melpa.org/packages/")
   (with-eval-after-load-feature 'lice
     (defadvice lice:insert-copyright (around
                                       override-lice:insert-copyright
