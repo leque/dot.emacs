@@ -6,6 +6,18 @@
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 
+(show-paren-mode +1)
+(setq show-paren-style 'expression)
+(set-face-attribute 'show-paren-match
+                    nil
+                    :inherit 'region
+                    :background nil
+                    )
+(set-face-attribute 'show-paren-mismatch
+                    nil
+                    :foreground "white"
+                    :background "purple")
+
 (el-get-bundle! diminish)
 
 (defmacro my-diminish (&rest modes)
@@ -65,11 +77,6 @@
     (set-face-background 'symbol-overlay-default-face
                          my-cud-light-purple-color))
   (add-hook 'prog-mode-hook #'symbol-overlay-mode))
-
-(el-get-bundle! mic-paren
-  (paren-activate)
-  (setq paren-match-face 'region)
-  (setq paren-sexp-mode t))
 
 (el-get-bundle! indent-guide
   (indent-guide-global-mode)
