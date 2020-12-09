@@ -10,7 +10,7 @@
 (setq show-paren-style 'expression)
 (set-face-attribute 'show-paren-match
                     nil
-                    :inherit 'region
+                    :inherit 'highlight
                     :background nil
                     )
 (set-face-attribute 'show-paren-mismatch
