@@ -1,27 +1,44 @@
-;;; CUD colorset ver. 3 http://jfly.iam.u-tokyo.ac.jp/colorset/
+(defun my-rgb (spec)
+  (cond ((string-match (rx bos
+                           "rgb(" (* space)
+                           (submatch-n 1 (** 1 3 digit))
+                           (* space) "," (* space)
+                           (submatch-n 2 (** 1 3 digit))
+                           (* space) "," (* space)
+                           (submatch-n 3 (** 1 3 digit))
+                           (* space) ")"
+                           eos)
+                       spec)
+         (format "#%02x%02x%02x"
+                 (string-to-number (match-string 1 spec))
+                 (string-to-number (match-string 2 spec))
+                 (string-to-number (match-string 3 spec))
+                 ))))
+
+;;; CUD colorset ver. 4 http://jfly.iam.u-tokyo.ac.jp/colorset/
 ;; accent colors
-(defvar my-cud-color-red           "#ff2800")
-(defvar my-cud-color-yellow        "#faf500")
-(defvar my-cud-color-green         "#35a16b")
-(defvar my-cud-color-blue          "#0041ff")
-(defvar my-cud-color-skyblue       "#66ccff")
-(defvar my-cud-color-pink          "#ff99a0")
-(defvar my-cud-color-orange        "#ff9900")
-(defvar my-cud-color-purple        "#9a0079")
-(defvar my-cud-color-brown         "#663300")
+(defvar my-cud-color-red           (my-rgb "rgb(255,  75,   0)"))
+(defvar my-cud-color-yellow        (my-rgb "rgb(255, 241,   0)"))
+(defvar my-cud-color-green         (my-rgb "rgb(  3, 175, 122)"))
+(defvar my-cud-color-blue          (my-rgb "rgb(  0,  90, 255)"))
+(defvar my-cud-color-skyblue       (my-rgb "rgb( 77, 196, 255)"))
+(defvar my-cud-color-pink          (my-rgb "rgb(255, 128, 130)"))
+(defvar my-cud-color-orange        (my-rgb "rgb(246, 170,   0)"))
+(defvar my-cud-color-purple        (my-rgb "rgb(153,   0, 153)"))
+(defvar my-cud-color-brown         (my-rgb "rgb(128,  64,   0)"))
 ;; base colors
-(defvar my-cud-color-light-pink    "#ffd1d1")
-(defvar my-cud-color-cream         "#ffff99")
-(defvar my-cud-color-lime          "#cbf266")
-(defvar my-cud-color-light-skyblue "#b4ebfa")
-(defvar my-cud-color-beige         "#edc58f")
-(defvar my-cud-color-light-green   "#87e7b0")
-(defvar my-cud-color-light-purple  "#c7b2de")
+(defvar my-cud-color-light-pink    (my-rgb "rgb(255, 202, 191)"))
+(defvar my-cud-color-cream         (my-rgb "rgb(255, 255, 128)"))
+(defvar my-cud-color-lime          (my-rgb "rgb(216, 242,  85)"))
+(defvar my-cud-color-light-skyblue (my-rgb "rgb(191, 228, 255)"))
+(defvar my-cud-color-beige         (my-rgb "rgb(255, 202, 128)"))
+(defvar my-cud-color-light-green   (my-rgb "rgb(119, 217, 168)"))
+(defvar my-cud-color-light-purple  (my-rgb "rgb(201, 172, 230)"))
 ;; achromatic colors
-(defvar my-cud-color-white         "#ffffff")
-(defvar my-cud-color-light-gray    "#c8c8cb")
-(defvar my-cud-color-gray          "#7f878f")
-(defvar my-cud-color-black         "#000000")
+(defvar my-cud-color-white         (my-rgb "rgb(255, 255, 255)"))
+(defvar my-cud-color-light-gray    (my-rgb "rgb(200, 200, 203)"))
+(defvar my-cud-color-gray          (my-rgb "rgb(132, 145, 158)"))
+(defvar my-cud-color-black         (my-rgb "rgb(  0,   0,   0)"))
 
 (require 'font-lock)
 (global-font-lock-mode +1)
@@ -108,3 +125,9 @@
         :inherit t
         :background nil))))
  )
+
+;; Local Variables:
+;; rainbow-html-colors: t
+;; rainbow-x-colors: nil
+;; eval: (rainbow-mode)
+;; End:
