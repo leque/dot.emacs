@@ -31,6 +31,7 @@
 (setq whitespace-style '(face tabs trailing lines-tail))
 (global-whitespace-mode +1)
 
+(require 'paren)
 (show-paren-mode +1)
 (setq show-paren-style 'expression)
 (set-face-attribute 'show-paren-match
