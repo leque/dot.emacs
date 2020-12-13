@@ -42,7 +42,7 @@
 (set-face-attribute 'show-paren-mismatch
                     nil
                     :foreground "white"
-                    :background "purple")
+                    :background my-cud-color-red)
 
 (el-get-bundle! diminish)
 
