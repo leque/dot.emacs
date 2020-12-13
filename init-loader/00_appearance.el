@@ -68,18 +68,21 @@
 (el-get-bundle rainbow-mode)
 
 (el-get-bundle! symbol-overlay
-  (setq symbol-overlay-colors
-        (list
-         my-cud-color-light-pink
-         my-cud-color-cream
-         my-cud-color-lime
-         my-cud-color-light-skyblue
-         my-cud-color-beige
-         my-cud-color-light-skyblue
-         my-cud-color-light-green
-         my-cud-color-light-purple
-         ))
   (with-eval-after-load-feature 'symbol-overlay
+    (cl-loop for color in (list
+                           my-cud-color-light-pink
+                           my-cud-color-cream
+                           my-cud-color-lime
+                           my-cud-color-light-skyblue
+                           my-cud-color-beige
+                           my-cud-color-light-skyblue
+                           my-cud-color-light-green
+                           my-cud-color-light-purple
+                           )
+             for i = 1 then (+ i 1)
+             while (<= i (length symbol-overlay-faces))
+             do (set-face-background (intern (format "symbol-overlay-face-%d" i))
+                                     color))
     (set-face-background 'symbol-overlay-default-face
                          my-cud-color-light-purple))
   (add-hook 'prog-mode-hook #'symbol-overlay-mode))
