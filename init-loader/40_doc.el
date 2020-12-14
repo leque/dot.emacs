@@ -113,6 +113,7 @@
 (el-get-bundle impatient-mode
   :type elpa
   :repo ("melpa" . "https://melpa.org/packages/")
+  :depends (htmlize simple-httpd)
   (with-eval-after-load-feature 'impatient-mode
     (defun my-imp-setup-doc-filter ()
       (impatient-mode)
