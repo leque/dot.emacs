@@ -123,7 +123,7 @@
 
 ;;; Function Keys
 (defconst skk-pskana-rom-kana-base-rule-list-hana-us
-  '(("dq" nil skk-toggle-kana)
+  '(("dq" nil skk-toggle-characters)
     ("kl" nil skk-latin-mode)
     ("ko" nil skk-jisx0208-latin-mode)
     ("#" nil skk-purge-from-jisyo)
@@ -145,7 +145,7 @@
   skk-pskana-rom-kana-base-rule-list-tsuki-2-263-us)
 
 (defconst skk-pskana-rom-kana-base-rule-list-hana-dvorak
-  '(("eq" nil skk-toggle-kana)
+  '(("eq" nil skk-toggle-characters)
     ("tl" nil skk-latin-mode)
     ("tr" nil skk-jisx0208-latin-mode)
     ("#" nil skk-purge-from-jisyo)
