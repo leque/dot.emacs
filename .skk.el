@@ -45,7 +45,7 @@
 ;;; * 同手シフトに追加のかな
 ;;; * 異手ダブルシフトにたまご風の矢印・記号
 (defconst my-skk-rom-kana-rule-list-qwerty
-  '(("\C-k" nil skk-toggle-kana)
+  '(("\C-k" nil skk-toggle-characters)
     ("\C-l" nil skk-latin-mode)
     ("dw" nil skk-jisx0201-mode)
     ("kj" nil skk-jisx0208-latin-mode)
