@@ -1,4 +1,4 @@
-'(with-eval-after-load-feature 'elp
+(with-eval-after-load-feature 'elp
    ;; monkey patch to avoid
    ;; `cl--generic-standard-method-combination: Unsupported qualifiers in function loadhist-unload-element: (:before :extra "elp")`
   (let ((gf (cl--generic 'loadhist-unload-element)))
