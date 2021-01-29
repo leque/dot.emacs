@@ -19,10 +19,15 @@
   (and opam-share
        (concat opam-share "/emacs/site-lisp")))
 
+(defun opam-env ()
+  (cl-loop for (var val) in (read (shell-command-to-string "opam env --sexp"))
+           do (exec-path-from-shell-setenv var val)))
+
 (defun opam-config ()
   (interactive)
   (setq load-path (delete (opam-site-lisp) load-path))
   (when (executable-find "opam")
+    (opam-env)
     (setq opam-share
           (s-chomp
            (shell-command-to-string "opam config var share 2> /dev/null")))
