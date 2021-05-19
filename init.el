@@ -17,6 +17,13 @@
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 
+(let ((auto-save-dir (locate-user-emacs-file "auto-save/")))
+  (make-directory auto-save-dir t)
+  (setq auto-save-file-name-transforms (list
+                                        (list (rx (* any)) auto-save-dir t))))
+(setq auto-save-timeout 10)
+(setq auto-save-interval 100)
+
 ;;;; el-get
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 
