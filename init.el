@@ -6,6 +6,7 @@
 ;; You may delete these explanatory comments.
 
 ;; (package-initialize)
+(desktop-save-mode +1)
 
 (require 'cl-lib)
 
