@@ -63,6 +63,10 @@
 (el-get-bundle leque/viper-lisp)
 (require 'viper)
 
+;;; persistent-scratch
+(el-get-bundle! persistent-scratch
+  (persistent-scratch-setup-default))
+
 ;;;; other
 (el-get-bundle! emacs-jp/init-loader
   (setq init-loader-show-log-after-init 'error-only)
