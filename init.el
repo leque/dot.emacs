@@ -6,6 +6,9 @@
 ;; You may delete these explanatory comments.
 
 ;; (package-initialize)
+(setq gc-cons-threshold (* 256 1024 1024)) ;; 256 MiB
+(setq garbage-collection-messages t)
+
 (desktop-save-mode +1)
 
 (require 'cl-lib)
