@@ -1,6 +1,8 @@
 (setq ns-command-modifier 'meta)
 (setq ns-option-modifier 'super)
 
+(setq dired-use-ls-dired nil)
+
 (let ((size 14)
       (ascii-font "Monaco")
       (ja-font "Hiragino Maru Gothic Pro")
