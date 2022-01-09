@@ -4,7 +4,7 @@
   (push '("gosh" . (utf-8 . utf-8)) process-coding-system-alist)
   (with-eval-after-load-feature 'gauche-mode
     (add-hook 'gauche-mode-hook #'enable-gauche-paredit-mode)
-    (add-hook 'gauche-mode-hook #'ac-gauche-setup)
+    (add-hook 'gauche-mode-hook #'company-gauche-setup)
     ))
 
 (with-eval-after-load-feature 'cmuscheme
