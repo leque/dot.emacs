@@ -81,7 +81,7 @@
   :repo ("melpa" . "https://melpa.org/packages/")
   (dimmer-mode)
   (with-eval-after-load-feature 'dimmer
-    (setq dimmer-fraction 0.3)))
+    (setq dimmer-fraction 0.5)))
 
 (el-get-bundle rainbow-mode)
 
