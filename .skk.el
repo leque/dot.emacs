@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp, coding: utf-8 -*-
+;; -*- mode: emacs-lisp; coding: utf-8 -*-
 
 (setq skk-server-host "localhost")
 (setq skk-server-portnum 1178)
