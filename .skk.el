@@ -78,6 +78,7 @@
     ("dd[" nil "『")
     ("dd]" nil "』")
     ("dd'" nil "〜")
+    ("k'" nil "：")
     ("\\" nil ("チ" . "ち"))          ; for kinesis ergonomic keyboard
     ))
 
@@ -89,6 +90,7 @@
     ("dd@" nil "『")
     ("dd[" nil "』")
     ("dd:" nil "〜")
+    ("k:" nil "：")
     ))
 
 (cl-case skk-pskana-keyboard-layout
