@@ -83,7 +83,10 @@
   (with-eval-after-load-feature 'dimmer
     (setq dimmer-fraction 0.5)))
 
-(el-get-bundle rainbow-mode)
+(el-get-bundle rainbow-mode
+  (put 'rainbow-html-colors 'safe-local-variable  #'booleanp)
+  (put 'rainbow-x-colors 'safe-local-variable #'booleanp)
+  )
 
 (el-get-bundle! symbol-overlay
   (with-eval-after-load-feature 'symbol-overlay
