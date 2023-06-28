@@ -39,6 +39,7 @@
 (el-get-bundle elpa:keypression)
 (el-get-bundle! which-key
   (with-eval-after-load-feature 'which-key
+    (setq which-key-frame-max-height 40)
     (which-key-mode)))
 
 (el-get-bundle leque/csv-mode
