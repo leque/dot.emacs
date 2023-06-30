@@ -117,18 +117,6 @@
       (cl-pushnew x indent-guide-inhibit-modes))
     ))
 
-(custom-set-faces
- '(whitespace-line
-   ((t (
-        :inherit t
-        :background "gray85"))))
- ;; avoid collision with ivy-minibuffer-faces
- '(viper-minibuffer-insert
-   ((t (
-        :inherit t
-        :background nil))))
- )
-
 ;; Local Variables:
 ;; rainbow-html-colors: t
 ;; rainbow-x-colors: nil

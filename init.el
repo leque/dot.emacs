@@ -70,6 +70,19 @@
 (el-get-bundle! persistent-scratch
   (persistent-scratch-setup-default))
 
+;;; customs
+(custom-set-faces
+ '(whitespace-line
+   ((t (
+        :inherit t
+        :background "gray85"))))
+ ;; avoid collision with ivy-minibuffer-faces
+ '(viper-minibuffer-insert
+   ((t (
+        :inherit t
+        :background nil))))
+ )
+
 ;;;; other
 (el-get-bundle! emacs-jp/init-loader
   (setq init-loader-show-log-after-init 'error-only)
